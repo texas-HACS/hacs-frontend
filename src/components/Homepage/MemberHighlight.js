@@ -2,7 +2,6 @@ import React, { Fragment } from "react";
 import "./Homepage.scss";
 import Fade from "react-reveal/Fade";
 
-
 function MemberHighlight(props) {
   return (
     <section className="member-highlight">
@@ -14,7 +13,7 @@ function MemberHighlight(props) {
           <Fade bottom>
             <div className="member-wrapper">
               <img
-                src={props.member.image}
+                src={props.member.imageURL}
                 alt={"HACS member of the week, " + props.member.name}
               />
               <div className="content">
