@@ -2,7 +2,6 @@ import React, { Fragment } from "react";
 import "./Homepage.scss";
 import Fade from "react-reveal/Fade";
 
-
 function MemberHighlight(props) {
   return (
     <section className="member-highlight">

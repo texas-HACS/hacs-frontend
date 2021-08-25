@@ -65,7 +65,7 @@ function App() {
         console.error("Error:", error);
       });
   }, []);
-  
+
   return siteContent ? (
     <div className="App">
       <Router>
@@ -106,6 +106,8 @@ function App() {
         </div>
       </Router>
     </div>
-  ): <div />;
+  ) : (
+    <div />
+  );
 }
 export default App;

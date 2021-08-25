@@ -33,8 +33,16 @@ function AdminPanel(props) {
   });
 
   const updateOfficer = (officerData) => {
-    let updating = { ...data };
+    let updating = { ...data, officers: {} };
     updating.officers[officerData.uid] = officerData;
+    setData(updating);
+  };
+
+  const deleteOfficer = (uid) => {
+    let updating = { ...data };
+    if (updating.officers?.[uid] != null) {
+      delete updating.officers[uid];
+    }
     setData(updating);
   };
 
@@ -62,20 +70,27 @@ function AdminPanel(props) {
       />
     ) : null;
 
-  const officerOfTheWeekEdit =    <div className="form-group">
-      <h2 className="form-group-title">Officers</h2>{
-    data.officers !== undefined
-      ? [Object.keys(data.officers).map((uid) => (
-          <OfficerEdit
-            id={uid}
-            key={uid}
-            data={data.officers[uid]}
-            handleUpdate={updateOfficer}
-          />
-        )), <OfficerEdit handleUpdate={updateOfficer} data={null}/>]
-      : null}
-
-      </div>
+  const officerOfTheWeekEdit = (
+    <div className="form-group">
+      <h2 className="form-group-title">Officers</h2>
+      {data.officers !== undefined
+        ? Object.keys(data.officers)?.map((uid) => (
+            <OfficerEdit
+              id={uid}
+              key={uid}
+              data={data.officers[uid]}
+              handleUpdate={updateOfficer}
+              handleDelete={deleteOfficer}
+            />
+          ))
+        : null}
+      <OfficerEdit
+        handleUpdate={updateOfficer}
+        handleDelete={deleteOfficer}
+        data={null}
+      />
+    </div>
+  );
 
   const memberOfTheWeekEdit =
     data.memberOfTheWeek !== undefined ? (

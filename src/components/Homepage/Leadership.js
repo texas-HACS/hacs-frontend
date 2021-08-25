@@ -103,24 +103,24 @@ const placeholderLeadership = [
 ];
 
 function Leadership(props) {
-    var officers = props.officers ?? placeholderLeadership;
-    return (
-        <section className="leadership">
-            <div className="container">
-                <h1>Leadership</h1>
-                <div className="leadership-wrapper">
-                    {Object.keys(officers).map((uid) => {
-                      let officer = officers[uid];
-                        return (
-                          <Fade bottom key={uid}>
-                            <OfficerCard {...officer} />
-                          </Fade>
-                        );
-                    })}
-                </div>
-            </div>
-        </section>
-    );
+  var officers = props.officers ?? placeholderLeadership;
+  return (
+    <section className="leadership">
+      <div className="container">
+        <h1>Leadership</h1>
+        <div className="leadership-wrapper">
+          {Object.keys(officers).map((uid) => {
+            let officer = officers[uid];
+            return (
+              <Fade bottom key={uid}>
+                <OfficerCard {...officer} />
+              </Fade>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
 }
 
 export default Leadership;
