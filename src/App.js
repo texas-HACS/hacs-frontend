@@ -8,14 +8,13 @@ import Footer from "./components/Footer";
 import AdminPage from "./components/AdminPage";
 import Redirect from "./components/Redirect";
 import Opportunities from "./components/Opportunities";
-import firebase from "./_firebase";
+import firebase, { auth } from "./_firebase";
+import config from "./_config";
 
 function App() {
   const [user, updateUser] = useState(null);
-  const [siteContent, updateSiteContent] = useState({
-    memberOfTheWeek: null,
-    meetingLink: { link: null },
-  });
+  const [siteContent, updateSiteContent] = useState({});
+
   const [authorized, updateAuthorization] = useState("Initial State");
 
   const loginUser = (loginData) => {
@@ -32,7 +31,7 @@ function App() {
       });
   };
 
-  const signoutUser = (loginData) => {
+  const signoutUser = () => {
     firebase
       .auth()
       .signOut()
@@ -46,21 +45,19 @@ function App() {
       });
   };
 
-  // an initial api call to get our member of the week
+  // an initial api call to get the site content
   useEffect(() => {
-    firebase.auth().onAuthStateChanged((user) => {
+    firebase.auth().onAuthStateChanged((authorizedUser) => {
       if (user) {
-        updateUser(user);
+        updateUser(authorizedUser);
       }
     });
+  }, []);
 
-    fetch("https://enigmatic-shore-29691.herokuapp.com/siteContent", {
-      headers: { Authorization: user?.getToken() },
-    })
-      .then((response) => response.json())
+  useEffect(() => {
+    fetch(config.url + "siteContent")
+      .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-        data.officers.members.sort((a, b) => b.order - a.order);
         updateSiteContent(data);
       })
       .catch((error) => {
@@ -68,17 +65,16 @@ function App() {
       });
   }, []);
 
-  return (
+  return siteContent ? (
     <div className="App">
       <Router>
         <div>
           {/* <Navigation /> */}
           <Header />
-
           <div className="main-content">
             <Switch>
               <Route path="/meet">
-                <Redirect link={siteContent.meetingLink.link} />
+                <Redirect link={siteContent.meetingLink} />
               </Route>
               <Route path="/newsletter">
                 <Redirect link={"https://t.co/KUhKphLx2d?amp=1"} />
@@ -100,9 +96,7 @@ function App() {
               <Route path="/">
                 <Homepage
                   memberOfWeek={siteContent.memberOfTheWeek}
-                  officers={
-                    siteContent.officers ? siteContent.officers.members : []
-                  }
+                  officers={siteContent.officers}
                 />
               </Route>
             </Switch>
@@ -111,7 +105,8 @@ function App() {
         </div>
       </Router>
     </div>
+  ) : (
+    <div />
   );
 }
-
 export default App;

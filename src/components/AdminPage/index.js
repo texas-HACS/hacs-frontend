@@ -1,13 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import "./AdminPage.scss";
 import Login from "./Login.js";
 import AdminPanel from "./AdminPanel";
 
 function AdminPage(props) {
   if (props.user /*|| window.location.href.includes("localhost")*/) {
-      return <AdminPanel {...props.siteContent} signoutUser = {props.signoutUser} user = {props.user}/>;
+    var siteContent = props.siteContent;
+    return (
+      <AdminPanel
+        data={siteContent}
+        signoutUser={props.signoutUser}
+        user={props.user}
+        // {...props.siteContent}
+      />
+    );
   } else {
-      return <Login loginUser={props.loginUser} />;
+    return <Login loginUser={props.loginUser} />;
   }
 }
 
