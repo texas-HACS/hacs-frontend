@@ -58,7 +58,6 @@ function App() {
     fetch(config.url + "/siteContent")
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         updateSiteContent(data);
       })
       .catch((error) => {
