@@ -55,7 +55,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    fetch(config.url + "/siteContent")
+    fetch(config.url + "siteContent")
       .then((res) => res.json())
       .then((data) => {
         updateSiteContent(data);

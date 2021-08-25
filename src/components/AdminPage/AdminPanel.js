@@ -17,7 +17,7 @@ function AdminPanel(props) {
     auth.currentUser
       .getIdToken(true)
       .then((idToken) => {
-        fetch(config.url + "/siteContent", {
+        fetch(config.url + "siteContent", {
           method: "POST",
           credentials: "same-origin",
           headers: {
