@@ -1,5 +1,6 @@
 {
   "name": "hacs-opensource",
+  "homepage": "https://texashacs.org",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
