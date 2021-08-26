@@ -1,6 +1,7 @@
 {
   "name": "hacs-opensource",
   "homepage": "https://texashacs.org",
+  "description": "Website for the Hispanic Association of Computer Scientists (HACS) at the University of Texas at Austin.",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

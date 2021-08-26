@@ -3,6 +3,8 @@ import "./Navigation.scss";
 import { Link } from "react-router-dom";
 
 function Navigation(props) {
+  let { meetingLink, newsletterLink, developLink } = props.redirects;
+
   return (
     <Fragment>
       <div className="navigation-container" ref={props.element}>
@@ -12,7 +14,7 @@ function Navigation(props) {
           }`}
         >
           <div className="navigation-links-container">
-            <Link to="/">
+            <Link to="/home">
               <div className="nav-link">Home</div>
             </Link>
             <Link to="/about">
@@ -21,13 +23,13 @@ function Navigation(props) {
             <Link to="/opportunities">
               <div className="nav-link">Opportunities</div>
             </Link>
-            <Link /*to="/meet"*/>
+            <Link to="/meet" target={meetingLink.target}>
               <div className="nav-link">Meet</div>
             </Link>
-            <Link /*to="/newsletter"*/>
+            <Link to="/newsletter" target={newsletterLink.target}>
               <div className="nav-link">Newsletter</div>
             </Link>
-            <Link /*to="/develop"*/>
+            <Link to="/develop" target={developLink.target}>
               <div className="nav-link">Develop</div>
             </Link>
             {/* <Link to="/contact">

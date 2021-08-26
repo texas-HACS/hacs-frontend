@@ -15,7 +15,7 @@ import JumpToTop from "./components/utils/jumpToTop";
 
 function App() {
   const [user, updateUser] = useState(null);
-  const [siteContent, updateSiteContent] = useState({});
+  const [siteContent, updateSiteContent] = useState(null);
   const [opportunitiesContent, updateOpportunitiesContent] = useState({});
 
   const [authorized, updateAuthorization] = useState("Initial State");
@@ -81,23 +81,33 @@ function App() {
 
   const { isSticky, element } = useSticky();
 
-  return siteContent ? (
+  if (!siteContent) {
+    return <div />;
+  }
+
+  console.log(siteContent)
+  let { meetingLink, newsletterLink, developLink } = siteContent.redirects;
+  return (
     <div className="App">
       <Router>
         <JumpToTop />
         <div>
-          <Navigation sticky={isSticky} element={element} />
+          <Navigation
+            redirects={siteContent.redirects}
+            sticky={isSticky}
+            element={element}
+          />
           <Header />
           <div className="main-content">
             <Switch>
               <Route path="/meet">
-                <Redirect link={siteContent.meetingLink} />
+                <Redirect to={meetingLink} />
               </Route>
               <Route path="/newsletter">
-                <Redirect link={"https://t.co/KUhKphLx2d?amp=1"} />
+                <Redirect to={newsletterLink} />
               </Route>
               <Route path="/develop">
-                <Redirect link={"https://forms.gle/c7vJN8uMALUwoGbH9"} />
+                <Redirect to={developLink} />
               </Route>
               <Route path="/opportunities">
                 <Opportunities
@@ -126,8 +136,6 @@ function App() {
         </div>
       </Router>
     </div>
-  ) : (
-    <div />
   );
 }
 export default App;
