@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.scss";
-// import Navigation from './components/Navigation';
+import Navigation from "./components/Navigation";
 import Homepage from "./components/Homepage";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -10,6 +10,8 @@ import Redirect from "./components/Redirect";
 import Opportunities from "./components/Opportunities";
 import firebase, { auth } from "./_firebase";
 import config from "./_config";
+import useSticky from "./components/utils/useSticky";
+import JumpToTop from "./components/utils/jumpToTop";
 
 function App() {
   const [user, updateUser] = useState(null);
@@ -77,11 +79,14 @@ function App() {
       });
   }, []);
 
+  const { isSticky, element } = useSticky();
+
   return siteContent ? (
     <div className="App">
       <Router>
+        <JumpToTop />
         <div>
-          {/* <Navigation /> */}
+          <Navigation sticky={isSticky} element={element} />
           <Header />
           <div className="main-content">
             <Switch>
