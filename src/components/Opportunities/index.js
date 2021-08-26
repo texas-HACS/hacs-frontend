@@ -7,6 +7,7 @@ import {
   renderScholarships,
 } from "./utils.js";
 import { getTimeStamp } from "../utils/utils";
+import HACSModal from "../partials/Modal";
 
 const placeholderEvents = [
   {
@@ -335,14 +336,21 @@ const placeholderSponsorScholarships = [
 
 function Opportunities(props) {
   // const [user, updateUser] = useState(null);
-  const [opportunitiesContent, updateOpportunitiesContent] = useState({
-    sponsorListings: [],
-    nonSponsorListings: [],
-    sponsorEvents: [],
-    nonSponsorEvents: [],
-    sponsorScholarships: [],
-    nonSponsorScholarships: [],
-  });
+  const [data, setData] = useState({ events: {}, jobs: {}, scholarships: {} });
+
+  useEffect(() => {
+    setData(props.opportunities);
+  }, [props.opportunities]);
+
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState(
+    "This shouldn't be happening..."
+  );
+
+  const openModal = (content) => {
+    setModalContent(content.title);
+    setModalOpen(!modalOpen);
+  };
 
   // const loginUser = (loginData) => {
   //   fetch("https://enigmatic-shore-29691.herokuapp.com/login", {
@@ -365,51 +373,18 @@ function Opportunities(props) {
 
   // an initial api call to get all opportunities data
 
-  const startTime = new Date("04 December 2020 19:00 CST").toISOString();
-  const endTime = new Date("03 March 2021 19:00 CST").toISOString();
-  const eventData = {
-    title: "HACS x Cisco 1",
-    startTime: startTime,
-    endTime: endTime,
-    img: null,
-    meetingLink:
-      "https://cisco.webex.com/cisco/j.php?MTID=m56c5cf702bc5043269cece567e3efe5b",
-    rsvpLink: "https://cisco.avature.net/su/c82e80f1ecff7432",
-    location:
-      "https://cisco.webex.com/cisco/j.php?MTID=m56c5cf702bc5043269cece567e3efe5b",
-    description:
-      "As the largest top-10 computer science program in the country, Texas Computer Science is uniquely positioned to tackle head-on the demand for bolstering diversity in tech. The Texas Computer Science Endowment for Change was established to support diversity efforts by funding opportunities for underserved students with a demonstrated passion for computer science. Scholarships through the Texas Computer Science Endowment for Change are available to incoming and current undergraduate computer science students who have participated in The Code Longhorn program or are members of or plan to join the Association of Black Computer Scientists (ABCS), or the Hispanic Association of Computer Scientists (HACS).",
-    otherLinks: {
-      flyerLink: "http://aldsjflas;fdd",
-      jobListing: "adsflk;jdsfk;dsajf;l",
-      adsflk: "jasd;lkfjdsaf",
-      asdf: {},
-    },
-  };
+  var { jobs, events, scholarships } = data;
 
-  useEffect(() => {
-    fetch("http://localhost:5000/opportunities")
-      .then((response) => response.json())
-      .then((data) => {
-        updateOpportunitiesContent(data);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-  }, []);
+  // events = placeholderEvents;
+  // scholarships = placeholderSponsorScholarships;
+  // jobs = placeholderSponsorListings;
 
-  var { jobs, events, scholarships } = opportunitiesContent;
-
-  // sponsorEvents = placeholderEvents;
-  // sponsorScholarships = placeholderSponsorScholarships;
-  // sponsorListings = placeholderSponsorListings;
-  console.log(opportunitiesContent);
   const jobListingsSection = jobs ? (
     <div className="job-listings">
       <Fade bottom>
         <h3 className="section-title">Job Listings</h3>
       </Fade>
-      <Fade left>{renderJobListings(jobs, props.editable)}</Fade>
+      <Fade left>{renderJobListings(jobs, props.editable, openModal)}</Fade>
     </div>
   ) : (
     <div />
@@ -420,7 +395,7 @@ function Opportunities(props) {
       <Fade bottom>
         <h3 className="section-title">Events</h3>
       </Fade>
-      <Fade right>{renderEvents(events, props.editable)}</Fade>
+      <Fade right>{renderEvents(events, props.editable, openModal)}</Fade>
     </div>
   ) : (
     <div />
@@ -431,10 +406,18 @@ function Opportunities(props) {
       <Fade bottom>
         <h3 className="section-title">Scholarships</h3>
       </Fade>
-      <Fade left>{renderScholarships(scholarships, props.editable)}</Fade>
+      <Fade left>
+        {renderScholarships(scholarships, props.editable, openModal)}
+      </Fade>
     </div>
   ) : (
     <div />
+  );
+
+  const modal = (
+    <div>
+      <HACSModal isOpen={modalOpen}>{modalContent}</HACSModal>
+    </div>
   );
 
   return (
@@ -457,6 +440,7 @@ function Opportunities(props) {
       {jobListingsSection}
       {eventsSection}
       {scholarshipsSection}
+      {modal}
     </div>
   );
 }

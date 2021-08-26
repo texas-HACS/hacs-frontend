@@ -100,6 +100,8 @@ function AdminPanel(props) {
       />
     ) : null;
 
+  console.log(data)
+
   return (
     <div className="admin-panel">
       {meetingLinkEdit}

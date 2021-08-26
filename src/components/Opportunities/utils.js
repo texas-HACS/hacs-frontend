@@ -1,5 +1,6 @@
 import React from "react";
 import { isoDateToDateTimeString, isoDateToDateString } from "../utils/utils";
+import Modal from "../partials/Modal";
 
 // Return array from firestore object representation of array
 function objectToArray(obj) {
@@ -28,49 +29,67 @@ function renderTimeline(t) {
 }
 
 // Return JSX for an array of job-listings
-export function renderJobListings(listings, editable) {
-  objectToArray(listings)
-  listings = Object.keys(listings).map((l) => listings[l]);
-  return (
+export function renderJobListings(listings, editable, openModal) {
+  let uids = Object.keys(listings);
+  return !!uids.length ? (
     <div className="sponsor-listings flex-row carousel">
-      {listings.map((l) => (
-        <div
-          className="job-listing-container opportunity flex card"
-          key={l.title}
-        >
-          {l.img ? (
-            <img
-              src={l.img}
-              className="scholarship-image"
-              alt="scholarship-view"
-            />
-          ) : null}
-          <div className="details">
-            <h3 className="title">{l.title}</h3>
-            <div className="job-timeline-container">
-              {renderTimeline(l.timeline)}
-            </div>
-            <a href={l.link} className="job-link">
-              <button>Visit Site</button>
-            </a>
-            <div className="other-links-container">
-              {renderLinks(l.otherLinks)}
+      {uids.map((uid) => {
+        let l = listings[uid];
+
+        return (
+          <div
+            className="job-listing-container opportunity flex card"
+            key={uid}
+            onClick={() => openModal(l)}
+          >
+            {l.img ? (
+              <img
+                src={l.img}
+                className="scholarship-image"
+                alt="scholarship-view"
+              />
+            ) : null}
+            <div className="details">
+              <h3 className="title">{l.title}</h3>
+              <div className="job-timeline-container">
+                {renderTimeline(l.timeline)}
+              </div>
+              <a href={l.link} className="job-link">
+                <button>Visit Site</button>
+              </a>
+              <div className="other-links-container">
+                {renderLinks(l.otherLinks)}
+              </div>
             </div>
           </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
+  ) : (
+    <p>
+      There are no current job listings available. Let our officer team know of
+      any new opportunities by emailing
+      <a className="fancy" href="mailto:texashacs@gmail.com">
+        texashacs@gmail.com
+      </a>
+      , or check back again later!
+    </p>
   );
 }
 
 // Return JSX for an array of events
-export function renderEvents(events, editable) {
-  events = Object.keys(events).map((l) => events[l]);
-  return (
+export function renderEvents(events, editable, openModal) {
+  let uids = Object.keys(events);
+  return !!uids.length ? (
     <div className="sponsor-events flex-row carousel">
-      {events.map((e) => {
+      {uids.map((uid) => {
+        let e = events[uid];
         return (
-          <div className="event-container opportunity flex card" key={e.title}>
+          <div
+            className="event-container opportunity flex card"
+            key={uid}
+            onClick={() => openModal(e)}
+          >
             {e.img ? (
               <img src={e.img} className="event-image" alt="event-view" />
             ) : null}
@@ -97,37 +116,59 @@ export function renderEvents(events, editable) {
         );
       })}
     </div>
+  ) : (
+    <p>
+      There are no upcoming events. Please let us know if this seems incorrect
+      by emailing
+      <a className="fancy" href="mailto:texashacs@gmail.com">
+        texashacs@gmail.com
+      </a>
+      , or check back again later!
+    </p>
   );
 }
 
 // Return JSX for an array of scholarships
-export function renderScholarships(scholarships, editable) {
-  scholarships = Object.keys(scholarships).map((l) => scholarships[l]);
-  return (
+export function renderScholarships(scholarships, editable, openModal) {
+  let uids = Object.keys(scholarships);
+  return !!uids.length ? (
     <div className="sponsor-scholarships flex-row carousel">
-      {scholarships.map((s) => (
-        <div
-          className="scholarship-container opportunity flex card"
-          key={s.title}
-        >
-          {s.img ? (
-            <img
-              src={s.img}
-              className="scholarship-image"
-              alt="scholarship-view"
-            />
-          ) : null}
-          <div className="details">
-            <h3 className="title">{s.title}</h3>
-            <a href={s.link} className="scholarship-link">
-              <button>Visit Site</button>
-            </a>
-            <div className="scholarship-timeline-container">
-              {renderTimeline(s.timeline)}
+      {uids.map((uid) => {
+        let s = scholarships[uid];
+        return (
+          <div
+            key={uid}
+            className="scholarship-container opportunity flex card"
+            onClick={() => openModal(s)}
+          >
+            {s.img ? (
+              <img
+                src={s.img}
+                className="scholarship-image"
+                alt="scholarship-view"
+              />
+            ) : null}
+            <div className="details">
+              <h3 className="title">{s.title}</h3>
+              <a href={s.link} className="scholarship-link">
+                <button>Visit Site</button>
+              </a>
+              <div className="scholarship-timeline-container">
+                {renderTimeline(s.timeline)}
+              </div>
             </div>
           </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
+  ) : (
+    <p>
+      There are no scholarships that we are currently aware of. Let our officer
+      team know of any new opportunities by emailing
+      <a className="fancy" href="mailto:texashacs@gmail.com">
+        texashacs@gmail.com
+      </a>
+      , or check back again later!
+    </p>
   );
 }

@@ -14,6 +14,7 @@ import config from "./_config";
 function App() {
   const [user, updateUser] = useState(null);
   const [siteContent, updateSiteContent] = useState({});
+  const [opportunitiesContent, updateOpportunitiesContent] = useState({});
 
   const [authorized, updateAuthorization] = useState("Initial State");
 
@@ -65,6 +66,17 @@ function App() {
       });
   }, []);
 
+  useEffect(() => {
+    fetch(config.url + "opportunities")
+      .then((res) => res.json())
+      .then((data) => {
+        updateOpportunitiesContent(data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }, []);
+
   return siteContent ? (
     <div className="App">
       <Router>
@@ -83,7 +95,10 @@ function App() {
                 <Redirect link={"https://forms.gle/c7vJN8uMALUwoGbH9"} />
               </Route>
               <Route path="/opportunities">
-                <Opportunities editable={user != null} />
+                <Opportunities
+                  editable={user != null}
+                  opportunities={opportunitiesContent}
+                />
               </Route>
               <Route path="/admin">
                 <AdminPage
@@ -91,6 +106,7 @@ function App() {
                   loginUser={loginUser}
                   signoutUser={signoutUser}
                   siteContent={siteContent}
+                  opportunities={opportunitiesContent}
                 />
               </Route>
               <Route path="/">
