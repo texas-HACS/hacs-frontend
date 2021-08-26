@@ -85,7 +85,6 @@ function App() {
     return <div />;
   }
 
-  console.log(siteContent)
   let { meetingLink, newsletterLink, developLink } = siteContent.redirects;
   return (
     <div className="App">
