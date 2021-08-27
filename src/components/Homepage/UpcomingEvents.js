@@ -3,7 +3,6 @@ import "./Homepage.scss";
 import Fade from "react-reveal/Fade";
 
 function UpcomingEvents(props) {
-
   return (
     <section className="upcoming-events">
       <div className="content-wrapper">
@@ -18,7 +17,7 @@ function UpcomingEvents(props) {
                 border: 0,
                 height: "600px",
                 background: "none",
-                width: "100%"
+                width: "100%",
               }}
               frameBorder="0"
               id="calendar"

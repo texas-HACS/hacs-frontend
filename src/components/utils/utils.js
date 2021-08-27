@@ -15,4 +15,12 @@ function isoDateToDateString(isoDate) {
   return `${d.toLocaleDateString()}`;
 }
 
-module.exports = { isoDateToDateTimeString, getTimeStamp };
+function newUid(prefix) {
+  return `${prefix}_${new Date().getTime()}`;
+}
+
+function containsAny(list, args) {
+  return args.some((a) => list.indexOf(a) >= 0);
+}
+
+module.exports = { isoDateToDateTimeString, getTimeStamp, newUid, containsAny };

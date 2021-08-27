@@ -12,25 +12,26 @@ import firebase, { auth } from "./_firebase";
 import config from "./_config";
 import useSticky from "./components/utils/useSticky";
 import JumpToTop from "./components/utils/jumpToTop";
+import Login from "./components/auth/Login";
 
 function App() {
-  const [user, updateUser] = useState(null);
+  // const [user, updateUser] = useState(null);
   const [siteContent, updateSiteContent] = useState(null);
-  const [opportunitiesContent, updateOpportunitiesContent] = useState({});
+  const [opportunitiesContent, updateOpportunitiesContent] = useState(null);
 
-  const [authorized, updateAuthorization] = useState("Initial State");
+  // const [authorized, updateAuthorization] = useState("Initial State");
 
-  const loginUser = (loginData) => {
-    firebase
+  const loginUser = async (loginData) => {
+    await firebase
       .auth()
       .signInWithEmailAndPassword(loginData.username, loginData.password)
       .then((user) => {
-        updateAuthorization(user);
-        updateUser(user);
+        // updateAuthorization(user);
+        // updateUser(user);
       })
       .catch((err) => {
         console.error("Error:", err);
-        updateAuthorization(err);
+        // updateAuthorization(err);
       });
   };
 
@@ -39,23 +40,22 @@ function App() {
       .auth()
       .signOut()
       .then(() => {
-        updateAuthorization("Signed Out");
-        updateUser(null);
+        // updateAuthorization("Signed Out");
+        // updateUser(null);
       })
       .catch((err) => {
         console.error("Error:", err);
-        updateAuthorization(err);
+        // updateAuthorization(err);
       });
   };
 
-  // an initial api call to get the site content
-  useEffect(() => {
-    firebase.auth().onAuthStateChanged((authorizedUser) => {
-      if (user) {
-        updateUser(authorizedUser);
-      }
-    });
-  }, []);
+  // useEffect(() => {
+  //   firebase.auth().onAuthStateChanged((authorizedUser) => {
+  //     if (user) {
+  //       updateUser(authorizedUser);
+  //     }
+  //   });
+  // });
 
   useEffect(() => {
     fetch(config.url + "siteContent")
@@ -110,18 +110,21 @@ function App() {
               </Route>
               <Route path="/opportunities">
                 <Opportunities
-                  editable={user != null}
+                  // editable={user != null}
                   opportunities={opportunitiesContent}
                 />
               </Route>
               <Route path="/admin">
                 <AdminPage
-                  user={user}
+                  // user={user}
                   loginUser={loginUser}
                   signoutUser={signoutUser}
                   siteContent={siteContent}
                   opportunities={opportunitiesContent}
                 />
+              </Route>
+              <Route path="/login">
+                <Login loginUser={loginUser} />
               </Route>
               <Route path="/">
                 <Homepage

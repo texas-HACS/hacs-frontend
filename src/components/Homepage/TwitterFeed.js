@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import "./Homepage.scss";
 import Fade from "react-reveal/Fade";
-import { TwitterTimelineEmbed } from 'react-twitter-embed';
+import { TwitterTimelineEmbed } from "react-twitter-embed";
 
 const styles = `
 <style>
@@ -56,48 +56,47 @@ const styles = `
 </style>`;
 
 const injectCss = () => {
-    let timelineFrame = document.getElementById("twitter-widget-0");
+  let timelineFrame = document.getElementById("twitter-widget-0");
 
-    if (timelineFrame) {
-        let doc = timelineFrame.contentDocument;
-        // first, generate our <link> element
-        // let link = doc.createElement("link");
-        // link.href = "/TwitterFeed.css";
-        // link.rel = "stylesheet";
-        // link.type = "text/css";
-        
-        // // now, we insert the new <link> element into the iframe
-        // let head = doc.getElementsByTagName("head")[0];
-        // head.appendChild(link);
-         doc.head.innerHTML += styles;
-    } else {
-        requestAnimationFrame(injectCss);
-    }
+  if (timelineFrame) {
+    let doc = timelineFrame.contentDocument;
+    // first, generate our <link> element
+    // let link = doc.createElement("link");
+    // link.href = "/TwitterFeed.css";
+    // link.rel = "stylesheet";
+    // link.type = "text/css";
+
+    // // now, we insert the new <link> element into the iframe
+    // let head = doc.getElementsByTagName("head")[0];
+    // head.appendChild(link);
+    doc.head.innerHTML += styles;
+  } else {
+    requestAnimationFrame(injectCss);
+  }
 };
 
 function TwitterFeed() {
+  // we inject css into the twitter iframe once it loads
+  useEffect(() => {
+    requestAnimationFrame(injectCss);
+  }, []);
 
-    // we inject css into the twitter iframe once it loads
-    useEffect( () => {
-        requestAnimationFrame(injectCss);
-    }, []);
-
-    return (
-      <div className="twitter-feed">
+  return (
+    <div className="twitter-feed">
+      <Fade bottom>
+        <h3 className="section-title">Latest Tweets</h3>
+      </Fade>
+      <div className="feed-wrapper">
         <Fade bottom>
-          <h3 className="section-title">Latest Tweets</h3>
+          <TwitterTimelineEmbed
+            sourceType="profile"
+            screenName="texasHACS"
+            options={{ height: 440 }}
+          />
         </Fade>
-        <div className="feed-wrapper">
-          <Fade bottom>
-            <TwitterTimelineEmbed
-              sourceType="profile"
-              screenName="texasHACS"
-              options={{ height: 440 }}
-            />
-          </Fade>
-        </div>
       </div>
-    );
+    </div>
+  );
 }
 
 export default TwitterFeed;

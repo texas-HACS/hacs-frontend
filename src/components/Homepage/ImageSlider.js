@@ -52,7 +52,6 @@ const images = [
 ];
 
 function ImageSlider() {
-
   const [captionIndex, updateCaptionIndex] = useState(0);
 
   return (

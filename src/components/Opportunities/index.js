@@ -6,7 +6,6 @@ import {
   renderJobListings,
   renderScholarships,
 } from "./utils.js";
-import { getTimeStamp } from "../utils/utils";
 import HACSModal from "../partials/Modal";
 
 const placeholderEvents = [
@@ -335,7 +334,6 @@ const placeholderSponsorScholarships = [
 ];
 
 function Opportunities(props) {
-  // const [user, updateUser] = useState(null);
   const [data, setData] = useState({ events: {}, jobs: {}, scholarships: {} });
 
   useEffect(() => {
@@ -352,26 +350,10 @@ function Opportunities(props) {
     setModalOpen(!modalOpen);
   };
 
-  // const loginUser = (loginData) => {
-  //   fetch("https://enigmatic-shore-29691.herokuapp.com/login", {
-  //     method: "POST", // or 'PUT'
-  //     credentials: "same-origin",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Authorization:
-  //         "Basic " + btoa(`${loginData.username}:${loginData.password}`),
-  //     },
-  //   })
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       updateUser(data);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error:", error);
-  //     });
-  // };
-
   // an initial api call to get all opportunities data
+  if (!data) {
+    return <div />;
+  }
 
   var { jobs, events, scholarships } = data;
 
@@ -379,23 +361,23 @@ function Opportunities(props) {
   // scholarships = placeholderSponsorScholarships;
   // jobs = placeholderSponsorListings;
 
-  const jobListingsSection = jobs ? (
-    <div className="job-listings">
-      <Fade bottom>
-        <h3 className="section-title">Job Listings</h3>
-      </Fade>
-      <Fade left>{renderJobListings(jobs, props.editable, openModal)}</Fade>
-    </div>
-  ) : (
-    <div />
-  );
-
   const eventsSection = events ? (
     <div className="corporate-events">
       <Fade bottom>
         <h3 className="section-title">Events</h3>
       </Fade>
       <Fade right>{renderEvents(events, props.editable, openModal)}</Fade>
+    </div>
+  ) : (
+    <div />
+  );
+
+  const jobListingsSection = jobs ? (
+    <div className="job-listings">
+      <Fade bottom>
+        <h3 className="section-title">Job Listings</h3>
+      </Fade>
+      <Fade left>{renderJobListings(jobs, props.editable, openModal)}</Fade>
     </div>
   ) : (
     <div />
@@ -437,8 +419,8 @@ function Opportunities(props) {
           </p>
         </section>
       </Fade>
-      {jobListingsSection}
       {eventsSection}
+      {jobListingsSection}
       {scholarshipsSection}
       {modal}
     </div>

@@ -1,28 +1,28 @@
 @import "../../variables";
 
 .socials {
-    font-size: 24px;
+  font-size: 24px;
+  color: $social;
+  display: flex;
+  align-items: center;
+  height: 24px;
+  padding-bottom: 16px;
+
+  a,
+  a:visited {
     color: $social;
-    display: flex;
-    align-items: center;
-    height: 24px;
-    padding-bottom: 16px;
+  }
 
-    a, a:visited{
-        color: $social;
-    }
-
-    i {
-        margin: 0 12px;
-    }
-
+  i {
+    margin: 0 12px;
+  }
 }
 
-
 .footer .socials {
-    color: $light-light;
+  color: $light-light;
 
-    a, a:visited{
-        color: $light-light;
-    }
+  a,
+  a:visited {
+    color: $light-light;
+  }
 }
