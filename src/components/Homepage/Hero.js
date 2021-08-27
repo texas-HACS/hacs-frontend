@@ -54,9 +54,27 @@ function Hero() {
             <circle className="cls-5" cx="426.21" cy="399.64" r="10.98" />
           </g>
           <g id="Outer_Ring" data-name="Outer Ring">
-            <line className="cls-6" x1="366.44" y1="5.52" x2="366.44" y2="33.94" />
-            <line className="cls-6" x1="377.63" y1="5.52" x2="377.63" y2="33.94" />
-            <line className="cls-6" x1="388.83" y1="5.52" x2="388.83" y2="33.94" />
+            <line
+              className="cls-6"
+              x1="366.44"
+              y1="5.52"
+              x2="366.44"
+              y2="33.94"
+            />
+            <line
+              className="cls-6"
+              x1="377.63"
+              y1="5.52"
+              x2="377.63"
+              y2="33.94"
+            />
+            <line
+              className="cls-6"
+              x1="388.83"
+              y1="5.52"
+              x2="388.83"
+              y2="33.94"
+            />
             <line
               className="cls-6"
               x1="366.44"
@@ -78,10 +96,34 @@ function Hero() {
               x2="388.83"
               y2="525.94"
             />
-            <line className="cls-6" x1="483.24" y1="24.64" x2="471.94" y2="50.71" />
-            <line className="cls-6" x1="493.52" y1="29.09" x2="482.22" y2="55.16" />
-            <line className="cls-6" x1="503.79" y1="33.54" x2="492.49" y2="59.61" />
-            <line className="cls-6" x1="574.4" y1="88.87" x2="553.36" y2="107.98" />
+            <line
+              className="cls-6"
+              x1="483.24"
+              y1="24.64"
+              x2="471.94"
+              y2="50.71"
+            />
+            <line
+              className="cls-6"
+              x1="493.52"
+              y1="29.09"
+              x2="482.22"
+              y2="55.16"
+            />
+            <line
+              className="cls-6"
+              x1="503.79"
+              y1="33.54"
+              x2="492.49"
+              y2="59.61"
+            />
+            <line
+              className="cls-6"
+              x1="574.4"
+              y1="88.87"
+              x2="553.36"
+              y2="107.98"
+            />
             <line
               className="cls-6"
               x1="581.92"
@@ -225,10 +267,34 @@ function Hero() {
               x2="200.98"
               y2="120.12"
             />
-            <line className="cls-6" x1="185.3" y1="93.91" x2="207.81" y2="111.25" />
-            <line className="cls-6" x1="253.26" y1="36.61" x2="266.27" y2="61.87" />
-            <line className="cls-6" x1="263.22" y1="31.48" x2="276.23" y2="56.75" />
-            <line className="cls-6" x1="273.17" y1="26.36" x2="286.18" y2="51.62" />
+            <line
+              className="cls-6"
+              x1="185.3"
+              y1="93.91"
+              x2="207.81"
+              y2="111.25"
+            />
+            <line
+              className="cls-6"
+              x1="253.26"
+              y1="36.61"
+              x2="266.27"
+              y2="61.87"
+            />
+            <line
+              className="cls-6"
+              x1="263.22"
+              y1="31.48"
+              x2="276.23"
+              y2="56.75"
+            />
+            <line
+              className="cls-6"
+              x1="273.17"
+              y1="26.36"
+              x2="286.18"
+              y2="51.62"
+            />
             <line
               className="cls-6"
               x1="262.64"
@@ -257,7 +323,13 @@ function Hero() {
               x2="198.25"
               y2="408.33"
             />
-            <line className="cls-6" x1="169.21" y1="417.8" x2="191.12" y2="399.7" />
+            <line
+              className="cls-6"
+              x1="169.21"
+              y1="417.8"
+              x2="191.12"
+              y2="399.7"
+            />
             <line
               className="cls-6"
               x1="162.08"
@@ -272,7 +344,13 @@ function Hero() {
               x2="156.69"
               y2="325.62"
             />
-            <line className="cls-6" x1="126.5" y1="320.95" x2="154.22" y2="314.7" />
+            <line
+              className="cls-6"
+              x1="126.5"
+              y1="320.95"
+              x2="154.22"
+              y2="314.7"
+            />
             <line
               className="cls-6"
               x1="124.04"
@@ -347,9 +425,9 @@ function Hero() {
         <h1>Welcome to HACS!</h1>
         <p>We're the Hispanic Association of Computer Scientists</p>
         <p>
-          The <span>Hispanic Association of Computer Scientists (HACS)</span> aims to empower and provide support for Hispanic 
-          and Latinx students in computer science through academic,
-          professional, and social events.
+          The <span>Hispanic Association of Computer Scientists (HACS)</span>{" "}
+          aims to empower and provide support for Hispanic and Latinx students
+          in computer science through academic, professional, and social events.
         </p>
         <a href="https://t.co/KUhKphLx2d?amp=1">
           <button className="mailing-list">Join Our Mailing List</button>

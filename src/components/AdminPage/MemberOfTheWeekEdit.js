@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { nanoid } from "nanoid";
-import Editable from "../editables/Editable";
 import "./AdminPage.scss";
 
 function MemberOfTheWeekEdit(props) {
@@ -72,7 +70,9 @@ function MemberOfTheWeekEdit(props) {
 
   const saveSection = (
     <div onClick={() => setEditing(editing ^ true)}>
-      <p><span>{data.name}</span></p>
+      <p>
+        <span>{data.name}</span>
+      </p>
       {/* TODO: Add X mark to close dropdown */}
     </div>
   );

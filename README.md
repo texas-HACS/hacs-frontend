@@ -1,11 +1,15 @@
-# HACS-OpenSource-WebSite  
-React based website for the Hispanic Association of Computer Scientists. Allowing our members to be able to contribute to the website and gain experience with industry tools.  
+# HACS-OpenSource-WebSite
+
+React based website for the Hispanic Association of Computer Scientists. Allowing our members to be able to contribute to the website and gain experience with industry tools.
 
 # Important!
+
 This project is only intended for students at The University of Texas at Austin! We appreciate any offers of help, but please do not try to contribute if you are not a member of the Hispanic Association of Computer Scientists at UT Austin.
 
 # Pre-Setup Setup
-You will need:  
+
+You will need:
+
 - node.js
 - git
 - a text editor of your choice or IDE. Brackets, VSCode, and Webstorm are all great.
@@ -16,25 +20,27 @@ You can find `git` if you don't have it already at https://git-scm.com/downloads
 If you aren't familiar with `git`, check out [this tutorial.](http://noodle.med.yale.edu/hdtag/notes/git_tut.pdf).
 
 # Quick Start
+
 Clone the repo. Put it somewhere more permanent than the Downloads folder. Navigate in terminal/powershell to the project and use
->npm install
+
+> npm install
 
 This installs all packages/libraries you currently needed for this project locally. You can start the development server with
->npm start
+
+> npm start
 
 This is a script in the package.json file. It's function is to start up webpack and a developer server where your changes will be watched and automatically recompiled so you can see them live. If a tab isn't opened automatically, you can go to
 `http://localhost:8080/`
 Feel free to mess around with the code and see what happens.
 
 # How to Contribute
-Check out the "Issues" tab at the top of the page! These are features or bugs that we want to work on. 
+
+Check out the "Issues" tab at the top of the page! These are features or bugs that we want to work on.
 Feel free to assign yourself to any issue that hasn't been claimed, or message Chris Nunes in the slack if you want to work on something different.
 
 If there is an issue that you want to work on that someone else is working on, feel free to message them and see if they want any help!
 
-With any questions, feel free to reach out to Chris Nunes! 
-
-
+With any questions, feel free to reach out to Chris Nunes!
 
 This is our tentative [sitemap](https://www.gloomaps.com/RpcFrFsN4s)
 
@@ -59,8 +65,8 @@ robert-announcement-queries
 4. Request others to review your code.
 5. After review, your code will be merged by designated Git Master.
 
-
 # Todo:
+
 - Finish fleshing out the how to contribute section
 
 #People:
@@ -74,9 +80,6 @@ robert-announcement-queries
 - Pamela Vazquez
 - Santiago Cortes
 - Chris Nunes
-
-
-
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

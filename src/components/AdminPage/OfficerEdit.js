@@ -1,20 +1,18 @@
 import React, { useState } from "react";
-import Editable from "../editables/Editable";
+import { newUid } from "../utils/utils";
 import "./AdminPage.scss";
 
 function OfficerEdit(props) {
   const [editing, setEditing] = useState(false);
   const [data, setData] = useState({
     ...props.data,
-    uid: props.data?.uid ?? new Date().getTime(),
+    uid: props.data?.uid ?? newUid("officer"),
   });
 
   const handleSave = () => {
     props.handleUpdate(data);
     setEditing(false);
-    if (props.data == null) {
-      setData({ uid: new Date().getTime() });
-    }
+    setData({ uid: newUid("officer") });
   };
 
   const handleChange = (e) => {
@@ -78,7 +76,9 @@ function OfficerEdit(props) {
           className="form-control-small"
           name="linkedin"
           type="url"
-          defaultValue={data?.linkedin ? data.linkedin : "https://www.linkedin.com/in/"}
+          defaultValue={
+            data?.linkedin ? data.linkedin : "https://www.linkedin.com/in/"
+          }
           placeholder="ex.: https://linkedin.com/in/firstnamelastname"
           onChange={handleChange}
         />
@@ -101,6 +101,7 @@ function OfficerEdit(props) {
           type="text"
           value={data?.uid ?? new Date().getTime()}
           required
+          readOnly
           onChange={handleChange}
         />
       </form>

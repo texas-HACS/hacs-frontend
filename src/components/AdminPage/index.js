@@ -1,22 +1,21 @@
 import React, { useState } from "react";
 import "./AdminPage.scss";
-import Login from "./Login.js";
+import Login from "../auth/Login.js";
 import AdminPanel from "./AdminPanel";
+import AdminAuth from "../auth/AdminAuth";
 
 function AdminPage(props) {
-  if (props.user /*|| window.location.href.includes("localhost")*/) {
-    var siteContent = props.siteContent;
-    return (
-      <AdminPanel
-        data={siteContent}
-        signoutUser={props.signoutUser}
-        user={props.user}
-        // {...props.siteContent}
-      />
-    );
-  } else {
-    return <Login loginUser={props.loginUser} />;
-  }
+  AdminAuth();
+  return props.siteContent && props.opportunities ? (
+    <AdminPanel
+      data={props.siteContent}
+      opportunities={props.opportunities}
+      signoutUser={props.signoutUser}
+      user={props.user}
+    />
+  ) : (
+    <div />
+  );
 }
 
 export default AdminPage;

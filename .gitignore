@@ -30,9 +30,6 @@
 *.cache
 node_modules
 dist
-yarn.lock
-package-json.lock
-package-lock.json
 
 # Logs and databases #
 ######################

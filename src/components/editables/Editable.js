@@ -12,7 +12,7 @@ const Editable = ({
   min,
   max,
   handleChange,
-  content
+  content,
 }) => {
   const [isEditing, setEditing] = useState(false);
 

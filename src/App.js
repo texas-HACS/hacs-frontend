@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.scss";
-// import Navigation from './components/Navigation';
+import Navigation from "./components/Navigation";
 import Homepage from "./components/Homepage";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -10,24 +10,28 @@ import Redirect from "./components/Redirect";
 import Opportunities from "./components/Opportunities";
 import firebase, { auth } from "./_firebase";
 import config from "./_config";
+import useSticky from "./components/utils/useSticky";
+import JumpToTop from "./components/utils/jumpToTop";
+import Login from "./components/auth/Login";
 
 function App() {
-  const [user, updateUser] = useState(null);
-  const [siteContent, updateSiteContent] = useState({});
+  // const [user, updateUser] = useState(null);
+  const [siteContent, updateSiteContent] = useState(null);
+  const [opportunitiesContent, updateOpportunitiesContent] = useState(null);
 
-  const [authorized, updateAuthorization] = useState("Initial State");
+  // const [authorized, updateAuthorization] = useState("Initial State");
 
-  const loginUser = (loginData) => {
-    firebase
+  const loginUser = async (loginData) => {
+    await firebase
       .auth()
       .signInWithEmailAndPassword(loginData.username, loginData.password)
       .then((user) => {
-        updateAuthorization(user);
-        updateUser(user);
+        // updateAuthorization(user);
+        // updateUser(user);
       })
       .catch((err) => {
         console.error("Error:", err);
-        updateAuthorization(err);
+        // updateAuthorization(err);
       });
   };
 
@@ -36,23 +40,22 @@ function App() {
       .auth()
       .signOut()
       .then(() => {
-        updateAuthorization("Signed Out");
-        updateUser(null);
+        // updateAuthorization("Signed Out");
+        // updateUser(null);
       })
       .catch((err) => {
         console.error("Error:", err);
-        updateAuthorization(err);
+        // updateAuthorization(err);
       });
   };
 
-  // an initial api call to get the site content
-  useEffect(() => {
-    firebase.auth().onAuthStateChanged((authorizedUser) => {
-      if (user) {
-        updateUser(authorizedUser);
-      }
-    });
-  }, []);
+  // useEffect(() => {
+  //   firebase.auth().onAuthStateChanged((authorizedUser) => {
+  //     if (user) {
+  //       updateUser(authorizedUser);
+  //     }
+  //   });
+  // });
 
   useEffect(() => {
     fetch(config.url + "siteContent")
@@ -65,33 +68,63 @@ function App() {
       });
   }, []);
 
-  return siteContent ? (
+  useEffect(() => {
+    fetch(config.url + "opportunities")
+      .then((res) => res.json())
+      .then((data) => {
+        updateOpportunitiesContent(data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }, []);
+
+  const { isSticky, element } = useSticky();
+
+  if (!siteContent) {
+    return <div />;
+  }
+
+  let { meetingLink, newsletterLink, developLink } = siteContent.redirects;
+  return (
     <div className="App">
       <Router>
+        <JumpToTop />
         <div>
-          {/* <Navigation /> */}
+          <Navigation
+            redirects={siteContent.redirects}
+            sticky={isSticky}
+            element={element}
+          />
           <Header />
           <div className="main-content">
             <Switch>
               <Route path="/meet">
-                <Redirect link={siteContent.meetingLink} />
+                <Redirect to={meetingLink} />
               </Route>
               <Route path="/newsletter">
-                <Redirect link={"https://t.co/KUhKphLx2d?amp=1"} />
+                <Redirect to={newsletterLink} />
               </Route>
               <Route path="/develop">
-                <Redirect link={"https://forms.gle/c7vJN8uMALUwoGbH9"} />
+                <Redirect to={developLink} />
               </Route>
               <Route path="/opportunities">
-                <Opportunities editable={user != null} />
+                <Opportunities
+                  // editable={user != null}
+                  opportunities={opportunitiesContent}
+                />
               </Route>
               <Route path="/admin">
                 <AdminPage
-                  user={user}
+                  // user={user}
                   loginUser={loginUser}
                   signoutUser={signoutUser}
                   siteContent={siteContent}
+                  opportunities={opportunitiesContent}
                 />
+              </Route>
+              <Route path="/login">
+                <Login loginUser={loginUser} />
               </Route>
               <Route path="/">
                 <Homepage
@@ -105,8 +138,6 @@ function App() {
         </div>
       </Router>
     </div>
-  ) : (
-    <div />
   );
 }
 export default App;
