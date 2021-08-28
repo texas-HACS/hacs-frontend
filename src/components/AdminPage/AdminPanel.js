@@ -1,9 +1,9 @@
 import { auth } from "../../_firebase";
 import React, { useEffect, useRef, useState } from "react";
 import "./AdminPage.scss";
+import config from "../../_config";
 import OfficerEdit from "./OfficerEdit";
 import MeetingLinkEdit from "./MeetingLinkEdit";
-import config from "../../_config";
 import MemberOfTheWeekEdit from "./MemberOfTheWeekEdit";
 import EventEdit from "./EventEdit";
 import JobEdit from "./JobEdit";
@@ -23,7 +23,7 @@ function AdminPanel(props) {
     auth.currentUser
       .getIdToken(true)
       .then((idToken) => {
-        fetch("/api/siteContent", {
+        fetch(config.url + "/siteContent", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -48,7 +48,7 @@ function AdminPanel(props) {
     auth.currentUser
       .getIdToken(true)
       .then((idToken) => {
-        fetch("/api/opportunities", {
+        fetch(config.url + "/opportunities", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
