@@ -24,8 +24,8 @@ function AdminPanel(props) {
       .getIdToken(true)
       .then((idToken) => {
         fetch(config.url + "siteContent", {
+          crossDomain: true,
           method: "POST",
-          credentials: "same-origin",
           headers: {
             "Content-Type": "application/json",
             Authorization: idToken,
@@ -50,6 +50,7 @@ function AdminPanel(props) {
       .getIdToken(true)
       .then((idToken) => {
         fetch(config.url + "opportunities", {
+          crossDomain: true,
           method: "POST",
           credentials: "same-origin",
           headers: {
@@ -68,7 +69,7 @@ function AdminPanel(props) {
   }, [uOpps]);
 
   const updateOfficer = (officerData) => {
-    let updating = { ...data};
+    let updating = { ...data };
     updating.officers[officerData.uid] = officerData;
     setData(updating);
     setUData(updating);
@@ -177,7 +178,9 @@ function AdminPanel(props) {
           handleDelete={deleteOpp}
         />
       </div>
-    ) : <p>Why am I not  here</p>;
+    ) : (
+      <p>Why am I not here</p>
+    );
 
     jobsEdit = opps.jobs ? (
       <div className="form-group">
