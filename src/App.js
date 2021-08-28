@@ -58,7 +58,10 @@ function App() {
   // });
 
   useEffect(() => {
-    fetch("/api/siteContent")
+    fetch("/api/siteContent", {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    })
       .then((res) => res.json())
       .then((data) => {
         updateSiteContent(data);
@@ -69,7 +72,10 @@ function App() {
   }, []);
 
   useEffect(() => {
-    fetch("/api/opportunities")
+    fetch("/api/opportunities", {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    })
       .then((res) => res.json())
       .then((data) => {
         updateOpportunitiesContent(data);
