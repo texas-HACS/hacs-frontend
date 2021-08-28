@@ -3,7 +3,6 @@ import React, { useEffect, useRef, useState } from "react";
 import "./AdminPage.scss";
 import OfficerEdit from "./OfficerEdit";
 import MeetingLinkEdit from "./MeetingLinkEdit";
-import config from "../../_config";
 import MemberOfTheWeekEdit from "./MemberOfTheWeekEdit";
 import EventEdit from "./EventEdit";
 import JobEdit from "./JobEdit";
