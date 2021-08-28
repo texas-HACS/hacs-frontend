@@ -58,7 +58,7 @@ function App() {
   // });
 
   useEffect(() => {
-    fetch(config.url + "siteContent", { crossDomain: true })
+    fetch("/api/siteContent")
       .then((res) => res.json())
       .then((data) => {
         updateSiteContent(data);
@@ -69,7 +69,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    fetch(config.url + "opportunities", { crossDomain: true })
+    fetch("/api/opportunities")
       .then((res) => res.json())
       .then((data) => {
         updateOpportunitiesContent(data);

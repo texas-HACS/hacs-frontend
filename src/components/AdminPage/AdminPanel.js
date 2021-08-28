@@ -23,8 +23,7 @@ function AdminPanel(props) {
     auth.currentUser
       .getIdToken(true)
       .then((idToken) => {
-        fetch(config.url + "siteContent", {
-          crossDomain: true,
+        fetch("/api/siteContent", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -49,10 +48,8 @@ function AdminPanel(props) {
     auth.currentUser
       .getIdToken(true)
       .then((idToken) => {
-        fetch(config.url + "opportunities", {
-          crossDomain: true,
+        fetch("/api/opportunities", {
           method: "POST",
-          credentials: "same-origin",
           headers: {
             "Content-Type": "application/json",
             Authorization: idToken,
