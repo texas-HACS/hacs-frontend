@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.scss";
+import config from "./_config";
 import Navigation from "./components/Navigation";
 import Homepage from "./components/Homepage";
 import Header from "./components/Header";
@@ -9,7 +10,6 @@ import AdminPage from "./components/AdminPage";
 import Redirect from "./components/Redirect";
 import Opportunities from "./components/Opportunities";
 import firebase, { auth } from "./_firebase";
-import config from "./_config";
 import useSticky from "./components/utils/useSticky";
 import JumpToTop from "./components/utils/jumpToTop";
 import Login from "./components/auth/Login";
@@ -58,7 +58,10 @@ function App() {
   // });
 
   useEffect(() => {
-    fetch(config.url + "siteContent")
+    fetch(config.url + "/siteContent", {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    })
       .then((res) => res.json())
       .then((data) => {
         updateSiteContent(data);
@@ -69,7 +72,10 @@ function App() {
   }, []);
 
   useEffect(() => {
-    fetch(config.url + "opportunities")
+    fetch(config.url + "/opportunities", {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    })
       .then((res) => res.json())
       .then((data) => {
         updateOpportunitiesContent(data);
