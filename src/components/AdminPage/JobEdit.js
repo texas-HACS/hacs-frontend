@@ -81,7 +81,7 @@ function JobEdit(props) {
           defaultValue={data?.otherLinks}
           placeholder="ex.: flyer link, merch sign up, etc."
           required
-          readonly // TODO: Fix render before removing this tag
+          readOnly // TODO: Fix render before removing this tag
           onChange={handleChange}
         />
         <label>Job UID</label>

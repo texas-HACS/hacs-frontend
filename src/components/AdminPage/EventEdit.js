@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./AdminPage.scss";
 import { newUid } from "../utils/utils";
 import Flatpickr from "react-flatpickr";
-import "flatpickr/dist/themes/light.css";
+import "flatpickr/dist/themes/material_blue.css";
 
 function EventEdit(props) {
   const [editing, setEditing] = useState(false);
@@ -12,7 +12,7 @@ function EventEdit(props) {
   });
 
   const handleSave = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     props.handleUpdate("events", data);
     setEditing(false);
     if (props.addNew) {
@@ -64,12 +64,14 @@ function EventEdit(props) {
         />
         <label>Start Time</label>
         <Flatpickr
+          className="form-control-small"
           data-enable-time
           value={data?.startTime ?? new Date()}
           onChange={(date) => handleDateChange("startTime", date)}
         />
         <label>End Time</label>
         <Flatpickr
+          className="form-control-small"
           data-enable-time
           value={data?.endTime ?? new Date()}
           onChange={(date) => handleDateChange("endTime", date)}
@@ -121,7 +123,7 @@ function EventEdit(props) {
           defaultValue={data?.otherLinks}
           placeholder="ex.: flyer link, merch sign up, etc."
           required
-          readonly // TODO: Fix render before removing this tag
+          readOnly // TODO: Fix render before removing this tag
           onChange={handleChange}
         />
         <label>Event UID</label>
