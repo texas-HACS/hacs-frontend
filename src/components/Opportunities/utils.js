@@ -1,6 +1,5 @@
 import React from "react";
 import { isoDateToDateTimeString, isoDateToDateString } from "../utils/utils";
-import Modal from "../partials/Modal";
 
 // Return array from firestore object representation of array
 function objectToArray(obj) {
@@ -96,12 +95,12 @@ export function renderEvents(events, editable, openModal) {
             <div className="details">
               <h3 className="title">{e.title}</h3>
               <div className="event-time-container">
-                <h4 className="event-start-time">
-                  {isoDateToDateTimeString(e.startTime)}
-                </h4>
-                <h4 className="event-end-time">
-                  {isoDateToDateTimeString(e.endTime)}
-                </h4>
+                <p className="event-start-time">
+                  Start: {isoDateToDateTimeString(e.startTime)}
+                </p>
+                <p className="event-end-time">
+                  End: {isoDateToDateTimeString(e.endTime)}
+                </p>
               </div>
               <div className="event-links-container flex-row">
                 <a href={e.rsvpLink} className="rsvp-link">
