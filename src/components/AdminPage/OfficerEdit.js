@@ -9,15 +9,20 @@ function OfficerEdit(props) {
     uid: props.data?.uid ?? newUid("officer"),
   });
 
-  const handleSave = () => {
+  const handleSave = (e) => {
+    e.preventDefault();
     props.handleUpdate(data);
     setEditing(false);
-    setData({ uid: newUid("officer") });
+    if (props.addNew) {
+      setData({ uid: newUid("officer") });
+    }
   };
 
   const handleChange = (e) => {
+    let { name, value, type } = e.target;
     let newData = { ...data };
-    newData[e.target.name] = e.target.value;
+    value = type === "number" ? parseInt(value, 10) : value;
+    newData[name] = value;
     setData(newData);
   };
 
@@ -28,7 +33,7 @@ function OfficerEdit(props) {
 
   const editSection = (
     <div className="admin-edit">
-      <form>
+      <form id={data.uid} onSubmit={handleSave}>
         <label>{"First & Last Name"}</label>
         <input
           id="officer-name-edit"
@@ -76,9 +81,7 @@ function OfficerEdit(props) {
           className="form-control-small"
           name="linkedin"
           type="url"
-          defaultValue={
-            data?.linkedin ? data.linkedin : "https://www.linkedin.com/in/"
-          }
+          defaultValue={data?.linkedin}
           placeholder="ex.: https://linkedin.com/in/firstnamelastname"
           onChange={handleChange}
         />
@@ -105,7 +108,7 @@ function OfficerEdit(props) {
           onChange={handleChange}
         />
       </form>
-      <button className="btn btn-primary" onClick={handleSave} type="submit">
+      <button className="btn btn-primary" type="submit" form={data.uid}>
         Save
       </button>
       <button className="btn btn-primary" onClick={handleDelete} type="button">
@@ -121,7 +124,7 @@ function OfficerEdit(props) {
           "Add Officer"
         ) : (
           <span>
-            {props.data?.name} -{" "}
+            {props.data?.order}. {props.data?.name} -{" "}
             <span className="subtitle">{props.data?.role}</span>
           </span>
         )}

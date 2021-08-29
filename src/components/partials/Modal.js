@@ -1,12 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
+import "./Modal.scss";
 
 function HACSModal(props) {
   const [isOpen, setIsOpen] = useState(props.isOpen);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setIsOpen(props.isOpen);
   }, [props.isOpen]);
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+  });
 
   const open = () => {
     setIsOpen(true);
@@ -14,15 +23,20 @@ function HACSModal(props) {
 
   const close = () => {
     setIsOpen(false);
+    document.body.style.overflow = "unset";
   };
 
   return (
-    <>
-      <Modal isOpen={isOpen}>
-        <button onClick={close}>x</button>
-        {props.children}
-      </Modal>
-    </>
+    <Modal
+      className="Modal"
+      isOpen={isOpen}
+      appElement={document.getElementById("AppRoot")}
+    >
+      <button className="modal-close-button" onClick={close}>
+        x
+      </button>
+      {props.children}
+    </Modal>
   );
 }
 export default HACSModal;

@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import "./AdminPage.scss";
-import Login from "../auth/Login.js";
 import AdminPanel from "./AdminPanel";
 import AdminAuth from "../auth/AdminAuth";
 

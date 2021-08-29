@@ -31,7 +31,7 @@ function MemberOfTheWeekEdit(props) {
           onChange={handleChange}
         />
         <label>Description</label>
-        <input
+        <textarea
           id="motw-role-edit"
           className="form-control-small"
           name="role"

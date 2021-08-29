@@ -9,15 +9,20 @@ function ScholarshipEdit(props) {
     uid: props.data?.uid ?? newUid("scholarship"),
   });
 
-  const handleSave = () => {
+  const handleSave = (e) => {
+    e.preventDefault();
     props.handleUpdate("scholarships", data);
     setEditing(false);
-    setData({ uid: newUid("scholarship") });
+    if (props.addNew) {
+      setData({ uid: newUid("scholarship") });
+    }
   };
 
   const handleChange = (e) => {
+    let { name, value, type } = e.target;
     let newData = { ...data };
-    newData[e.target.name] = e.target.value;
+    value = type === "number" ? parseInt(value, 10) : value;
+    newData[name] = value;
     setData(newData);
   };
 
@@ -28,7 +33,7 @@ function ScholarshipEdit(props) {
 
   const editSection = (
     <div className="admin-edit">
-      <form>
+      <form id={data.uid} onSubmit={handleSave}>
         <label>Scholarship Title</label>
         <input
           id="scholarship-title-edit"
@@ -50,12 +55,14 @@ function ScholarshipEdit(props) {
           onChange={handleChange}
         />
         <label>Scholarship Description</label>
-        <input
+        <small id="scholarshipDescriptionHelp" className="form-text text-muted">
+          Include all major details surrounding the scholarship opportunity
+        </small>
+        <textarea
           id="scholarship-description-edit"
           className="form-control-small"
           name="description"
           defaultValue={data?.description}
-          placeholder="Include all major details surrounding the scholarship opportunity"
           required
           onChange={handleChange}
         />
@@ -70,7 +77,7 @@ function ScholarshipEdit(props) {
           onChange={handleChange}
         />
       </form>
-      <button className="btn btn-primary" onClick={handleSave} type="submit">
+      <button className="btn btn-primary" type="submit" form={data.uid}>
         Save
       </button>
       <button className="btn btn-primary" onClick={handleDelete} type="button">

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "./AdminPage.scss";
 import { newUid } from "../utils/utils";
+import Flatpickr from "react-flatpickr";
+import "flatpickr/dist/themes/light.css";
 
 function EventEdit(props) {
   const [editing, setEditing] = useState(false);
@@ -9,16 +11,27 @@ function EventEdit(props) {
     uid: props.data.uid ?? newUid("event"),
   });
 
-  const handleSave = () => {
+  const handleSave = (e) => {
+    e.preventDefault()
     props.handleUpdate("events", data);
     setEditing(false);
-    setData({ uid: newUid("event") });
+    if (props.addNew) {
+      setData({ uid: newUid("event") });
+    }
   };
 
   const handleChange = (e) => {
+    let { name, value, type } = e.target;
     let newData = { ...data };
-    newData[e.target.name] = e.target.value;
+    value = type === "number" ? parseInt(value, 10) : value;
+    newData[name] = value;
     setData(newData);
+  };
+
+  const handleDateChange = (name, date) => {
+    handleChange({
+      target: { name: name, value: new Date(date).toISOString() },
+    });
   };
 
   const handleDelete = () => {
@@ -28,7 +41,7 @@ function EventEdit(props) {
 
   const editSection = (
     <div className="admin-edit">
-      <form>
+      <form id={data.uid} onSubmit={handleSave}>
         <label>Event Title</label>
         <input
           id="event-title-edit"
@@ -39,25 +52,27 @@ function EventEdit(props) {
           required
           onChange={handleChange}
         />
-        <label>Start Time</label>
-        <input
-          id="event-start-time-edit"
+        <label>Description</label>
+        <textarea
+          id="event-description-edit"
           className="form-control-small"
-          name="startTime"
-          defaultValue={data?.startTime}
-          placeholder="ex.: 2021-08-10T16:54:47.261Z"
+          name="description"
+          defaultValue={data?.description}
+          placeholder="Include all major details surrounding the event"
           required
           onChange={handleChange}
         />
+        <label>Start Time</label>
+        <Flatpickr
+          data-enable-time
+          value={data?.startTime ?? new Date()}
+          onChange={(date) => handleDateChange("startTime", date)}
+        />
         <label>End Time</label>
-        <input
-          id="event-end-time-edit"
-          className="form-control-small"
-          name="endTime"
-          defaultValue={data?.endTime}
-          placeholder="ex.: 2021-08-10T16:54:47.261Z"
-          required
-          onChange={handleChange}
+        <Flatpickr
+          data-enable-time
+          value={data?.endTime ?? new Date()}
+          onChange={(date) => handleDateChange("endTime", date)}
         />
         <label>Image URL</label>
         <input
@@ -98,16 +113,6 @@ function EventEdit(props) {
           required
           onChange={handleChange}
         />
-        <label>Event Description</label>
-        <input
-          id="event-description-edit"
-          className="form-control-small"
-          name="description"
-          defaultValue={data?.description}
-          placeholder="Include all major details surrounding the event"
-          required
-          onChange={handleChange}
-        />
         <label>Other Links</label>
         <input
           id="event-other-links-edit"
@@ -116,6 +121,7 @@ function EventEdit(props) {
           defaultValue={data?.otherLinks}
           placeholder="ex.: flyer link, merch sign up, etc."
           required
+          readonly // TODO: Fix render before removing this tag
           onChange={handleChange}
         />
         <label>Event UID</label>
@@ -129,7 +135,7 @@ function EventEdit(props) {
           onChange={handleChange}
         />
       </form>
-      <button className="btn btn-primary" onClick={handleSave} type="submit">
+      <button className="btn btn-primary" type="submit" form={data.uid}>
         Save
       </button>
       <button className="btn btn-primary" onClick={handleDelete} type="button">
