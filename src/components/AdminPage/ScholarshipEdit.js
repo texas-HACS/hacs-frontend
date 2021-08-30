@@ -44,16 +44,6 @@ function ScholarshipEdit(props) {
           required
           onChange={handleChange}
         />
-        <label>Link</label>
-        <input
-          id="scholarship-link-edit"
-          className="form-control-small"
-          name="link"
-          defaultValue={data?.link}
-          placeholder="ex.: https://utexas.qualtrics.com/..."
-          required
-          onChange={handleChange}
-        />
         <label>Scholarship Description</label>
         <small id="scholarshipDescriptionHelp" className="form-text text-muted">
           Include all major details surrounding the scholarship opportunity
@@ -64,6 +54,15 @@ function ScholarshipEdit(props) {
           name="description"
           defaultValue={data?.description}
           required
+          onChange={handleChange}
+        />
+        <label>Link</label>
+        <input
+          id="scholarship-link-edit"
+          className="form-control-small"
+          name="link"
+          defaultValue={data?.link}
+          placeholder="ex.: https://utexas.qualtrics.com/..."
           onChange={handleChange}
         />
         <label>Scholarship UID</label>

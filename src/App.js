@@ -13,6 +13,7 @@ import firebase from "./_firebase";
 import useSticky from "./components/utils/useSticky";
 import JumpToTop from "./components/utils/jumpToTop";
 import Login from "./components/auth/Login";
+import "react-datetime/css/react-datetime.css";
 
 function App() {
   // const [user, updateUser] = useState(null);
@@ -78,6 +79,9 @@ function App() {
     })
       .then((res) => res.json())
       .then((data) => {
+        if(data == null) {
+          data = {events: {}, jobs: {}, scholarships: {}}
+        }
         updateOpportunitiesContent(data);
       })
       .catch((error) => {

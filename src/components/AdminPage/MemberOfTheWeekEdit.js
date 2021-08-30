@@ -54,9 +54,9 @@ function MemberOfTheWeekEdit(props) {
         <input
           id="motw-image-url-edit"
           className="form-control-small"
-          name="imageURL"
+          name="imageUrl"
           type="url"
-          defaultValue={data.imageURL}
+          defaultValue={data.imageUrl}
           placeholder={`${data.name} image URL`}
           required
           onChange={handleChange}

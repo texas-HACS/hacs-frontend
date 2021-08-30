@@ -158,11 +158,11 @@ function AdminPanel(props) {
 
   var eventsEdit, jobsEdit, scholarshipsEdit;
   if (opps) {
-    eventsEdit = opps.events ? (
+    eventsEdit = (
       <div className="form-group">
         <h2 className="form-group-title">Events</h2>
-        {data.officers !== undefined
-          ? Object.keys(opps.events)?.map((uid) => (
+        {opps.events
+          ? Object.keys(opps.events).map((uid) => (
               <EventEdit
                 id={uid}
                 key={uid}
@@ -179,15 +179,13 @@ function AdminPanel(props) {
           handleDelete={deleteOpp}
         />
       </div>
-    ) : (
-      <p>Why am I not here</p>
     );
 
-    jobsEdit = opps.jobs ? (
+    jobsEdit = (
       <div className="form-group">
         <h2 className="form-group-title">Job Postings</h2>
-        {data.officers !== undefined
-          ? Object.keys(opps.jobs)?.map((uid) => (
+        {opps.jobs
+          ? Object.keys(opps.jobs).map((uid) => (
               <JobEdit
                 id={uid}
                 key={uid}
@@ -204,13 +202,13 @@ function AdminPanel(props) {
           handleDelete={deleteOpp}
         />
       </div>
-    ) : null;
+    );
 
-    scholarshipsEdit = opps.scholarships ? (
+    scholarshipsEdit = (
       <div className="form-group">
         <h2 className="form-group-title">Scholarship Opportunities</h2>
-        {data.officers !== undefined
-          ? Object.keys(opps.scholarships)?.map((uid) => (
+        {opps.scholarships
+          ? Object.keys(opps.scholarships).map((uid) => (
               <ScholarshipEdit
                 id={uid}
                 key={uid}
@@ -227,7 +225,9 @@ function AdminPanel(props) {
           handleDelete={deleteOpp}
         />
       </div>
-    ) : null;
+    );
+  } else {
+    console.log("help");
   }
 
   return (
