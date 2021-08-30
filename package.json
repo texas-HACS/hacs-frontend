@@ -5,16 +5,21 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^4.12.3",
+    "@material-ui/pickers": "^3.3.10",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "dotenv": "^10.0.0",
     "firebase": "^7.20.0",
     "joi": "^17.4.2",
+    "moment": "^2.29.1",
     "nanoid": "^3.1.25",
     "node-sass": "^4.14.1",
     "react": "^16.13.1",
+    "react-datetime": "^3.0.4",
     "react-dom": "^16.13.1",
+    "react-flatpickr": "^3.10.7",
     "react-image-gallery": "^1.2.7",
     "react-modal": "^3.14.3",
     "react-reveal": "^1.2.2",
@@ -34,11 +39,16 @@
   },
   "browserslist": {
     "production": [
-      ">0.2%",
+      ">0.3%",
+      "not ie 11",
       "not dead",
       "not op_mini all"
     ],
     "development": [
+      ">0.3%",
+      "not ie 11",
+      "not dead",
+      "not op_mini all",
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"

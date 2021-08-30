@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./AdminPage.scss";
 import { newUid } from "../utils/utils";
+import Datetime from "react-datetime";
 
 function EventEdit(props) {
   const [editing, setEditing] = useState(false);
@@ -9,16 +10,32 @@ function EventEdit(props) {
     uid: props.data.uid ?? newUid("event"),
   });
 
-  const handleSave = () => {
+  const handleSave = (e) => {
+    e.preventDefault();
     props.handleUpdate("events", data);
     setEditing(false);
-    setData({ uid: newUid("event") });
+    if (props.addNew) {
+      setData({ uid: newUid("event") });
+    }
   };
 
   const handleChange = (e) => {
+    let { name, value, type } = e.target;
     let newData = { ...data };
-    newData[e.target.name] = e.target.value;
+    value = type === "number" ? parseInt(value, 10) : value;
+    newData[name] = value;
+    console.log(newData)
     setData(newData);
+  };
+
+  const handleDateChange = (name, date) => {
+    try {
+      let newData = { ...data };
+      newData[name] = new Date(date).toISOString();
+      setData(newData);
+    } catch(e) {
+      console.log("Invalid date")
+    }
   };
 
   const handleDelete = () => {
@@ -28,7 +45,7 @@ function EventEdit(props) {
 
   const editSection = (
     <div className="admin-edit">
-      <form>
+      <form id={data.uid} onSubmit={handleSave}>
         <label>Event Title</label>
         <input
           id="event-title-edit"
@@ -39,67 +56,8 @@ function EventEdit(props) {
           required
           onChange={handleChange}
         />
-        <label>Start Time</label>
-        <input
-          id="event-start-time-edit"
-          className="form-control-small"
-          name="startTime"
-          defaultValue={data?.startTime}
-          placeholder="ex.: 2021-08-10T16:54:47.261Z"
-          required
-          onChange={handleChange}
-        />
-        <label>End Time</label>
-        <input
-          id="event-end-time-edit"
-          className="form-control-small"
-          name="endTime"
-          defaultValue={data?.endTime}
-          placeholder="ex.: 2021-08-10T16:54:47.261Z"
-          required
-          onChange={handleChange}
-        />
-        <label>Image URL</label>
-        <input
-          id="event-image-url-edit"
-          className="form-control-small"
-          name="imageUrl"
-          defaultValue={data?.img}
-          placeholder="ex.: https://firebasestorage.googleapis.com/..."
-          onChange={handleChange}
-        />
-        <label>Meeting Link</label>
-        <input
-          id="event-meeting-link-edit"
-          className="form-control-small"
-          name="meetingLink"
-          defaultValue={data?.meetingLink}
-          placeholder="ex.: https://utexas.zoom.us/j/..."
-          required
-          onChange={handleChange}
-        />
-        <label>RSVP Link</label>
-        <input
-          id="event-rsvp-link-edit"
-          className="form-control-small"
-          name="rsvpLink"
-          defaultValue={data?.rsvpLink}
-          placeholder="ex.: https://forms.gle/..."
-          required
-          onChange={handleChange}
-        />
-        <label>Event Location</label>
-        <input
-          id="event-location-edit"
-          className="form-control-small"
-          name="location"
-          defaultValue={data?.location}
-          placeholder="ex.: GDC 5.302"
-          required
-          onChange={handleChange}
-        />
-        <label>Event Description</label>
-        <input
+        <label>Description</label>
+        <textarea
           id="event-description-edit"
           className="form-control-small"
           name="description"
@@ -108,14 +66,66 @@ function EventEdit(props) {
           required
           onChange={handleChange}
         />
+        <label>Start Time</label>
+        <Datetime
+          className="small"
+          value={new Date(data.startTime)}
+          onChange={(date) => {
+            handleDateChange("startTime", date);
+          }}
+        />
+        <label>End Time</label>
+        <Datetime
+          className="small"
+          value={new Date(data.endTime)}
+          onChange={(date) => {
+            handleDateChange("endTime", date);
+          }}
+        />
+        <label>Image URL</label>
+        <input
+          id="event-image-url-edit"
+          className="form-control-small"
+          name="imageUrl"
+          defaultValue={data.imageUrl}
+          placeholder="ex.: https://firebasestorage.googleapis.com/..."
+          onChange={handleChange}
+        />
+        <label>Meeting Link</label>
+        <input
+          id="event-meeting-link-edit"
+          className="form-control-small"
+          name="meetingLink"
+          defaultValue={data.meetingLink}
+          placeholder="ex.: https://utexas.zoom.us/j/..."
+          onChange={handleChange}
+        />
+        <label>RSVP Link</label>
+        <input
+          id="event-rsvp-link-edit"
+          className="form-control-small"
+          name="rsvpLink"
+          defaultValue={data.rsvpLink}
+          placeholder="ex.: https://forms.gle/..."
+          onChange={handleChange}
+        />
+        <label>Event Location</label>
+        <input
+          id="event-location-edit"
+          className="form-control-small"
+          name="location"
+          defaultValue={data.location}
+          placeholder="ex.: GDC 5.302"
+          onChange={handleChange}
+        />
         <label>Other Links</label>
         <input
           id="event-other-links-edit"
           className="form-control-small"
           name="otherLinks"
-          defaultValue={data?.otherLinks}
+          defaultValue={data.otherLinks}
           placeholder="ex.: flyer link, merch sign up, etc."
-          required
+          readOnly // TODO: Fix render before removing this tag
           onChange={handleChange}
         />
         <label>Event UID</label>
@@ -129,7 +139,7 @@ function EventEdit(props) {
           onChange={handleChange}
         />
       </form>
-      <button className="btn btn-primary" onClick={handleSave} type="submit">
+      <button className="btn btn-primary" type="submit" form={data.uid}>
         Save
       </button>
       <button className="btn btn-primary" onClick={handleDelete} type="button">

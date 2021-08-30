@@ -31,7 +31,7 @@ function MemberOfTheWeekEdit(props) {
           onChange={handleChange}
         />
         <label>Description</label>
-        <input
+        <textarea
           id="motw-role-edit"
           className="form-control-small"
           name="role"
@@ -54,9 +54,9 @@ function MemberOfTheWeekEdit(props) {
         <input
           id="motw-image-url-edit"
           className="form-control-small"
-          name="imageURL"
+          name="imageUrl"
           type="url"
-          defaultValue={data.imageURL}
+          defaultValue={data.imageUrl}
           placeholder={`${data.name} image URL`}
           required
           onChange={handleChange}

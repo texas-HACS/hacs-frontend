@@ -6,7 +6,7 @@ function OfficerCard(props) {
     <div className="card">
       <img
         src={
-          props.imageURL ||
+          props.imageUrl ||
           "https://immedilet-invest.com/wp-content/uploads/2016/01/user-placeholder.jpg"
         }
         alt={"An image of officer " + props.name}

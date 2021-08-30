@@ -109,14 +109,16 @@ function Leadership(props) {
       <div className="container">
         <h1>Leadership</h1>
         <div className="leadership-wrapper">
-          {Object.keys(officers).map((uid) => {
-            let officer = officers[uid];
-            return (
-              <Fade bottom key={uid}>
-                <OfficerCard {...officer} />
-              </Fade>
-            );
-          })}
+          {Object.keys(officers)
+            .sort((a, b) => (a.order > b.order ? 1 : -1))
+            .map((uid) => {
+              let officer = officers[uid];
+              return (
+                <Fade bottom key={uid}>
+                  <OfficerCard {...officer} />
+                </Fade>
+              );
+            })}
         </div>
       </div>
     </section>

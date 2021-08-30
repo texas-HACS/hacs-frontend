@@ -1,9 +1,5 @@
 @import "../../variables";
 
-section {
-  margin: 10vh 0;
-}
-
 .opportunities {
   margin: 60px auto;
   max-width: 1240px;
@@ -50,6 +46,12 @@ section {
 
     .title {
       text-align: center;
+    }
+
+    .time {
+      font-weight: bold;
+      color: $hacs-blue;
+      margin-bottom: 5px;
     }
   }
 

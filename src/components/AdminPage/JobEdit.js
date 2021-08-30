@@ -9,15 +9,20 @@ function JobEdit(props) {
     uid: props.data?.uid ?? newUid("job"),
   });
 
-  const handleSave = () => {
+  const handleSave = (e) => {
+    e.preventDefault();
     props.handleUpdate("jobs", data);
     setEditing(false);
-    setData({ uid: newUid("job") });
+    if (props.addNew) {
+      setData({ uid: newUid("job") });
+    }
   };
 
   const handleChange = (e) => {
+    let { name, value, type } = e.target;
     let newData = { ...data };
-    newData[e.target.name] = e.target.value;
+    value = type === "number" ? parseInt(value, 10) : value;
+    newData[name] = value;
     setData(newData);
   };
 
@@ -28,7 +33,7 @@ function JobEdit(props) {
 
   const editSection = (
     <div className="admin-edit">
-      <form>
+      <form id={data.uid} onSubmit={handleSave}>
         <label>Job Title</label>
         <input
           id="job-title-edit"
@@ -55,7 +60,6 @@ function JobEdit(props) {
           name="link"
           defaultValue={data?.link}
           placeholder="ex.: https://utexas.zoom.us/j/..."
-          required
           onChange={handleChange}
         />
         <label>Job Description</label>
@@ -75,7 +79,7 @@ function JobEdit(props) {
           name="otherLinks"
           defaultValue={data?.otherLinks}
           placeholder="ex.: flyer link, merch sign up, etc."
-          required
+          readOnly // TODO: Fix render before removing this tag
           onChange={handleChange}
         />
         <label>Job UID</label>
@@ -89,7 +93,7 @@ function JobEdit(props) {
           onChange={handleChange}
         />
       </form>
-      <button className="btn btn-primary" onClick={handleSave} type="submit">
+      <button className="btn btn-primary" type="submit" form={data.uid}>
         Save
       </button>
       <button className="btn btn-primary" onClick={handleDelete} type="button">

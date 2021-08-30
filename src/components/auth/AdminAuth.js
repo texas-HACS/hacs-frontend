@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import firebase from "firebase";
+import firebase from "firebase/app";
 import { useHistory } from "react-router-dom";
 
 export default function AdminAuth() {

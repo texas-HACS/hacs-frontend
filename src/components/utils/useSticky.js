@@ -1,14 +1,14 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 
 function useSticky() {
   const [isSticky, setSticky] = useState(false);
 
   const element = useRef();
 
-  const handleScroll = () => {
+  const handleScroll = useCallback(() => {
     const top = element.current?.getBoundingClientRect().top;
     top < 0 ? setSticky(true) : setSticky(false);
-  };
+  }, []);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);

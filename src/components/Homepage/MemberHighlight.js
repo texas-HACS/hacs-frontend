@@ -12,13 +12,18 @@ function MemberHighlight(props) {
           </Fade>
           <Fade bottom>
             <div className="member-wrapper">
-              <img
-                src={props.member.imageURL}
-                alt={"HACS member of the week, " + props.member.name}
-              />
+              <a href={props.member.linkedin}>
+                <img
+                  src={props.member.imageUrl}
+                  alt={"HACS member of the week, " + props.member.name}
+                />
+              </a>
               <div className="content">
                 <p className="name">{props.member.name}</p>
                 <p className="description">{props.member.description}</p>
+                <a href={props.member.linkedin} className="link">
+                  <i className="fab fa-linkedin"></i>
+                </a>
               </div>
             </div>
           </Fade>

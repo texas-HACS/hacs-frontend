@@ -1,6 +1,10 @@
 import React from "react";
-import { isoDateToDateTimeString, isoDateToDateString } from "../utils/utils";
-import Modal from "../partials/Modal";
+import {
+  isoDateToDateTimeString,
+  isoDateToDateString,
+  prettyDateTimeString,
+  renderStartAndEndDateTime,
+} from "../utils/utils";
 
 // Return array from firestore object representation of array
 function objectToArray(obj) {
@@ -42,9 +46,9 @@ export function renderJobListings(listings, editable, openModal) {
             key={uid}
             onClick={() => openModal(l)}
           >
-            {l.img ? (
+            {l.imageUrl ? (
               <img
-                src={l.img}
+                src={l.imageUrl}
                 className="scholarship-image"
                 alt="scholarship-view"
               />
@@ -90,18 +94,18 @@ export function renderEvents(events, editable, openModal) {
             key={uid}
             onClick={() => openModal(e)}
           >
-            {e.img ? (
-              <img src={e.img} className="event-image" alt="event-view" />
+            {e.imageUrl ? (
+              <img src={e.imageUrl} className="event-image" alt="event-view" />
             ) : null}
             <div className="details">
               <h3 className="title">{e.title}</h3>
               <div className="event-time-container">
-                <h4 className="event-start-time">
-                  {isoDateToDateTimeString(e.startTime)}
-                </h4>
-                <h4 className="event-end-time">
-                  {isoDateToDateTimeString(e.endTime)}
-                </h4>
+                <span className="time">
+                  {renderStartAndEndDateTime(
+                    e.startTime,
+                    e.endTime
+                  )}
+                </span>
               </div>
               <div className="event-links-container flex-row">
                 <a href={e.rsvpLink} className="rsvp-link">
@@ -141,9 +145,9 @@ export function renderScholarships(scholarships, editable, openModal) {
             className="scholarship-container opportunity flex card"
             onClick={() => openModal(s)}
           >
-            {s.img ? (
+            {s.imageUrl ? (
               <img
-                src={s.img}
+                src={s.imageUrl}
                 className="scholarship-image"
                 alt="scholarship-view"
               />
@@ -171,4 +175,28 @@ export function renderScholarships(scholarships, editable, openModal) {
       , or check back again later!
     </p>
   );
+}
+
+export function renderModalContent(content) {
+  return [
+    <div className="flex-row content-header">
+      <img src={content.imageUrl} />
+      <div className={`links flex${content.imageUrl ? "" : "-row"}`}>
+        <a href={content.meetingLink}>
+          <button className="meeting link">Join Meeting</button>
+        </a>
+        <a href={content.rsvpLink}>
+          <button className="rsvp link">RSVP</button>
+        </a>
+        <a href={content.location}>
+          <button className="location link">Meeting Location</button>
+        </a>
+      </div>
+    </div>,
+    <h1 className="title">{content.title}</h1>,
+    <span className="time">
+      {renderStartAndEndDateTime(content.startTime, content.endTime)}
+    </span>,
+    <p className="description">{content.description}</p>,
+  ];
 }

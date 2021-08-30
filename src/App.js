@@ -9,10 +9,11 @@ import Footer from "./components/Footer";
 import AdminPage from "./components/AdminPage";
 import Redirect from "./components/Redirect";
 import Opportunities from "./components/Opportunities";
-import firebase, { auth } from "./_firebase";
+import firebase from "./_firebase";
 import useSticky from "./components/utils/useSticky";
 import JumpToTop from "./components/utils/jumpToTop";
 import Login from "./components/auth/Login";
+import "react-datetime/css/react-datetime.css";
 
 function App() {
   // const [user, updateUser] = useState(null);
@@ -59,7 +60,7 @@ function App() {
 
   useEffect(() => {
     fetch(config.url + "/siteContent", {
-      Accept: "application/json",
+        Accept: "application/json",
       "Content-Type": "application/json",
     })
       .then((res) => res.json())
@@ -78,6 +79,9 @@ function App() {
     })
       .then((res) => res.json())
       .then((data) => {
+        if(data == null) {
+          data = {events: {}, jobs: {}, scholarships: {}}
+        }
         updateOpportunitiesContent(data);
       })
       .catch((error) => {
@@ -93,7 +97,7 @@ function App() {
 
   let { meetingLink, newsletterLink, developLink } = siteContent.redirects;
   return (
-    <div className="App">
+    <div className="App" id="AppRoot">
       <Router>
         <JumpToTop />
         <div>
