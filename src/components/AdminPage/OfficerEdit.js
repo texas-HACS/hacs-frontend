@@ -89,9 +89,9 @@ function OfficerEdit(props) {
         <input
           id="officer-image-url-edit"
           className="form-control-small"
-          name="imageURL"
+          name="imageUrl"
           type="url"
-          defaultValue={data?.imageURL}
+          defaultValue={data?.imageUrl}
           placeholder={"ex.: https://drive.google.com/..."}
           required
           onChange={handleChange}

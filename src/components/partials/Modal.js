@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import Modal from "react-modal";
+import ReactModal from "react-modal";
 import "./Modal.scss";
 
-function HACSModal(props) {
+function Modal(props) {
   const [isOpen, setIsOpen] = useState(props.isOpen);
 
   useEffect(() => {
@@ -27,16 +27,16 @@ function HACSModal(props) {
   };
 
   return (
-    <Modal
+    <ReactModal
       className="Modal"
       isOpen={isOpen}
       appElement={document.getElementById("AppRoot")}
     >
       <button className="modal-close-button" onClick={close}>
-        x
+        <i className="fa fa-times" />
       </button>
-      {props.children}
-    </Modal>
+      <div className="flex content">{props.children}</div>
+    </ReactModal>
   );
 }
-export default HACSModal;
+export default Modal;

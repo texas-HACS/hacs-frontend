@@ -5,8 +5,9 @@ import {
   renderEvents,
   renderJobListings,
   renderScholarships,
+  renderModalContent
 } from "./utils.js";
-import HACSModal from "../partials/Modal";
+import Modal from "../partials/Modal";
 
 function Opportunities(props) {
   const [data, setData] = useState({ events: {}, jobs: {}, scholarships: {} });
@@ -17,11 +18,11 @@ function Opportunities(props) {
 
   const [modalOpen, setModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState(
-    "This shouldn't be happening..."
+    "Something is wrong, no data in the modal..."
   );
 
   const openModal = (content) => {
-    setModalContent(content.title);
+    setModalContent(content);
     setModalOpen(!modalOpen);
   };
 
@@ -73,7 +74,7 @@ function Opportunities(props) {
 
   const modal = (
     <div>
-      <HACSModal isOpen={modalOpen}>{modalContent}</HACSModal>
+      <Modal isOpen={modalOpen}>{renderModalContent(modalContent)}</Modal>
     </div>
   );
 

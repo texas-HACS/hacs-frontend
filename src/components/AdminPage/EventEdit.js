@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import "./AdminPage.scss";
 import { newUid } from "../utils/utils";
-import Flatpickr from "react-flatpickr";
-import "flatpickr/dist/themes/material_blue.css";
+import Datetime from "react-datetime";
 
 function EventEdit(props) {
   const [editing, setEditing] = useState(false);
@@ -25,13 +24,18 @@ function EventEdit(props) {
     let newData = { ...data };
     value = type === "number" ? parseInt(value, 10) : value;
     newData[name] = value;
+    console.log(newData)
     setData(newData);
   };
 
   const handleDateChange = (name, date) => {
-    handleChange({
-      target: { name: name, value: new Date(date).toISOString() },
-    });
+    try {
+      let newData = { ...data };
+      newData[name] = new Date(date).toISOString();
+      setData(newData);
+    } catch(e) {
+      console.log("Invalid date")
+    }
   };
 
   const handleDelete = () => {
@@ -63,25 +67,27 @@ function EventEdit(props) {
           onChange={handleChange}
         />
         <label>Start Time</label>
-        <Flatpickr
-          className="form-control-small"
-          data-enable-time
-          value={data?.startTime ?? new Date()}
-          onChange={(date) => handleDateChange("startTime", date)}
+        <Datetime
+          className="small"
+          value={new Date(data.startTime)}
+          onChange={(date) => {
+            handleDateChange("startTime", date);
+          }}
         />
         <label>End Time</label>
-        <Flatpickr
-          className="form-control-small"
-          data-enable-time
-          value={data?.endTime ?? new Date()}
-          onChange={(date) => handleDateChange("endTime", date)}
+        <Datetime
+          className="small"
+          value={new Date(data.endTime)}
+          onChange={(date) => {
+            handleDateChange("endTime", date);
+          }}
         />
         <label>Image URL</label>
         <input
           id="event-image-url-edit"
           className="form-control-small"
           name="imageUrl"
-          defaultValue={data?.img}
+          defaultValue={data.imageUrl}
           placeholder="ex.: https://firebasestorage.googleapis.com/..."
           onChange={handleChange}
         />
@@ -90,9 +96,8 @@ function EventEdit(props) {
           id="event-meeting-link-edit"
           className="form-control-small"
           name="meetingLink"
-          defaultValue={data?.meetingLink}
+          defaultValue={data.meetingLink}
           placeholder="ex.: https://utexas.zoom.us/j/..."
-          required
           onChange={handleChange}
         />
         <label>RSVP Link</label>
@@ -100,9 +105,8 @@ function EventEdit(props) {
           id="event-rsvp-link-edit"
           className="form-control-small"
           name="rsvpLink"
-          defaultValue={data?.rsvpLink}
+          defaultValue={data.rsvpLink}
           placeholder="ex.: https://forms.gle/..."
-          required
           onChange={handleChange}
         />
         <label>Event Location</label>
@@ -110,9 +114,8 @@ function EventEdit(props) {
           id="event-location-edit"
           className="form-control-small"
           name="location"
-          defaultValue={data?.location}
+          defaultValue={data.location}
           placeholder="ex.: GDC 5.302"
-          required
           onChange={handleChange}
         />
         <label>Other Links</label>
@@ -120,9 +123,8 @@ function EventEdit(props) {
           id="event-other-links-edit"
           className="form-control-small"
           name="otherLinks"
-          defaultValue={data?.otherLinks}
+          defaultValue={data.otherLinks}
           placeholder="ex.: flyer link, merch sign up, etc."
-          required
           readOnly // TODO: Fix render before removing this tag
           onChange={handleChange}
         />
