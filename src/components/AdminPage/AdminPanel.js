@@ -128,7 +128,11 @@ function AdminPanel(props) {
       <h2 className="form-group-title">Officers</h2>
       {data.officers !== undefined
         ? Object.keys(data.officers)
-            ?.sort((a, b) => (a.order > b.order ? 1 : -1))
+            ?.sort((a_uid, b_uid) => {
+              return data.officers[a_uid].order > data.officers[b_uid].order
+                ? 1
+                : -1;
+            })
             .map((uid) => (
               <OfficerEdit
                 id={uid}
