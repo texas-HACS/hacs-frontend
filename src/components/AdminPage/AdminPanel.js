@@ -83,7 +83,7 @@ function AdminPanel(props) {
 
   const updateMeetingLink = (linkData) => {
     let updating = { ...data };
-    updating.meetingLink = linkData;
+    updating.redirects.meetingLink = linkData;
     setData(updating);
     setUData(updating);
   };
