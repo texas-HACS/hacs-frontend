@@ -93,7 +93,6 @@ function OfficerEdit(props) {
           type="url"
           defaultValue={data?.imageUrl}
           placeholder={"ex.: https://drive.google.com/..."}
-          required
           onChange={handleChange}
         />
         <label>Officer UID</label>

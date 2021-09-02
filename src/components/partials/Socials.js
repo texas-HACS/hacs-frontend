@@ -33,7 +33,7 @@ function Socials(props) {
         <i className="far fa-envelope" />
       </a>
       <a
-        href="https://github.com/chrisnunes57/hacs-opensource"
+        href="https://github.com/texas-HACS"
         target="_blank"
         rel="noopener noreferrer"
       >

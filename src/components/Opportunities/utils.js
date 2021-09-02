@@ -1,4 +1,5 @@
 import React from "react";
+import { Fragment } from "react";
 import {
   isoDateToDateTimeString,
   isoDateToDateString,
@@ -101,10 +102,7 @@ export function renderEvents(events, editable, openModal) {
               <h3 className="title">{e.title}</h3>
               <div className="event-time-container">
                 <span className="time">
-                  {renderStartAndEndDateTime(
-                    e.startTime,
-                    e.endTime
-                  )}
+                  {renderStartAndEndDateTime(e.startTime, e.endTime)}
                 </span>
               </div>
               <div className="event-links-container flex-row">
@@ -178,25 +176,27 @@ export function renderScholarships(scholarships, editable, openModal) {
 }
 
 export function renderModalContent(content) {
-  return [
-    <div className="flex-row content-header">
-      <img src={content.imageUrl} />
-      <div className={`links flex${content.imageUrl ? "" : "-row"}`}>
-        <a href={content.meetingLink}>
-          <button className="meeting link">Join Meeting</button>
-        </a>
-        <a href={content.rsvpLink}>
-          <button className="rsvp link">RSVP</button>
-        </a>
-        <a href={content.location}>
-          <button className="location link">Meeting Location</button>
-        </a>
+  return (
+    <Fragment>
+      <div className="flex-row content-header" key={content.uid}>
+        <img src={content.imageUrl} />
+        <div className={`links flex${content.imageUrl ? "" : "-row"}`}>
+          <a href={content.meetingLink}>
+            <button className="meeting link">Join Meeting</button>
+          </a>
+          <a href={content.rsvpLink}>
+            <button className="rsvp link">RSVP</button>
+          </a>
+          <a href={content.location}>
+            <button className="location link">Meeting Location</button>
+          </a>
+        </div>
       </div>
-    </div>,
-    <h1 className="title">{content.title}</h1>,
-    <span className="time">
-      {renderStartAndEndDateTime(content.startTime, content.endTime)}
-    </span>,
-    <p className="description">{content.description}</p>,
-  ];
+      <h1 className="title">{content.title}</h1>
+      <span className="time">
+        {renderStartAndEndDateTime(content.startTime, content.endTime)}
+      </span>
+      <p className="description">{content.description}</p>
+    </Fragment>
+  );
 }

@@ -24,7 +24,6 @@ function EventEdit(props) {
     let newData = { ...data };
     value = type === "number" ? parseInt(value, 10) : value;
     newData[name] = value;
-    console.log(newData)
     setData(newData);
   };
 
