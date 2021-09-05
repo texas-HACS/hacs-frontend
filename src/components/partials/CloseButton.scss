@@ -1,0 +1,25 @@
+@import "../../variables";
+
+@media only screen and (max-width: 768px) {
+  .close-button {
+    all: initial;
+    height: 10px;
+    width: 10px;
+    box-sizing: border-box;
+    background-color: transparent;
+    color: $hacs-blue;
+    font-family: $title-font;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 18px;
+    text-transform: uppercase;
+    margin: 10px 10px;
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+      all: initial;
+    }
+  }
+}

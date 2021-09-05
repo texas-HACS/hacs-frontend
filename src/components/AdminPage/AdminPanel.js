@@ -231,7 +231,7 @@ function AdminPanel(props) {
       </div>
     );
   } else {
-    console.log("help");
+    console.log("This is not supposed to happen...");
   }
 
   return (

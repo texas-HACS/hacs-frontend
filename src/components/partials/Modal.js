@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ReactModal from "react-modal";
+import CloseButton from "./CloseButton";
 import "./Modal.scss";
 
 function Modal(props) {
@@ -32,9 +33,7 @@ function Modal(props) {
       isOpen={isOpen}
       appElement={document.getElementById("AppRoot")}
     >
-      <button className="modal-close-button" onClick={close}>
-        <i className="fa fa-times" />
-      </button>
+      <CloseButton className="modal-close-button" onClick={close} />
       <div className="flex content">{props.children}</div>
     </ReactModal>
   );

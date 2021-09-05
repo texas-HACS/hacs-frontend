@@ -7,7 +7,7 @@ function OfficerCard(props) {
       <img
         src={
           props.imageUrl ||
-          "https://immedilet-invest.com/wp-content/uploads/2016/01/user-placeholder.jpg"
+          "https://firebasestorage.googleapis.com/v0/b/hacs-opensource.appspot.com/o/hacs_logo.png?alt=media&token=993e859b-5ae1-47c3-9f51-cf414d833a2c"
         }
         alt={"An image of officer " + props.name}
       />
