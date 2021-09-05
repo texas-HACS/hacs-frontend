@@ -1,5 +1,4 @@
 import React from "react";
-import { Fragment } from "react";
 import {
   isoDateToDateTimeString,
   isoDateToDateString,
@@ -177,26 +176,26 @@ export function renderScholarships(scholarships, editable, openModal) {
 
 export function renderModalContent(content) {
   return (
-    <Fragment>
-      <div className="flex-row content-header" key={content.uid}>
-        <img src={content.imageUrl} />
-        <div className={`links flex${content.imageUrl ? "" : "-row"}`}>
-          <a href={content.meetingLink}>
-            <button className="meeting link">Join Meeting</button>
-          </a>
-          <a href={content.rsvpLink}>
-            <button className="rsvp link">RSVP</button>
-          </a>
-          <a href={content.location}>
-            <button className="location link">Meeting Location</button>
-          </a>
+      <div className="flex-row content" key={content.uid}>
+        <div className="image"><img src={content.imageUrl} /></div>
+        <div className="flex other-content">
+          <h1 className="title">{content.title}</h1>
+          <span className="time">
+            {renderStartAndEndDateTime(content.startTime, content.endTime)}
+          </span>
+          <p className="description">{content.description}</p>
+          <div className="links flex-row">
+            <a href={content.meetingLink}>
+              <button className="meeting link">Join Meeting</button>
+            </a>
+            <a href={content.rsvpLink}>
+              <button className="rsvp link">RSVP</button>
+            </a>
+            <a href={content.location}>
+              <button className="location link">Meeting Location</button>
+            </a>
+          </div>
         </div>
       </div>
-      <h1 className="title">{content.title}</h1>
-      <span className="time">
-        {renderStartAndEndDateTime(content.startTime, content.endTime)}
-      </span>
-      <p className="description">{content.description}</p>
-    </Fragment>
   );
 }
