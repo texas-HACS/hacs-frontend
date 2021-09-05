@@ -19,7 +19,6 @@ export default function BurgerMenu(props) {
   };
 
   let meetingLink, newsletterLink, developLink;
-  console.log(props.redirects)
   if (props.redirects) {
     ({ meetingLink, newsletterLink, developLink } = props.redirects);
   }
