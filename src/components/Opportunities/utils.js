@@ -6,6 +6,9 @@ import {
   renderStartAndEndDateTime,
 } from "../utils/utils";
 
+const HACS_LOGO_URL =
+  "https://firebasestorage.googleapis.com/v0/b/hacs-opensource.appspot.com/o/hacs_logo.png?alt=media&token=993e859b-5ae1-47c3-9f51-cf414d833a2c";
+
 // Return array from firestore object representation of array
 function objectToArray(obj) {
   return Object.keys(obj).map((i) => obj[i]);
@@ -46,13 +49,11 @@ export function renderJobListings(listings, editable, openModal) {
             key={uid}
             onClick={() => openModal(l)}
           >
-            {l.imageUrl ? (
-              <img
-                src={l.imageUrl}
-                className="scholarship-image"
-                alt="scholarship-view"
-              />
-            ) : null}
+            <img
+              src={l.imageUrl ?? HACS_LOGO_URL}
+              className="scholarship-image"
+              alt="scholarship-view"
+            />
             <div className="details">
               <h3 className="title">{l.title}</h3>
               <div className="job-timeline-container">
@@ -94,9 +95,11 @@ export function renderEvents(events, editable, openModal) {
             key={uid}
             onClick={() => openModal(e)}
           >
-            {e.imageUrl ? (
-              <img src={e.imageUrl} className="event-image" alt="event-view" />
-            ) : null}
+            <img
+              src={e.imageUrl ?? HACS_LOGO_URL}
+              className="event-image"
+              alt="event-view"
+            />
             <div className="details">
               <h3 className="title">{e.title}</h3>
               <div className="event-time-container">
@@ -142,13 +145,11 @@ export function renderScholarships(scholarships, editable, openModal) {
             className="scholarship-container opportunity flex card"
             onClick={() => openModal(s)}
           >
-            {s.imageUrl ? (
-              <img
-                src={s.imageUrl}
-                className="scholarship-image"
-                alt="scholarship-view"
-              />
-            ) : null}
+            <img
+              src={s.imageUrl ?? HACS_LOGO_URL}
+              className="scholarship-image"
+              alt="scholarship-view"
+            />
             <div className="details">
               <h3 className="title">{s.title}</h3>
               <a href={s.link} className="scholarship-link">
@@ -176,26 +177,28 @@ export function renderScholarships(scholarships, editable, openModal) {
 
 export function renderModalContent(content) {
   return (
-      <div className="flex-row content" key={content.uid}>
-        <div className="image"><img src={content.imageUrl} /></div>
-        <div className="flex other-content">
-          <h1 className="title">{content.title}</h1>
-          <span className="time">
-            {renderStartAndEndDateTime(content.startTime, content.endTime)}
-          </span>
-          <p className="description">{content.description}</p>
-          <div className="links flex-row">
-            <a href={content.meetingLink}>
-              <button className="meeting link">Join Meeting</button>
-            </a>
-            <a href={content.rsvpLink}>
-              <button className="rsvp link">RSVP</button>
-            </a>
-            <a href={content.location}>
-              <button className="location link">Meeting Location</button>
-            </a>
-          </div>
+    <div className="flex-row content" key={content.uid}>
+      <div className="image">
+        <img src={content.imageUrl ?? HACS_LOGO_URL} />
+      </div>
+      <div className="flex other-content">
+        <h1 className="title">{content.title}</h1>
+        <span className="time">
+          {renderStartAndEndDateTime(content.startTime, content.endTime)}
+        </span>
+        <p className="description">{content.description}</p>
+        <div className="links flex-row">
+          <a href={content.meetingLink}>
+            <button className="meeting link">Join Meeting</button>
+          </a>
+          <a href={content.rsvpLink}>
+            <button className="rsvp link">RSVP</button>
+          </a>
+          <a href={content.location}>
+            <button className="location link">Meeting Location</button>
+          </a>
         </div>
       </div>
+    </div>
   );
 }
