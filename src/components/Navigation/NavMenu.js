@@ -19,9 +19,9 @@ export default function NavMenu(props) {
       <Link to="/home">
         <div className="nav-link">Home</div>
       </Link>
-      <Link to="/about">
+      {/* <Link to="/about">
         <div className="nav-link">About</div>
-      </Link>
+      </Link> */}
       <Link to="/opportunities">
         <div className="nav-link">Opportunities</div>
       </Link>
@@ -38,7 +38,7 @@ export default function NavMenu(props) {
               <div className="nav-link">Contact</div>
             </Link> */}
       <Link to="/admin">
-        <div className="nav-link">Admin</div>
+        <div className="nav-link">Sign In</div>
       </Link>
     </Fragment>
   );

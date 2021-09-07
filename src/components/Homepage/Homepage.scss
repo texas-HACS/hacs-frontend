@@ -198,6 +198,10 @@
     img {
       max-width: 1080px;
     }
+    .image-gallery-icon {
+      background-color: transparent;
+      outline: none;
+    }
   }
 
   .caption {
@@ -235,7 +239,8 @@
       max-width: 800px;
       margin-left: 30px;
 
-      .name, .link {
+      .name,
+      .link {
         font-size: 24px;
         line-height: 32px;
         font-family: $title-font;
