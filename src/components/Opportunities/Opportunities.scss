@@ -35,28 +35,33 @@
     }
   }
 
-  .opportunity {
-    width: auto;
-    padding: 10px;
-    flex: 0 0 auto;
+  .opportunity-row {
+    align-items: stretch;
 
-    .details {
-      padding: 0 25px;
+    .opportunity {
+      width: auto;
+      padding: 10px;
+      flex: 0 0 auto;
+      justify-content: space-between;
+
+      .details {
+        padding: 0 25px;
+      }
+
+      .title {
+        text-align: center;
+      }
+
+      .time {
+        font-weight: bold;
+        color: $hacs-blue;
+        margin-bottom: 5px;
+      }
     }
 
-    .title {
-      text-align: center;
+    .card {
+      padding: 0;
+      margin: 0 20px;
     }
-
-    .time {
-      font-weight: bold;
-      color: $hacs-blue;
-      margin-bottom: 5px;
-    }
-  }
-
-  .card {
-    padding: 0;
-    margin: 0 20px;
   }
 }

@@ -12,7 +12,16 @@ import TopGolfPlaying from "../../media/Top Golf Playing.jpg";
 import TopGolfTalking from "../../media/Top Golf Talking w Google.jpg";
 import Fade from "react-reveal/Fade";
 
+const HACSFallKickoff1 =
+  "https://firebasestorage.googleapis.com/v0/b/hacs-opensource.appspot.com/o/homepage_slider_images%2Fhacs-fall-kickoff-1.HEIC?alt=media&token=8097d931-df3d-44f0-b687-07e7ac26363f";
+const HACSFallKickoff2 =
+  "https://firebasestorage.googleapis.com/v0/b/hacs-opensource.appspot.com/o/homepage_slider_images%2Fhacs-fall-kickoff-2.HEIC?alt=media&token=18af7979-ab76-4974-9571-3cbc89383708";
+
 const images = [
+  // {
+  //   original: HACSFallKickoff1,
+  //   originalAlt: "HACS Fall 2021 Kickoff!",
+  // },
   {
     original: ABCSQuora,
     originalAlt: "HACS Game Night w ABCS & Quora",
@@ -29,6 +38,10 @@ const images = [
     original: GoogleMeeting,
     originalAlt: "General Meeting with Google Employees",
   },
+  // {
+  //   original: HACSFallKickoff2,
+  //   originalAlt: "HACS Fall 2021 Kickoff!",
+  // },
   {
     original: NetworkingDinner,
     originalAlt: "Diversity Networking Dinner with ABCS",
