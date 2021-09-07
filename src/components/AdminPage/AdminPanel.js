@@ -8,6 +8,7 @@ import MemberOfTheWeekEdit from "./MemberOfTheWeekEdit";
 import EventEdit from "./EventEdit";
 import JobEdit from "./JobEdit";
 import ScholarshipEdit from "./ScholarshipEdit";
+import SignInLinkEdit from "./SignInLinkEdit";
 
 function AdminPanel(props) {
   const [data, setData] = useState(props.data);
@@ -88,6 +89,13 @@ function AdminPanel(props) {
     setUData(updating);
   };
 
+  const updateSignInLink = (linkData) => {
+    let updating = { ...data };
+    updating.redirects.signInLink = linkData;
+    setData(updating);
+    setUData(updating);
+  };
+
   const updateMemberOfTheWeek = (linkData) => {
     let updating = { ...data };
     updating.memberOfTheWeek = linkData;
@@ -116,10 +124,18 @@ function AdminPanel(props) {
   };
 
   const meetingLinkEdit =
-    data.meetingLink !== undefined ? (
+    data.redirects.meetingLink !== undefined ? (
       <MeetingLinkEdit
-        data={data.meetingLink}
+        data={data.redirects.meetingLink}
         handleUpdate={updateMeetingLink}
+      />
+    ) : null;
+
+  const signInLinkEdit =
+    data.redirects.signInLink !== undefined ? (
+      <SignInLinkEdit
+        data={data.redirects.signInLink}
+        handleUpdate={updateSignInLink}
       />
     ) : null;
 
@@ -237,6 +253,7 @@ function AdminPanel(props) {
   return (
     <div className="admin-panel">
       {meetingLinkEdit}
+      {signInLinkEdit}
       {/* TODO: Add ability to drag and drop ordering to enforce indices. */}
       {officersEdit}
       {memberOfTheWeekEdit}

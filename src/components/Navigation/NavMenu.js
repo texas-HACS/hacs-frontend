@@ -37,8 +37,13 @@ export default function NavMenu(props) {
       {/* <Link to="/contact" onClick={()=>props.tm(false)}>
               <div className="nav-link">Contact</div>
             </Link> */}
-      <Link to="/admin">
+      <Link to="/signin">
         <div className="nav-link">Sign In</div>
+      </Link>
+      <Link to="/admin">
+        <div className="nav-link">
+          <i className="fas fa-cog" />
+        </div>
       </Link>
     </Fragment>
   );
