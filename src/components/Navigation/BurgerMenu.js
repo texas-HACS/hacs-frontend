@@ -48,7 +48,7 @@ export default function BurgerMenu(props) {
       {/* <Link to="/contact" onClick={() => toggleMenu(false)}>
               <div className="nav-link">Contact</div>
             </Link> */}
-      <Link to="/signin">
+      <Link to="/sign-in">
         <div className="nav-link">Sign In</div>
       </Link>
       <Link to="/admin" aria-label="admin">
