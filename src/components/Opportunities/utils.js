@@ -36,7 +36,7 @@ function renderTimeline(t) {
 export function renderJobListings(listings, editable, openModal) {
   let uids = Object.keys(listings);
   return !!uids.length ? (
-    <div className="sponsor-listings flex-row carousel">
+    <div className="opportunity-row flex-row carousel">
       {uids.map((uid) => {
         let l = listings[uid];
 
@@ -85,7 +85,7 @@ export function renderJobListings(listings, editable, openModal) {
 export function renderEvents(events, editable, openModal) {
   let uids = Object.keys(events);
   return !!uids.length ? (
-    <div className="sponsor-events flex-row carousel">
+    <div className="opportunity-row flex-row carousel">
       {uids.map((uid) => {
         let e = events[uid];
         return (
@@ -133,7 +133,7 @@ export function renderEvents(events, editable, openModal) {
 export function renderScholarships(scholarships, editable, openModal) {
   let uids = Object.keys(scholarships);
   return !!uids.length ? (
-    <div className="sponsor-scholarships flex-row carousel">
+    <div className="opportunity-row flex-row carousel">
       {uids.map((uid) => {
         let s = scholarships[uid];
         return (
