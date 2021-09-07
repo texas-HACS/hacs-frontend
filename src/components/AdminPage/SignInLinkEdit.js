@@ -50,7 +50,7 @@ function SignInLinkEdit(props) {
         {!!editing && editSection}
         <small id="urlHelp" className="form-text text-muted">
           This is the link that people will be redirected to when they try to go
-          to <a href="https://www.texashacs.org/signin">texashacs.org/signin</a>
+          to <a href="https://www.texashacs.org/sign-in">texashacs.org/sign-in</a>
         </small>
       </div>
     </div>

@@ -37,7 +37,7 @@ export default function NavMenu(props) {
       {/* <Link to="/contact" onClick={()=>props.tm(false)}>
               <div className="nav-link">Contact</div>
             </Link> */}
-      <Link to="/signin">
+      <Link to="/sign-in">
         <div className="nav-link">Sign In</div>
       </Link>
       <Link to="/admin">

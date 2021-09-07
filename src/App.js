@@ -136,7 +136,7 @@ function App() {
               <Route path="/login">
                 <Login loginUser={loginUser} />
               </Route>
-              <Route path="/signin">
+              <Route path="/sign-in">
                 <Redirect to={signInLink}/>
               </Route>
               <Route path="/">
