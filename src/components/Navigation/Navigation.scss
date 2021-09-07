@@ -40,7 +40,7 @@ $nav-link-margin: 0 10px;
       .nav-link {
         color: $light-light;
         display: inline;
-        font: $title-font;
+        font-family: $title-font;
         margin: $nav-link-margin;
         transition: 0.3s all;
         padding: 10px 10px;

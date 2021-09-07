@@ -95,7 +95,7 @@ function App() {
     return <div />;
   }
 
-  let { meetingLink, newsletterLink, developLink } = siteContent.redirects;
+  let { meetingLink, signInLink, newsletterLink, developLink } = siteContent.redirects;
   return (
     <div className="App" id="AppRoot">
       <Router>
@@ -135,6 +135,9 @@ function App() {
               </Route>
               <Route path="/login">
                 <Login loginUser={loginUser} />
+              </Route>
+              <Route path="/signin">
+                <Redirect to={signInLink}/>
               </Route>
               <Route path="/">
                 <Homepage

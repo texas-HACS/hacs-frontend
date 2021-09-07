@@ -13,15 +13,15 @@ import TopGolfTalking from "../../media/Top Golf Talking w Google.jpg";
 import Fade from "react-reveal/Fade";
 
 const HACSFallKickoff1 =
-  "https://firebasestorage.googleapis.com/v0/b/hacs-opensource.appspot.com/o/homepage_slider_images%2Fhacs-fall-kickoff-1.HEIC?alt=media&token=8097d931-df3d-44f0-b687-07e7ac26363f";
+  "https://firebasestorage.googleapis.com/v0/b/hacs-opensource.appspot.com/o/homepage_slider_images%2Fhacs_fall_2021_kickoff.png?alt=media&token=fd103545-1f6d-4432-a8eb-bd1617c6e773";
 const HACSFallKickoff2 =
-  "https://firebasestorage.googleapis.com/v0/b/hacs-opensource.appspot.com/o/homepage_slider_images%2Fhacs-fall-kickoff-2.HEIC?alt=media&token=18af7979-ab76-4974-9571-3cbc89383708";
+  "https://firebasestorage.googleapis.com/v0/b/hacs-opensource.appspot.com/o/homepage_slider_images%2Fhacs_fall_2021_kickoff_1.png?alt=media&token=41960e16-a10a-43e8-b144-f022fde41d76";
 
 const images = [
-  // {
-  //   original: HACSFallKickoff1,
-  //   originalAlt: "HACS Fall 2021 Kickoff!",
-  // },
+  {
+    original: HACSFallKickoff1,
+    originalAlt: "HACS Fall 2021 Kickoff",
+  },
   {
     original: ABCSQuora,
     originalAlt: "HACS Game Night w ABCS & Quora",
@@ -38,10 +38,10 @@ const images = [
     original: GoogleMeeting,
     originalAlt: "General Meeting with Google Employees",
   },
-  // {
-  //   original: HACSFallKickoff2,
-  //   originalAlt: "HACS Fall 2021 Kickoff!",
-  // },
+  {
+    original: HACSFallKickoff2,
+    originalAlt: "HACS Fall 2021 Kickoff",
+  },
   {
     original: NetworkingDinner,
     originalAlt: "Diversity Networking Dinner with ABCS",
