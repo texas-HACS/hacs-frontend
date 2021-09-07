@@ -16,7 +16,7 @@ function Modal(props) {
     } else {
       document.body.style.overflow = "unset";
     }
-  });
+  }, [isOpen]);
 
   const open = () => {
     setIsOpen(true);
@@ -24,6 +24,9 @@ function Modal(props) {
 
   const close = () => {
     setIsOpen(false);
+    if (props.onClose) {
+      props.onClose();
+    }
     document.body.style.overflow = "unset";
   };
 
@@ -32,8 +35,9 @@ function Modal(props) {
       className="Modal"
       isOpen={isOpen}
       appElement={document.getElementById("AppRoot")}
+      onRequestClose={close}
     >
-      <CloseButton className="modal-close-button" onClick={close} />
+      <CloseButton className="modal-close-button" onClick={() => close()} />
       <div className="flex content">{props.children}</div>
     </ReactModal>
   );

@@ -5,12 +5,12 @@ import {
   renderEvents,
   renderJobListings,
   renderScholarships,
-  renderModalContent
+  renderModalContent,
 } from "./utils.js";
 import Modal from "../partials/Modal";
 
 function Opportunities(props) {
-  const [data, setData] = useState({ events: {}, jobs: {}, scholarships: {} });
+  const [data, setData] = useState({});
 
   useEffect(() => {
     setData(props.opportunities);
@@ -21,9 +21,16 @@ function Opportunities(props) {
     "Something is wrong, no data in the modal..."
   );
 
+  useEffect(() => {
+  }, [modalOpen, modalContent]);
+
   const openModal = (content) => {
     setModalContent(content);
-    setModalOpen(!modalOpen);
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
   };
 
   // an initial api call to get all opportunities data
@@ -74,7 +81,9 @@ function Opportunities(props) {
 
   const modal = (
     <div>
-      <Modal isOpen={modalOpen}>{renderModalContent(modalContent)}</Modal>
+      <Modal isOpen={modalOpen} onClose={closeModal}>
+        {renderModalContent(modalContent)}
+      </Modal>
     </div>
   );
 
