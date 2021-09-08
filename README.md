@@ -1,4 +1,5 @@
 # HACS-OpenSource-WebSite
+TODO: Add better get started guide
 
 React based website for the Hispanic Association of Computer Scientists. Allowing our members to be able to contribute to the website and gain experience with industry tools.
 
