@@ -66,10 +66,14 @@ export function renderEvents(events, editable, openModal) {
   let uids = Object.keys(events);
   return !!uids.length ? (
     <div className="opportunity-row flex-row carousel">
-      {uids.map((uid) => {
-        let e = events[uid];
-        return <EventCard key={uid} e={e} onClick={openModal} />;
-      })}
+      {uids
+        .map((uid) => events[uid])
+        .sort((a, b) => {
+          return new Date(b.startTime) - new Date(a.startTime);
+        })
+        .map((event) => {
+          return <EventCard key={event.uid} e={event} onClick={openModal} />;
+        })}
     </div>
   ) : (
     <p>

@@ -182,15 +182,21 @@ function AdminPanel(props) {
       <div className="form-group">
         <h2 className="form-group-title">Events</h2>
         {opps.events
-          ? Object.keys(opps.events).map((uid) => (
-              <EventEdit
-                id={uid}
-                key={uid}
-                data={opps.events[uid]}
-                handleUpdate={updateOpp}
-                handleDelete={deleteOpp}
-              />
-            ))
+          ? Object.keys(opps.events)
+              .map((uid) => opps.events[uid])
+              .sort((a, b) => {
+                // Sort in descending order of date
+                return new Date(b.startTime) - new Date(a.startTime);
+              })
+              .map((event) => (
+                <EventEdit
+                  id={event.uid}
+                  key={event.uid}
+                  data={event}
+                  handleUpdate={updateOpp}
+                  handleDelete={deleteOpp}
+                />
+              ))
           : null}
         <EventEdit
           addNew
