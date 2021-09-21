@@ -12,6 +12,11 @@ function EventCard(props) {
       className="event-container opportunity flex card"
       onClick={() => props.onClick(event)}
     >
+      <div
+        className={`card-overlay ${
+          new Date() > new Date(event.endTime) ? "past" : "future"
+        }`}
+      />
       <img
         src={event.imageUrl ?? HACS_LOGO_URL}
         className="event-image"
