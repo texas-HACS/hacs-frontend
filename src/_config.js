@@ -48,6 +48,7 @@ switch (envVars.REACT_APP_ENV) {
     break;
   case "prod":
     url = process.env.REACT_APP_PROD_URL;
+    break;
   default:
     url = process.env.REACT_APP_LOCAL_URL;
 }
