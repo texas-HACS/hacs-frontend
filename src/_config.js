@@ -41,13 +41,21 @@ if (error) {
   throw new Error(`Config validation error: ${error.message}`);
 }
 
+var url;
+switch (envVars.REACT_APP_ENV) {
+  case "dev":
+    url = process.env.REACT_APP_DEV_URL;
+    break;
+  case "prod":
+    url = process.env.REACT_APP_PROD_URL;
+  default:
+    url = process.env.REACT_APP_LOCAL_URL;
+}
+
 // Define config for backend
 const config = {
   env: envVars.REACT_APP_ENV,
-  url:
-    envVars.REACT_APP_ENV === "dev"
-      ? process.env.REACT_APP_DEV_URL
-      : process.env.REACT_APP_PROD_URL,
+  url: url,
   firebase: {
     apiKey: envVars.REACT_APP_FIREBASE_API_KEY,
     authDomain: envVars.REACT_APP_FIREBASE_AUTH_DOMAIN,

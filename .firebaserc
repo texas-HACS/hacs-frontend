@@ -1,5 +1,5 @@
 {
   "projects": {
-    "default": "hacs-opensource"
+    "default": "hacs-opensource-int"
   }
 }
