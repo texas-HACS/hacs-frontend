@@ -1,6 +1,6 @@
 # Environment #
 ###############
-.env*
+*.env
 # .env.local
 # .env.development.local
 # .env.test.local
@@ -29,6 +29,7 @@
 *.zip
 *.cache
 node_modules
+build
 dist
 
 # Logs and databases #

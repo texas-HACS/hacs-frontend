@@ -1,4 +1,4 @@
-# HACS-OpenSource-WebSite
+# HACS-Open-Source-Website
 React-based frontend for the Hispanic Association of Computer Scientists website. We allow our members to be able to contribute to the website and gain experience with industry tools.
 
 # Important!
