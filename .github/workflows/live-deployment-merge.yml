@@ -1,0 +1,19 @@
+name: push to live repo
+'on':
+  push:
+    branches:
+      - master
+jobs:
+  repo-sync:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: '0'
+        ref: 'master'
+    - run: |
+        git remote add live https://github.com/texas-HACS/test-repo.git
+        git config --global user.email "texashacs@gmail.com"
+        git config --global user.name "jrmoulckers"
+        git checkout master
+        git push -u live master
