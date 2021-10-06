@@ -41,6 +41,7 @@ if (error) {
   throw new Error(`Config validation error: ${error.message}`);
 }
 
+console.log(process.env);
 var url;
 switch (envVars.REACT_APP_ENV) {
   case "dev":
@@ -52,6 +53,7 @@ switch (envVars.REACT_APP_ENV) {
   default:
     url = process.env.REACT_APP_LOCAL_URL;
 }
+console.log(url);
 
 // Define config for backend
 const config = {
