@@ -1,0 +1,2 @@
+git remote add live https://github.com/texas-HACS/test-repo.git
+git push live master:dev
