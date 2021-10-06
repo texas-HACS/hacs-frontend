@@ -58,8 +58,6 @@ function App() {
   //   });
   // });
 
-  console.log(config);
-
   useEffect(() => {
     fetch(config.url + "/siteContent", {
       Accept: "application/json",
