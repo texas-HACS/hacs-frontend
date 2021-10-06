@@ -69,7 +69,8 @@ GoogleMaps.json
 
 # misc
 .DS_Store
-
+.firebase
+.vscode
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
