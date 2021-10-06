@@ -1,3 +1,0 @@
-git remote add live https://github.com/texas-HACS/hacs-frontend-live.git
-git push -f live master:master
-git remote rm live

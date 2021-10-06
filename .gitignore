@@ -51,6 +51,7 @@ Thumbs.db
 *.cache
 node_modules
 dist
+.deploy
 
 # Google Maps api keys #
 ########################

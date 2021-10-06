@@ -1,0 +1,20 @@
+cd $(dirname $0)/..
+
+rm -rf .deploy
+git clone https://github.com/texas-HACS/hacs-frontend-live.git .deploy
+rm -rf .deploy/src/ .deploy/public .deploy/.gitignore .deploy/package.json  .deploy/package-lock.json
+
+cp -TRv src/ .deploy/src/
+cp -TRv public/ .deploy/public/
+cp .gitignore .deploy/.gitignore
+cp package.json .deploy/package.json
+cp package-lock.json .deploy/package-lock.json
+
+cd .deploy
+npm i -s
+git add -A
+git commit -m "Deploying to live repository"
+git push
+cd ..
+
+rm -rf .deploy
