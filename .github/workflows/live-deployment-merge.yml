@@ -12,5 +12,5 @@ jobs:
         fetch-depth: '0'
         ref: 'master'
     - run: |
-        git remote add live https://github.com/texas-HACS/test-repo.git
+        git remote add live https://${{ secrets.GH_USERNAME }}:${{ secrets.GH_PW }}@github.com/texas-HACS/test-repo.git
         git push live master:dev
