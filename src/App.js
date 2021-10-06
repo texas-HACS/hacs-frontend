@@ -58,7 +58,7 @@ function App() {
   //   });
   // });
 
-  consol.log(config);
+  console.log(config);
 
   useEffect(() => {
     fetch(config.url + "/siteContent", {
