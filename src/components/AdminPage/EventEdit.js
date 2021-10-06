@@ -32,8 +32,8 @@ function EventEdit(props) {
       let newData = { ...data };
       newData[name] = new Date(date).toISOString();
       setData(newData);
-    } catch(e) {
-      console.log("Invalid date")
+    } catch (e) {
+      console.log("Invalid date");
     }
   };
 
