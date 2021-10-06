@@ -58,9 +58,11 @@ function App() {
   //   });
   // });
 
+  consol.log(config);
+
   useEffect(() => {
     fetch(config.url + "/siteContent", {
-        Accept: "application/json",
+      Accept: "application/json",
       "Content-Type": "application/json",
     })
       .then((res) => res.json())
@@ -79,8 +81,8 @@ function App() {
     })
       .then((res) => res.json())
       .then((data) => {
-        if(data == null) {
-          data = {events: {}, jobs: {}, scholarships: {}}
+        if (data == null) {
+          data = { events: {}, jobs: {}, scholarships: {} };
         }
         updateOpportunitiesContent(data);
       })
@@ -95,7 +97,8 @@ function App() {
     return <div />;
   }
 
-  let { meetingLink, signInLink, newsletterLink, developLink } = siteContent.redirects;
+  let { meetingLink, signInLink, newsletterLink, developLink } =
+    siteContent.redirects;
   return (
     <div className="App" id="AppRoot">
       <Router>
@@ -137,7 +140,7 @@ function App() {
                 <Login loginUser={loginUser} />
               </Route>
               <Route path="/sign-in">
-                <Redirect to={signInLink}/>
+                <Redirect to={signInLink} />
               </Route>
               <Route path="/">
                 <Homepage
