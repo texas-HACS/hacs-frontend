@@ -1,2 +1,3 @@
-git remote add live https://github.com/texas-HACS/test-repo.git
-git push live master:dev
+git remote add live https://github.com/texas-HACS/hacs-frontend-live.git
+git push live master:master
+git remote rm live
