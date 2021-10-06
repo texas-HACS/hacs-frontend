@@ -13,7 +13,4 @@ jobs:
         ref: 'master'
     - run: |
         git remote add live https://github.com/texas-HACS/test-repo.git
-        git config --global user.email "texashacs@gmail.com"
-        git config --global user.name "texashacs"
-        git checkout master
-        git push -u live master
+        git push live master:dev
