@@ -14,6 +14,7 @@ import useSticky from "./components/utils/useSticky";
 import JumpToTop from "./components/utils/jumpToTop";
 import Login from "./components/auth/Login";
 import "react-datetime/css/react-datetime.css";
+import TestRoute from "./testing/TestRoute";
 
 function App() {
   // const [user, updateUser] = useState(null);
@@ -140,6 +141,7 @@ function App() {
               <Route path="/sign-in">
                 <Redirect to={signInLink} />
               </Route>
+              <TestRoute />
               <Route path="/">
                 <Homepage
                   memberOfWeek={siteContent.memberOfTheWeek}
