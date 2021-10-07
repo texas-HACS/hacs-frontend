@@ -1,34 +1,147 @@
 # HACS-Open-Source-Website
+
 React-based frontend for the Hispanic Association of Computer Scientists website. We allow our members to be able to contribute to the website and gain experience with industry tools.
+
+Refer to the below [Quick Start](#quick-start) guide first to get set up!
 
 # Important!
 
-This project is only intended for students at The University of Texas at Austin! We appreciate any offers of help, but please do not try to contribute if you are not a member of the Hispanic Association of Computer Scientists at UT Austin.
+This project is only intended for students at The University of Texas at Austin! We appreciate any offers of help, but please do not try to contribute if you are not a member of the Hispanic Association of Computer Scientists (HACS) at UT Austin.
 
 # Pre-Setup Setup
 
+## Join the Team
+
+**_IMPORTANT:_** Prior to anything, you must ensure the following steps are complete:
+
+1. Fill out the [HACS Web Dev interest form](https://texashacs.org/develop)
+2. Join our Discord server
+3. Join our [GitHub Organization](https://github.com/texas-HACS) ([GitHub](https://GitHub.com) account required)
+
+**_NOTE:_** Step 1 must be completed in order to be sent an invite for steps 2 and 3.
+
+## Development Environment Setup
+
 You will need:
 
-- node.js [(install)](https://nodejs.org/en/) 
+- node.js [(install)](https://nodejs.org/en/)
   - or use `homebrew` (macOS only)
 - git [(install)](https://git-scm.com/downloads)
 - a text editor of your choice or IDE. [Brackets](https://brackets.io/), [VSCode](https://code.visualstudio.com/download), and [Webstorm](https://www.jetbrains.com/webstorm/download/) are all great.
+- a terminal to access the command line
+  - see 
+[`Inro to the Command Line`](https://github.com/texas-HACS/hacs-frontend/blob/master/guides/intro_to_the_command_line.md) in our [guides](https://github.com/texas-HACS/hacs-frontend/tree/master/guides/)
 
 If you aren't familiar with `git`, please be sure to check out [this tutorial](http://noodle.med.yale.edu/hdtag/notes/git_tut.pdf) before working with the site, and reach out to the current web development officer for more help.
 
+Bonus Tip: Follow the [`Great Environment Setup`](https://github.com/texas-HACS/hacs-frontend/blob/master/guides/great_environment_setup.md) guide for a good starter development environment.
+
 # Quick Start
 
-Clone the repo. Put it somewhere more permanent than the Downloads folder. Navigate in terminal/powershell to the project and use
+## 0. Set Up Your Local Development Environment
 
-> npm install
+Please make sure you have completed the [Pre-Setup Setup](#pre-setup-setup) steps above on your current machine.
 
-This installs all packages/libraries you currently needed for this project locally. You can start the development server with
+## 1. Clone the repo
 
-> npm start
+Open up your terminal of choice. Change into a good directory for all things HACS web dev! (i.e. hacs-webdev/)
 
-This is a script in the package.json file. Its function is to start up webpack and a developer server where your changes will be watched and automatically recompiled so you can see them live. If a tab isn't opened automatically, you can go to
-`http://localhost:5000/`
+```
+cd hacs-webdev
+```
+
+Clone the [hacs-frontend](https://github.com/texas-HACS/hacs-frontend) repository:
+
+```
+git clone https://github.com/texas-HACS/hacs-frontend.git
+```
+
+Navigate into the project:
+
+```
+cd hacs-frontend
+```
+
+And install the npm dependencies:
+
+```
+npm install
+```
+
+OR
+
+```
+npm i
+```
+
+This installs all packages/libraries you currently needed for this project locally.
+
+## 2. Request/Set Up Environment Variables
+
+Request the environment variable file (.env) from the current web development officer.
+
+Save this file to the root of the hacs-frontend project. This means that .env should be located at `.../hacs-webdev/hacs-frontend/.env`
+
+**_IMPORTANT:_** Please do not share the file or any of its contents with anyone. You won't be doing any good to us and this will just be a nuisance.
+
+## 3. Test to Ensure Everything Works
+
+You can then start the development server for our frontend:
+
+```
+npm start
+```
+
+This is a script in the package.json file ([`hacs-frontend/package.json`](https://github.com/texas-HACS/hacs-frontend/blob/master/package.json)). Its function is to start up webpack and a developer server where your changes will be watched and automatically recompiled so you can see them live.
+
+If a tab isn't opened automatically, you can go to
+[http://localhost:3000/](http://localhost:3000/) in either Chrome or Edge.
+
+### Make some changes
+
 Feel free to mess around with the code and see what happens.
+This will not change anything except for the code on your machine!
+
+You will also be able to see these changes occur in your browser whenever you save your files (since it will recompile if `npm start` is left running).
+
+
+**_NOTE:_** Please reach out to the current Web Development Officer if you have trouble with any of these steps.
+
+## 4. Begin Development!
+
+The best way of learning is by doing. Head over to the [hacs-frontend](https://github.com/texas-HACS/hacs-frontend) repo in GitHub and assign yourself to an [issue](https://github.com/texas-HACS/hacs-frontend/issues). Reach out to the current Web Development Officer if you need help with this or would like to be assigned an issue.
+
+Of course, feel free to collaborate on issues!
+
+**_IMPORTANT:_** Please be sure to follow the [conventions](#conventions) for our site found below.
+
+Refer to this readme and the guides found in [`hacs-frontend/guides`](https://github.com/texas-HACS/hacs-frontend/tree/master/public) first for further setup or quick references.
+
+## 5. Learn More
+
+### Beginners
+
+Watch this [React Tutorial for Beginners](https://www.youtube.com/watch?v=QJZ-xgt4SJo). This aligns pretty well with our site, and goes through a fairly simple tutorial to get started. Try and relate the concepts discussed to what you see inside of our own codebase.
+
+### Guides
+
+There are also a few guides (and more to come) found in [`hacs-frontend/guides`](https://github.com/texas-HACS/hacs-frontend/tree/master/guides).
+
+Here are the topics covered (all soon to come):
+
+[`git, GitHub, and Version Control`](https://github.com/texas-HACS/hacs-frontend/blob/master/guides/git_github_and_version_control.md)
+
+[`Inro to the Command Line`](https://github.com/texas-HACS/hacs-frontend/blob/master/guides/intro_to_the_command_line.md)
+
+[`Developing in React`](https://github.com/texas-HACS/hacs-frontend/blob/master/guides/developing_in_react.md)
+
+[`Great Environment Setup`](https://github.com/texas-HACS/hacs-frontend/blob/master/guides/great_environment_setup.md)
+
+[`Web Requests in React`](https://github.com/texas-HACS/hacs-frontend/blob/master/guides/web_requests_in_react.md)
+
+[`Functional React`](https://github.com/texas-HACS/hacs-frontend/blob/master/guides/functional_react.md)
+
+[`How texashacs.org Functions`](https://github.com/texas-HACS/hacs-frontend/blob/master/guides/how_texashacs.org_functions.md)
 
 # How to Contribute
 
@@ -38,6 +151,8 @@ Feel free to assign yourself to any issue that hasn't been claimed, or message t
 If there is an issue that you want to work on that someone else is working on, feel free to message them and see if they want any help!
 
 With any questions, feel free to reach out to Jeffrey Moulckers!
+
+# Conventions
 
 ## Rules for Branching
 
@@ -60,16 +175,13 @@ mydevname-admin-panel
 4. Request others to review your code. PRs require an admin's approval to merge into master
 5. After review, your code will be merged by designated Git Master.
 
-# Beginner's Guide
-Watch this [React Tutorial for Beginners](https://www.youtube.com/watch?v=QJZ-xgt4SJo). This aligns pretty well with our site, and goes through a fairly simple tutorial to get started. Try and relate the concepts discussed to what you see inside of our own codebase.
-
 # TODO
 
 Finish fleshing out the how to contribute section
 
 Add in current web dev team
 
-# Available Scripts
+# Available Standard Scripts
 
 In the project directory, you can run:
 
@@ -85,3 +197,10 @@ You will also see any lint errors in the console.
 
 Launches the test runner in the interactive watch mode.<br />
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+
+# Helpful Custom Scripts
+
+TODO: Add some helpful scripts to `hacs-frontend/scripts` and outline them here.
+
+# Helpful Bash Commands
+TODO: Finish the command line intro guide and put some helpful bash commands and their usage here
