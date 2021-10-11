@@ -20,6 +20,15 @@
     &:hover,
     &:focus {
       all: initial;
+      margin: 10px 10px;
+    }
+  }
+
+  .icon {
+    all: initial;
+    &:hover {
+      background-color: white;
+      color: $hacs-blue;
     }
   }
 }

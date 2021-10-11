@@ -14,7 +14,7 @@ function MemberHighlight(props) {
             <div className="member-wrapper">
               <a href={props.member.linkedin}>
                 <img
-                  src={props.member.imageUrl}
+                  src={props.member.image?.url}
                   alt={"HACS member of the week, " + props.member.name}
                 />
               </a>

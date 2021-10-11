@@ -56,10 +56,17 @@ button {
   cursor: pointer;
   transition: 0.2s all;
 
-  &:hover,
-  &:focus {
+  &:hover {
     background-color: $hacs-blue;
     color: white;
+  }
+}
+
+.icon {
+  all: initial;
+  &:hover {
+    background-color: white;
+    color: $hacs-blue;
   }
 }
 
@@ -126,8 +133,5 @@ button {
   }
 }
 
-
 @media only screen and (max-width: 768px) {
-  
 }
-

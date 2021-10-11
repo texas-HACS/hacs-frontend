@@ -6,8 +6,8 @@ function OfficerCard(props) {
     <div className="card">
       <img
         src={
-          props.imageUrl ||
-          "https://firebasestorage.googleapis.com/v0/b/hacs-opensource.appspot.com/o/hacs_logo.png?alt=media&token=993e859b-5ae1-47c3-9f51-cf414d833a2c"
+          props.image?.url ||
+          "https://firebasestorage.googleapis.com/v0/b/hacs-opensource-int.appspot.com/o/filler_person.jfif?alt=media&token=807c8a21-7ac3-4504-87de-7ef45a7ce800"
         }
         alt={"An image of officer " + props.name}
       />

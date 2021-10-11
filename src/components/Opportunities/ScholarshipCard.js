@@ -11,7 +11,7 @@ function ScholarshipCard(props) {
       onClick={() => props.onClick(s)}
     >
       <img
-        src={s.imageUrl ?? HACS_LOGO_URL}
+        src={s.image?.url ?? HACS_LOGO_URL}
         className="scholarship-image"
         alt="scholarship-view"
       />

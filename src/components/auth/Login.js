@@ -1,24 +1,30 @@
-import React, { useRef } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useRef, useState } from "react";
+import { Redirect, useLocation } from "react-router";
 
 function Login(props) {
   const userField = useRef(null);
   const passField = useRef(null);
 
-  const history = useHistory();
+  const [redirectToReferrer, setRedirectToReferrer] = useState(false);
 
+  const locState = useLocation().state;
   const submitLogin = (e) => {
     props
       .loginUser({
         username: userField.current.value,
         password: passField.current.value,
       })
-      .then(() => {
-        history.goBack();
+      .then((user) => {
+        if (user) {
+          setRedirectToReferrer(true);
+        }
       });
   };
 
-  return (
+  // Redirect if authenticated or prompt for login
+  return redirectToReferrer ? (
+    <Redirect to={locState?.from || "/"} />
+  ) : (
     <div className="login-wrapper">
       <div className="login">
         <div className="form-group">

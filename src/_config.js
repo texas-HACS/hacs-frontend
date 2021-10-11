@@ -57,7 +57,7 @@ switch (envVars.REACT_APP_ENV) {
 const config = {
   env: envVars.REACT_APP_ENV,
   url: url,
-  firebase: {
+  firebaseConfig: {
     apiKey: envVars.REACT_APP_FIREBASE_API_KEY,
     authDomain: envVars.REACT_APP_FIREBASE_AUTH_DOMAIN,
     databaseURL: envVars.REACT_APP_FIREBASE_DATABASE_URL,

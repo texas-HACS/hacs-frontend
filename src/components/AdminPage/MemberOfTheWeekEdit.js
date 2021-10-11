@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import FileEdit from "../MediaManagement/FileEdit";
 import "./AdminPage.scss";
 
 function MemberOfTheWeekEdit(props) {
@@ -11,60 +12,60 @@ function MemberOfTheWeekEdit(props) {
     e.preventDefault();
   };
 
-  const handleChange = (e) => {
+  const changeData = (key, value) => {
     let newData = { ...data };
-    newData[e.target.name] = e.target.value;
+    newData[key] = value;
     setData(newData);
+  };
+
+  const handleChange = (e) => {
+    let { name, value } = e.target;
+    value = value === "" ? null : value;
+    changeData(name, value);
   };
 
   const editSection = (
     <div className="admin-edit">
-      <form onSubmit={handleSave}>
-        <label>Name</label>
-        <input
-          id="motw-name-edit"
-          className="form-control-small"
-          name="name"
-          defaultValue={data.name}
-          placeholder={"First & last name"}
-          required
-          onChange={handleChange}
-        />
-        <label>Description</label>
-        <textarea
-          id="motw-role-edit"
-          className="form-control-small"
-          name="role"
-          defaultValue={data.description}
-          placeholder="ex.: President"
-          required
-          onChange={handleChange}
-        />
-        <label>LinkedIn URL</label>
-        <input
-          id="motw-linkedin-edit"
-          className="form-control-small"
-          name="linkedin"
-          type="url"
-          defaultValue={data.linkedin}
-          placeholder="ex.: linkedin.com/in/firstnamelastname"
-          onChange={handleChange}
-        />
-        <label>Image URL</label>
-        <input
-          id="motw-image-url-edit"
-          className="form-control-small"
-          name="imageUrl"
-          type="url"
-          defaultValue={data.imageUrl}
-          placeholder={`${data.name} image URL`}
-          required
-          onChange={handleChange}
-        />
-        <button className="btn btn-primary" type="submit">
-          Save
-        </button>
-      </form>
+      <label>Name</label>
+      <input
+        id="motw-name-edit"
+        className="form-control-small"
+        name="name"
+        defaultValue={data.name}
+        placeholder={"First & last name"}
+        required
+        onChange={handleChange}
+      />
+      <label>Description</label>
+      <textarea
+        id="motw-role-edit"
+        className="form-control-small"
+        name="role"
+        defaultValue={data.description}
+        placeholder="ex.: President"
+        required
+        onChange={handleChange}
+      />
+      <label>LinkedIn URL</label>
+      <input
+        id="motw-linkedin-edit"
+        className="form-control-small"
+        name="linkedin"
+        type="url"
+        defaultValue={data.linkedin}
+        placeholder="ex.: linkedin.com/in/firstnamelastname"
+        onChange={handleChange}
+      />
+      <div>Image</div>
+      <FileEdit
+        key={"file_edit" + props.id}
+        file={data.image}
+        onSelectFile={(file) => changeData("image", file)}
+        onRemoveFile={() => changeData("image", null)}
+      />
+      <button className="btn btn-primary" onClick={handleSave}>
+        Save
+      </button>
     </div>
   );
 

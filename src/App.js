@@ -14,50 +14,42 @@ import useSticky from "./components/utils/useSticky";
 import JumpToTop from "./components/utils/jumpToTop";
 import Login from "./components/auth/Login";
 import "react-datetime/css/react-datetime.css";
-import TestRoute from "./testing/TestRoute";
+import PrivateRoute from "./components/auth/PrivateRoute";
+import TestPage from "./testing/TestPage";
 
 function App() {
-  // const [user, updateUser] = useState(null);
+  const [initialized, setInitialized] = useState(false);
+  const [user, setUser] = useState(null);
   const [siteContent, updateSiteContent] = useState(null);
   const [opportunitiesContent, updateOpportunitiesContent] = useState(null);
 
-  // const [authorized, updateAuthorization] = useState("Initial State");
+  useEffect(() => {
+    const unsubscribe = firebase.auth.getCurrentUser((user) => {
+      setUser(user);
+      setInitialized(true);
+    });
 
-  const loginUser = async (loginData) => {
-    await firebase
-      .auth()
-      .signInWithEmailAndPassword(loginData.username, loginData.password)
-      .then((user) => {
-        // updateAuthorization(user);
-        // updateUser(user);
-      })
-      .catch((err) => {
-        console.error("Error:", err);
-        // updateAuthorization(err);
+    // React will call this to unsubscribe from the auth handler
+    return unsubscribe;
+  }, []);
+
+  const loginUser = (loginData) => {
+    return firebase.auth
+      .signIn(loginData.username, loginData.password)
+      .then(({ user }) => {
+        setUser(user);
+        return user;
       });
   };
 
   const signoutUser = () => {
-    firebase
-      .auth()
-      .signOut()
-      .then(() => {
-        // updateAuthorization("Signed Out");
-        // updateUser(null);
-      })
+    firebase.auth
+      .signOut(firebase.auth._)
+      .then(() => {})
       .catch((err) => {
         console.error("Error:", err);
-        // updateAuthorization(err);
       });
   };
-
-  // useEffect(() => {
-  //   firebase.auth().onAuthStateChanged((authorizedUser) => {
-  //     if (user) {
-  //       updateUser(authorizedUser);
-  //     }
-  //   });
-  // });
 
   useEffect(() => {
     fetch(config.url + "/siteContent", {
@@ -96,8 +88,16 @@ function App() {
     return <div />;
   }
 
+  const testRoute =
+    config.env === "local" || config.env === "dev" ? (
+      <Route path="/test">
+        <TestPage />
+      </Route>
+    ) : null;
+
   let { meetingLink, signInLink, newsletterLink, developLink } =
     siteContent.redirects;
+
   return (
     <div className="App" id="AppRoot">
       <Router>
@@ -126,22 +126,21 @@ function App() {
                   opportunities={opportunitiesContent}
                 />
               </Route>
-              <Route path="/admin">
+              <PrivateRoute path="/admin" user={user} init={initialized}>
                 <AdminPage
-                  // user={user}
-                  loginUser={loginUser}
+                  user={user}
                   signoutUser={signoutUser}
                   siteContent={siteContent}
                   opportunities={opportunitiesContent}
                 />
-              </Route>
+              </PrivateRoute>
               <Route path="/login">
                 <Login loginUser={loginUser} />
               </Route>
               <Route path="/sign-in">
                 <Redirect to={signInLink} />
               </Route>
-              <TestRoute />
+              {testRoute}
               <Route path="/">
                 <Homepage
                   memberOfWeek={siteContent.memberOfTheWeek}
