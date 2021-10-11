@@ -1,5 +1,4 @@
 import React from "react";
-import LinkButton from "../partials/LinkButton";
 import { renderStartAndEndDateTime } from "../utils/utils";
 import "./Opportunities.scss";
 import { HACS_LOGO_URL } from "./utils";
@@ -18,7 +17,7 @@ function EventCard(props) {
         }`}
       />
       <img
-        src={event.imageUrl ?? HACS_LOGO_URL}
+        src={event.image?.url ?? HACS_LOGO_URL}
         className="event-image"
         alt="event-view"
       />

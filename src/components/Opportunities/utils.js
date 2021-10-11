@@ -113,7 +113,7 @@ export function renderModalContent(content) {
   return (
     <div className="flex-row content" key={content.uid}>
       <div className="image">
-        <img src={content.imageUrl ?? HACS_LOGO_URL} />
+        <img src={content.image?.url ?? HACS_LOGO_URL} />
       </div>
       <div className="flex other-content">
         <h1 className="title">{content.title}</h1>

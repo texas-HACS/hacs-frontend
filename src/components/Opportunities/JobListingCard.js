@@ -12,7 +12,7 @@ function JobListingCard(props) {
       onClick={() => props.onClick(l)}
     >
       <img
-        src={l.imageUrl ?? HACS_LOGO_URL}
+        src={l.image?.url ?? HACS_LOGO_URL}
         className="scholarship-image"
         alt="scholarship-view"
       />

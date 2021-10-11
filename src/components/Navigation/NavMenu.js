@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import TestNavLink from "../../testing/TestNavLink";
 
 export default function NavMenu(props) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -7,7 +8,6 @@ export default function NavMenu(props) {
   useEffect(() => {
     setMenuOpen(props.isOpen);
   }, [props.isOpen]);
-
 
   let meetingLink, newsletterLink, developLink;
   if (props.redirects) {

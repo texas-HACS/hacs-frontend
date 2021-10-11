@@ -1,0 +1,28 @@
+@import "../../../_variables.scss";
+
+.file-system {
+  border: 1px solid $hacs-blue;
+  width: 100%;
+  height: auto;
+  text-align: initial;
+
+  .navigation {
+    justify-content: flex-start;
+    .level-up-button {
+      top: 100px;
+      left: 10px;
+    }
+  }
+
+  .folder-contents {
+    align-items: flex-start;
+  }
+
+  .file-upload {
+    justify-content: flex-start;
+  }
+}
+
+i {
+  padding: 0 1rem 0 0;
+}

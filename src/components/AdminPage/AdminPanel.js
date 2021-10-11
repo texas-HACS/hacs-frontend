@@ -1,4 +1,3 @@
-import { auth } from "../../_firebase";
 import React, { useEffect, useState } from "react";
 import "./AdminPage.scss";
 import config from "../../_config";
@@ -9,6 +8,7 @@ import EventEdit from "./EventEdit";
 import JobEdit from "./JobEdit";
 import ScholarshipEdit from "./ScholarshipEdit";
 import SignInLinkEdit from "./SignInLinkEdit";
+import useEffectNoInitialRender from "../../hooks/useEffectNoInitialRender";
 
 function AdminPanel(props) {
   const [data, setData] = useState(props.data);
@@ -16,12 +16,12 @@ function AdminPanel(props) {
   const [opps, setOpps] = useState(props.opportunities);
   const [uOpps, setUOpps] = useState(null);
 
-  useEffect(() => {
-    if (auth.currentUser == null || uData == null) {
+  useEffectNoInitialRender(() => {
+    if (uData == null) {
       return;
     }
 
-    auth.currentUser
+    props.user
       .getIdToken(true)
       .then((idToken) => {
         fetch(config.url + "/siteContent", {
@@ -41,12 +41,12 @@ function AdminPanel(props) {
       });
   }, [uData]);
 
-  useEffect(() => {
-    if (auth.currentUser == null || uOpps == null) {
+  useEffectNoInitialRender(() => {
+    if (uOpps == null) {
       return;
     }
 
-    auth.currentUser
+    props.user
       .getIdToken(true)
       .then((idToken) => {
         fetch(config.url + "/opportunities", {
@@ -105,6 +105,9 @@ function AdminPanel(props) {
 
   const updateOpp = (oppType, oppData) => {
     let updating = { ...opps };
+    if (!updating[oppType]) {
+      updating[oppType] = {};
+    }
     updating[oppType][oppData.uid] = oppData;
     setOpps(updating);
     setUOpps(updating);

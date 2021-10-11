@@ -1,0 +1,15 @@
+@import "../../variables.scss";
+
+.file-upload {
+  height: 4rem;
+  align-items: center;
+
+  .close-button {
+    all: initial;
+    margin: 10px 10px;
+
+    &:hover,
+    &:focus {
+    }
+  }
+}

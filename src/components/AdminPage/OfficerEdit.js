@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import FileEdit from "../MediaManagement/FileEdit";
 import { newUid } from "../utils/utils";
 import "./AdminPage.scss";
 
@@ -9,8 +10,7 @@ function OfficerEdit(props) {
     uid: props.data?.uid ?? newUid("officer"),
   });
 
-  const handleSave = (e) => {
-    e.preventDefault();
+  const handleSave = () => {
     props.handleUpdate(data);
     setEditing(false);
     if (props.addNew) {
@@ -18,12 +18,16 @@ function OfficerEdit(props) {
     }
   };
 
+  const changeData = (key, value) => {
+    let newData = { ...data };
+    newData[key] = value;
+    setData(newData);
+  };
+
   const handleChange = (e) => {
     let { name, value, type } = e.target;
-    let newData = { ...data };
-    value = type === "number" ? parseInt(value, 10) : value;
-    newData[name] = value;
-    setData(newData);
+    value = value === "" ? null : value;
+    changeData(name, value);
   };
 
   const handleDelete = () => {
@@ -33,81 +37,76 @@ function OfficerEdit(props) {
 
   const editSection = (
     <div className="admin-edit">
-      <form id={data.uid} onSubmit={handleSave}>
-        <label>{"First & Last Name"}</label>
-        <input
-          id="officer-name-edit"
-          className="form-control-small"
-          name="name"
-          defaultValue={data?.name}
-          placeholder="ex.: Chris Nunes"
-          required
-          onChange={handleChange}
-        />
-        <label>Officer Role</label>
-        <input
-          id="officer-role-edit"
-          className="form-control-small"
-          name="role"
-          defaultValue={data?.role}
-          placeholder="ex.: Web Developer"
-          required
-          onChange={handleChange}
-        />
-        <label>Email</label>
-        <input
-          id="officer-email-edit"
-          className="form-control-small"
-          name="email"
-          type="email"
-          defaultValue={data?.email}
-          placeholder="ex.: texashacs@gmail.com"
-          onChange={handleChange}
-        />
-        <label>Ordering Value</label>
-        <input
-          id="officer-order-edit"
-          className="form-control-small"
-          name="order"
-          type="number"
-          defaultValue={data?.order}
-          min="0"
-          required
-          onChange={handleChange}
-        />
-        <label>LinkedIn URL</label>
-        <input
-          id="officer-linkedin-edit"
-          className="form-control-small"
-          name="linkedin"
-          type="url"
-          defaultValue={data?.linkedin}
-          placeholder="ex.: https://linkedin.com/in/firstnamelastname"
-          onChange={handleChange}
-        />
-        <label>Image URL</label>
-        <input
-          id="officer-image-url-edit"
-          className="form-control-small"
-          name="imageUrl"
-          type="url"
-          defaultValue={data?.imageUrl}
-          placeholder={"ex.: https://drive.google.com/..."}
-          onChange={handleChange}
-        />
-        <label>Officer UID</label>
-        <input
-          id="officer-uid-edit"
-          className="form-control-small"
-          name="uid"
-          type="text"
-          value={data?.uid ?? new Date().getTime()}
-          required
-          readOnly
-          onChange={handleChange}
-        />
-      </form>
-      <button className="btn btn-primary" type="submit" form={data.uid}>
+      <label>{"First & Last Name"}</label>
+      <input
+        id="officer-name-edit"
+        className="form-control-small"
+        name="name"
+        defaultValue={data?.name}
+        placeholder="ex.: Chris Nunes"
+        required
+        onChange={handleChange}
+      />
+      <label>Officer Role</label>
+      <input
+        id="officer-role-edit"
+        className="form-control-small"
+        name="role"
+        defaultValue={data?.role}
+        placeholder="ex.: Web Developer"
+        required
+        onChange={handleChange}
+      />
+      <label>Email</label>
+      <input
+        id="officer-email-edit"
+        className="form-control-small"
+        name="email"
+        type="email"
+        defaultValue={data?.email}
+        placeholder="ex.: texashacs@gmail.com"
+        onChange={handleChange}
+      />
+      <label>Ordering Value</label>
+      <input
+        id="officer-order-edit"
+        className="form-control-small"
+        name="order"
+        type="number"
+        defaultValue={data?.order}
+        min="0"
+        required
+        onChange={handleChange}
+      />
+      <label>LinkedIn URL</label>
+      <input
+        id="officer-linkedin-edit"
+        className="form-control-small"
+        name="linkedin"
+        type="url"
+        defaultValue={data?.linkedin}
+        placeholder="ex.: https://linkedin.com/in/firstnamelastname"
+        onChange={handleChange}
+      />
+      <div>Image</div>
+      <FileEdit
+        key={"file_edit" + props.id}
+        file={data.image}
+        onSelectFile={(file) => changeData("image", file)}
+        onRemoveFile={() => changeData("image", null)}
+      />
+      <label>Officer UID</label>
+      <input
+        id="officer-uid-edit"
+        className="form-control-small"
+        name="uid"
+        type="text"
+        value={data?.uid ?? new Date().getTime()}
+        required
+        readOnly
+        onChange={handleChange}
+      />
+      <button className="btn btn-primary" onClick={handleSave}>
         Save
       </button>
       <button className="btn btn-primary" onClick={handleDelete} type="button">
