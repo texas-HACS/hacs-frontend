@@ -84,6 +84,12 @@ Save this file to the root of the hacs-frontend project. This means that .env sh
 
 **_IMPORTANT:_** Please do not share the file or any of its contents with anyone. You won't be doing any good to us and this will just be a nuisance.
 
+**_MAC USERS:_** You may not be able to rename this file properly using just Finder. Once you have placed the env file in the correct location, open up the terminal, navigate to `hacs-frontend`, and perform the following command:
+```
+mv env .env
+```
+This will rename env to .env, which is able to be done at the terminal level, but not in Finder.
+
 ## 3. Test to Ensure Everything Works
 
 You can then start the development server for our frontend:
