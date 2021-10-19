@@ -18,10 +18,6 @@ This guide teaches by example (with the HACS frontend repo: `[texas-HACS/hacs-fr
 
 [Remote](#remote-github)
 
-&nbsp;&nbsp;&nbsp;&nbsp;[Repository](#what-is-a-repository)
-
-&nbsp;&nbsp;&nbsp;&nbsp;[Repository](#what-is-a-repository)
-
 
 ---
 
