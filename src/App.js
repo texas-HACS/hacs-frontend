@@ -145,6 +145,7 @@ function App() {
                 <Homepage
                   memberOfWeek={siteContent.memberOfTheWeek}
                   officers={siteContent.officers}
+                  events={opportunitiesContent?.events}
                 />
               </Route>
             </Switch>
