@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Homepage.scss";
 import Hero from "./Hero";
 import ImageSlider from "./ImageSlider";
@@ -6,6 +6,7 @@ import MemberHighlight from "./MemberHighlight";
 import UpcomingEvents from "./UpcomingEvents";
 import TwitterFeed from "./TwitterFeed";
 import Leadership from "./Leadership";
+import CurrentEvents from "./CurrentEvents";
 
 const placeholderEvents = [
   {
@@ -27,9 +28,18 @@ const placeholderEvents = [
 ];
 
 function Homepage(props) {
+  const [events, setEvents] = useState(null);
+
+  useEffect(() => {
+    if (props.events != null) {
+      setEvents(Object.keys(props.events).map((uid) => props.events[uid]));
+    }
+  }, [props.events]);
+
   return (
     <section className="homepage">
       <Hero />
+      <CurrentEvents events={events} />
       <ImageSlider />
       <MemberHighlight member={props.memberOfWeek} />
       <UpcomingEvents events={placeholderEvents} />
