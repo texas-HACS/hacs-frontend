@@ -9,12 +9,49 @@ import JobEdit from "./JobEdit";
 import ScholarshipEdit from "./ScholarshipEdit";
 import SignInLinkEdit from "./SignInLinkEdit";
 import useEffectNoInitialRender from "../../hooks/useEffectNoInitialRender";
+import EventAPI from "../../api/event";
 
 function AdminPanel(props) {
   const [data, setData] = useState(props.data);
   const [uData, setUData] = useState(null);
   const [opps, setOpps] = useState(props.opportunities);
   const [uOpps, setUOpps] = useState(null);
+  const [events, setEvents] = useState(null);
+
+  useEffect(() => {
+    fetch(config.url + "/siteContent", {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    })
+      .then((res) => res.json())
+      .then((d) => {
+        setData(d);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }, []);
+
+  useEffect(() => {
+    fetch(config.url + "/opportunities", {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data == null) {
+          data = { jobs: {}, scholarships: {} };
+        }
+        setOpps(data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }, []);
+
+  useEffect(() => {
+    events ?? EventAPI.list().then((data) => setEvents(data));
+  }, [events]);
 
   useEffectNoInitialRender(() => {
     if (uData == null) {
@@ -180,36 +217,33 @@ function AdminPanel(props) {
     ) : null;
 
   var eventsEdit, jobsEdit, scholarshipsEdit;
-  if (opps) {
-    eventsEdit = (
-      <div className="form-group">
-        <h2 className="form-group-title">Events</h2>
-        {opps.events
-          ? Object.keys(opps.events)
-              .map((uid) => opps.events[uid])
-              .sort((a, b) => {
-                // Sort in descending order of date
-                return new Date(b.startTime) - new Date(a.startTime);
-              })
-              .map((event) => (
-                <EventEdit
-                  id={event.uid}
-                  key={event.uid}
-                  data={event}
-                  handleUpdate={updateOpp}
-                  handleDelete={deleteOpp}
-                />
-              ))
-          : null}
-        <EventEdit
-          addNew
-          data={{}}
-          handleUpdate={updateOpp}
-          handleDelete={deleteOpp}
-        />
-      </div>
-    );
 
+  const rerenderEvents = () => setEvents(null);
+  eventsEdit = (
+    <div className="form-group">
+      <h2 className="form-group-title">Events</h2>
+      {events
+        ? Object.keys(events)
+            .map((uid) => events[uid])
+            .sort((a, b) => {
+              // Sort in descending order of date
+              return new Date(b.startTime) - new Date(a.startTime);
+            })
+            .map((event) => (
+              <EventEdit
+                id={event.uid}
+                key={event.uid}
+                data={event}
+                user={props.user}
+                handleUpdate={rerenderEvents}
+              />
+            ))
+        : null}
+      <EventEdit addNew user={props.user} handleUpdate={rerenderEvents} />
+    </div>
+  );
+
+  if (opps) {
     jobsEdit = (
       <div className="form-group">
         <h2 className="form-group-title">Job Postings</h2>

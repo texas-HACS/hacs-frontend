@@ -1,22 +1,23 @@
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import "./AdminPage.scss";
-import { newUid } from "../utils/utils";
 import Datetime from "react-datetime";
 import FileEdit from "../MediaManagement/FileEdit";
+import EventAPI from "../../api/event";
 
 function EventEdit(props) {
   const [editing, setEditing] = useState(false);
-  const [data, setData] = useState({
-    ...props.data,
-    uid: props.data.uid ?? newUid("event"),
-  });
+  const [data, setData] = useState(props.data);
+
+  const { addNew, user } = props;
 
   const handleSave = () => {
-    props.handleUpdate("events", data);
+    (addNew
+      ? EventAPI.create(user, data)
+      : EventAPI.update(user, data.uid, data)
+    ).then(() => {
+      props.handleUpdate();
+    });
     setEditing(false);
-    if (props.addNew) {
-      setData({ uid: newUid("event") });
-    }
   };
 
   const changeData = (key, value) => {
@@ -42,7 +43,7 @@ function EventEdit(props) {
   };
 
   const handleDelete = () => {
-    props.handleDelete("events", data.uid);
+    addNew ?? EventAPI.delete(user, data.uid).then(props.handleUpdate());
     setEditing(false);
   };
 
@@ -71,7 +72,7 @@ function EventEdit(props) {
       <label>Start Time</label>
       <Datetime
         className="small"
-        value={new Date(data.startTime)}
+        value={new Date(data?.startTime)}
         onChange={(date) => {
           handleDateChange("startTime", date);
         }}
@@ -79,7 +80,7 @@ function EventEdit(props) {
       <label>End Time</label>
       <Datetime
         className="small"
-        value={new Date(data.endTime)}
+        value={new Date(data?.endTime)}
         onChange={(date) => {
           handleDateChange("endTime", date);
         }}
@@ -87,7 +88,7 @@ function EventEdit(props) {
       <div>Image</div>
       <FileEdit
         key={"file_edit" + props.id}
-        file={data.image}
+        file={data?.image}
         onSelectFile={(file) => changeData("image", file)}
         onRemoveFile={() => changeData("image", null)}
       />
@@ -96,7 +97,7 @@ function EventEdit(props) {
         id="event-meeting-link-edit"
         className="form-control-small"
         name="meetingLink"
-        defaultValue={data.meetingLink}
+        defaultValue={data?.meetingLink}
         placeholder="ex.: https://utexas.zoom.us/j/..."
         onChange={handleChange}
       />
@@ -105,7 +106,7 @@ function EventEdit(props) {
         id="event-rsvp-link-edit"
         className="form-control-small"
         name="rsvpLink"
-        defaultValue={data.rsvpLink}
+        defaultValue={data?.rsvpLink}
         placeholder="ex.: https://forms.gle/..."
         onChange={handleChange}
       />
@@ -114,7 +115,7 @@ function EventEdit(props) {
         id="event-location-edit"
         className="form-control-small"
         name="location"
-        defaultValue={data.location}
+        defaultValue={data?.location}
         placeholder="ex.: GDC 5.302"
         onChange={handleChange}
       />
@@ -123,26 +124,31 @@ function EventEdit(props) {
         id="event-other-links-edit"
         className="form-control-small"
         name="otherLinks"
-        defaultValue={data.otherLinks}
+        defaultValue={data?.otherLinks}
         placeholder="ex.: flyer link, merch sign up, etc."
         readOnly // TODO: Fix render before removing this tag
         onChange={handleChange}
       />
-      <label>Event UID</label>
-      <input
-        id="event-uid-edit"
-        className="form-control-small"
-        name="uid"
-        value={data?.uid ?? newUid("event")}
-        required
-        readOnly
-        onChange={handleChange}
-      />
+      {addNew ? null : (
+        <Fragment>
+          <label>Event UID</label>
+          <input
+            id="event-uid-edit"
+            className="form-control-small"
+            name="uid"
+            value={data.uid}
+            required
+            readOnly
+            onChange={handleChange}
+          />
+        </Fragment>
+      )}
+
       <button className="btn btn-primary" onClick={handleSave}>
-        Save
+        {addNew ? "Create" : "Save"}
       </button>
       <button className="btn btn-primary" onClick={handleDelete} type="button">
-        Delete
+        {addNew ? "Cancel" : "Delete"}
       </button>
     </div>
   );
@@ -150,11 +156,7 @@ function EventEdit(props) {
   const saveSection = (
     <div onClick={() => setEditing(!!(editing ^ true))}>
       <p className="editable">
-        {props.data?.title == null ? (
-          "Add Event"
-        ) : (
-          <span>{props.data?.title}</span>
-        )}
+        {addNew ? "Add Event" : <span>{props.data?.title}</span>}
       </p>
       {/* TODO: Add X mark to close dropdown */}
     </div>

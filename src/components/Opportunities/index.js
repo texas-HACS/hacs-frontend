@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Fade from "react-reveal/Fade";
+import EventAPI from "../../api/event";
 import "./Opportunities.scss";
 import {
   renderEvents,
@@ -11,6 +12,11 @@ import Modal from "../partials/Modal";
 
 function Opportunities(props) {
   const [data, setData] = useState({});
+  const [events, setEvents] = useState(null);
+
+  useEffect(() => {
+    EventAPI.list().then((events) => setEvents(events));
+  }, []);
 
   useEffect(() => {
     setData(props.opportunities);
@@ -21,8 +27,7 @@ function Opportunities(props) {
     "Something is wrong, no data in the modal..."
   );
 
-  useEffect(() => {
-  }, [modalOpen, modalContent]);
+  useEffect(() => {}, [modalOpen, modalContent]);
 
   const openModal = (content) => {
     setModalContent(content);
@@ -34,11 +39,11 @@ function Opportunities(props) {
   };
 
   // an initial api call to get all opportunities data
-  if (!data) {
+  if (!data && !events) {
     return <div />;
   }
 
-  var { jobs, events, scholarships } = data;
+  // var { jobs, scholarships } = data;
 
   // events = placeholderEvents;
   // scholarships = placeholderSponsorScholarships;
@@ -55,29 +60,29 @@ function Opportunities(props) {
     <div />
   );
 
-  const jobListingsSection = jobs ? (
-    <div className="job-listings">
-      <Fade bottom>
-        <h3 className="section-title">Job Listings</h3>
-      </Fade>
-      <Fade left>{renderJobListings(jobs, props.editable, openModal)}</Fade>
-    </div>
-  ) : (
-    <div />
-  );
+  // const jobListingsSection = jobs ? (
+  //   <div className="job-listings">
+  //     <Fade bottom>
+  //       <h3 className="section-title">Job Listings</h3>
+  //     </Fade>
+  //     <Fade left>{renderJobListings(jobs, props.editable, openModal)}</Fade>
+  //   </div>
+  // ) : (
+  //   <div />
+  // );
 
-  const scholarshipsSection = scholarships ? (
-    <div className="scholarships">
-      <Fade bottom>
-        <h3 className="section-title">Scholarships</h3>
-      </Fade>
-      <Fade left>
-        {renderScholarships(scholarships, props.editable, openModal)}
-      </Fade>
-    </div>
-  ) : (
-    <div />
-  );
+  // const scholarshipsSection = scholarships ? (
+  //   <div className="scholarships">
+  //     <Fade bottom>
+  //       <h3 className="section-title">Scholarships</h3>
+  //     </Fade>
+  //     <Fade left>
+  //       {renderScholarships(scholarships, props.editable, openModal)}
+  //     </Fade>
+  //   </div>
+  // ) : (
+  //   <div />
+  // );
 
   const modal = (
     <div>
@@ -105,8 +110,8 @@ function Opportunities(props) {
         </section>
       </Fade>
       {eventsSection}
-      {jobListingsSection}
-      {scholarshipsSection}
+      {/* {jobListingsSection}
+      {scholarshipsSection} */}
       {modal}
     </div>
   );
