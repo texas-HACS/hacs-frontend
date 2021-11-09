@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Fade from "react-reveal/Fade";
+import EventAPI from "../../api/event";
+import JobAPI from "../../api/job";
+import ScholarshipAPI from "../../api/scholarship";
 import "./Opportunities.scss";
 import {
   renderEvents,
@@ -11,6 +14,21 @@ import Modal from "../partials/Modal";
 
 function Opportunities(props) {
   const [data, setData] = useState({});
+  const [events, setEvents] = useState(null);
+  const [jobs, setJobs] = useState(null);
+  const [scholarships, setScholarships] = useState(null);
+
+  useEffect(() => {
+    EventAPI.list().then((e) => setEvents(e));
+  }, []);
+
+  useEffect(() => {
+    JobAPI.list().then((j) => setJobs(j));
+  }, []);
+
+  useEffect(() => {
+    ScholarshipAPI.list().then((s) => setScholarships(s));
+  }, []);
 
   useEffect(() => {
     setData(props.opportunities);
@@ -21,8 +39,7 @@ function Opportunities(props) {
     "Something is wrong, no data in the modal..."
   );
 
-  useEffect(() => {
-  }, [modalOpen, modalContent]);
+  useEffect(() => {}, [modalOpen, modalContent]);
 
   const openModal = (content) => {
     setModalContent(content);
@@ -32,13 +49,6 @@ function Opportunities(props) {
   const closeModal = () => {
     setModalOpen(false);
   };
-
-  // an initial api call to get all opportunities data
-  if (!data) {
-    return <div />;
-  }
-
-  var { jobs, events, scholarships } = data;
 
   // events = placeholderEvents;
   // scholarships = placeholderSponsorScholarships;
@@ -55,7 +65,7 @@ function Opportunities(props) {
     <div />
   );
 
-  const jobListingsSection = jobs ? (
+  const jobsSection = jobs ? (
     <div className="job-listings">
       <Fade bottom>
         <h3 className="section-title">Job Listings</h3>
@@ -105,7 +115,7 @@ function Opportunities(props) {
         </section>
       </Fade>
       {eventsSection}
-      {jobListingsSection}
+      {jobsSection}
       {scholarshipsSection}
       {modal}
     </div>

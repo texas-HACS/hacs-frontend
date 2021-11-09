@@ -52,7 +52,7 @@ export function renderJobListings(listings, editable, openModal) {
   ) : (
     <p>
       There are no current job listings available. Let our officer team know of
-      any new opportunities by emailing
+      any new opportunities by emailing&nbsp;
       <a className="fancy" href="mailto:texashacs@gmail.com">
         texashacs@gmail.com
       </a>
@@ -78,7 +78,7 @@ export function renderEvents(events, editable, openModal) {
   ) : (
     <p>
       There are no upcoming events. Please let us know if this seems incorrect
-      by emailing
+      by emailing&nbsp;
       <a className="fancy" href="mailto:texashacs@gmail.com">
         texashacs@gmail.com
       </a>
@@ -100,7 +100,7 @@ export function renderScholarships(scholarships, editable, openModal) {
   ) : (
     <p>
       There are no scholarships that we are currently aware of. Let our officer
-      team know of any new opportunities by emailing
+      team know of any new opportunities by emailing&nbsp;
       <a className="fancy" href="mailto:texashacs@gmail.com">
         texashacs@gmail.com
       </a>

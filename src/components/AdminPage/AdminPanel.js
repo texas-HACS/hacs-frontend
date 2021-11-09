@@ -9,12 +9,62 @@ import JobEdit from "./JobEdit";
 import ScholarshipEdit from "./ScholarshipEdit";
 import SignInLinkEdit from "./SignInLinkEdit";
 import useEffectNoInitialRender from "../../hooks/useEffectNoInitialRender";
+import EventAPI from "../../api/event";
+import JobAPI from "../../api/job";
+import ScholarshipAPI from "../../api/scholarship";
 
 function AdminPanel(props) {
   const [data, setData] = useState(props.data);
   const [uData, setUData] = useState(null);
   const [opps, setOpps] = useState(props.opportunities);
   const [uOpps, setUOpps] = useState(null);
+  const [events, setEvents] = useState(null);
+  const [jobs, setJobs] = useState(null);
+  const [scholarships, setScholarships] = useState(null);
+
+  useEffect(() => {
+    fetch(config.url + "/siteContent", {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    })
+      .then((res) => res.json())
+      .then((d) => {
+        setData(d);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }, []);
+
+  useEffect(() => {
+    fetch(config.url + "/opportunities", {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data == null) {
+          data = { jobs: {} };
+        }
+        setOpps(data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }, []);
+
+  useEffect(() => {
+    events ?? EventAPI.list().then((eData) => setEvents(eData));
+  }, []);
+
+  useEffect(() => {
+    jobs ?? JobAPI.list().then((jData) => setJobs(jData));
+  }, []);
+
+  useEffect(() => {
+    scholarships ??
+      ScholarshipAPI.list().then((sData) => setScholarships(sData));
+  }, []);
 
   useEffectNoInitialRender(() => {
     if (uData == null) {
@@ -180,84 +230,102 @@ function AdminPanel(props) {
     ) : null;
 
   var eventsEdit, jobsEdit, scholarshipsEdit;
-  if (opps) {
-    eventsEdit = (
-      <div className="form-group">
-        <h2 className="form-group-title">Events</h2>
-        {opps.events
-          ? Object.keys(opps.events)
-              .map((uid) => opps.events[uid])
-              .sort((a, b) => {
-                // Sort in descending order of date
-                return new Date(b.startTime) - new Date(a.startTime);
-              })
-              .map((event) => (
-                <EventEdit
-                  id={event.uid}
-                  key={event.uid}
-                  data={event}
-                  handleUpdate={updateOpp}
-                  handleDelete={deleteOpp}
-                />
-              ))
-          : null}
-        <EventEdit
-          addNew
-          data={{}}
-          handleUpdate={updateOpp}
-          handleDelete={deleteOpp}
-        />
-      </div>
-    );
 
-    jobsEdit = (
-      <div className="form-group">
-        <h2 className="form-group-title">Job Postings</h2>
-        {opps.jobs
-          ? Object.keys(opps.jobs).map((uid) => (
-              <JobEdit
-                id={uid}
-                key={uid}
-                data={opps.jobs[uid]}
-                handleUpdate={updateOpp}
-                handleDelete={deleteOpp}
+  const rerenderEvents = (data) => setEvents({ ...events, [data.uid]: data });
+  const deleteEvent = (uid) => {
+    let updatedEvents = { ...events };
+    delete updatedEvents[uid];
+    setEvents(updatedEvents);
+  };
+  eventsEdit = (
+    <div className="form-group">
+      <h2 className="form-group-title">Events</h2>
+      {events
+        ? Object.keys(events)
+            .map((uid) => events[uid])
+            .sort((a, b) => {
+              // Sort in descending order of date
+              return new Date(b.startTime) - new Date(a.startTime);
+            })
+            .map((e) => (
+              <EventEdit
+                id={e.uid}
+                key={e.uid}
+                data={e}
+                user={props.user}
+                handleUpdate={rerenderEvents}
+                handleDelete={deleteEvent}
               />
             ))
-          : null}
-        <JobEdit
-          addNew
-          data={{}}
-          handleUpdate={updateOpp}
-          handleDelete={deleteOpp}
-        />
-      </div>
-    );
+        : null}
+      <EventEdit addNew user={props.user} handleUpdate={rerenderEvents} />
+    </div>
+  );
 
-    scholarshipsEdit = (
-      <div className="form-group">
-        <h2 className="form-group-title">Scholarship Opportunities</h2>
-        {opps.scholarships
-          ? Object.keys(opps.scholarships).map((uid) => (
+  const rerenderScholarhsips = (data) =>
+    setScholarships({ ...scholarships, [data.uid]: data });
+  const deleteScholarship = (uid) => {
+    let updatedScholarships = { ...scholarships };
+    delete updatedScholarships[uid];
+    setScholarships(updatedScholarships);
+  };
+  scholarshipsEdit = (
+    <div className="form-group">
+      <h2 className="form-group-title">Scholarship Opportunities</h2>
+      {scholarships
+        ? Object.keys(scholarships)
+            .map((uid) => scholarships[uid])
+            .sort((a, b) => {
+              return new Date(b.startTime) - new Date(a.startTime);
+            })
+            .map((s) => (
               <ScholarshipEdit
-                id={uid}
-                key={uid}
-                data={opps.scholarships[uid]}
-                handleUpdate={updateOpp}
-                handleDelete={deleteOpp}
+                id={s.uid}
+                key={s.uid}
+                data={s}
+                user={props.user}
+                handleUpdate={rerenderScholarhsips}
+                handleDelete={deleteScholarship}
               />
             ))
-          : null}
-        <ScholarshipEdit
-          addNew
-          data={{}}
-          handleUpdate={updateOpp}
-          handleDelete={deleteOpp}
-        />
-      </div>
-    );
-  } else {
-    console.log("This is not supposed to happen...");
-  }
+        : null}
+      <ScholarshipEdit
+        addNew
+        user={props.user}
+        handleUpdate={rerenderScholarhsips}
+      />
+    </div>
+  );
+
+  const rerenderJobs = (data) => setJobs({ ...jobs, [data.uid]: data });
+  const deleteJob = (uid) => {
+    let updatedJobs = { ...jobs };
+    delete updatedJobs[uid];
+    setJobs(updatedJobs);
+  };
+  jobsEdit = (
+    <div className="form-group">
+      <h2 className="form-group-title">Job Postings</h2>
+      {jobs
+        ? Object.keys(jobs)
+            .map((uid) => jobs[uid])
+            .sort((a, b) => {
+              return new Date(b.startTime) - new Date(a.startTime);
+            })
+            .map((j) => (
+              <JobEdit
+                id={j.uid}
+                key={j.uid}
+                data={j}
+                user={props.user}
+                handleUpdate={rerenderJobs}
+                handleDelete={deleteJob}
+              />
+            ))
+        : null}
+      <JobEdit addNew user={props.user} handleUpdate={rerenderJobs} />
+    </div>
+  );
 
   return (
     <div className="admin-panel">
