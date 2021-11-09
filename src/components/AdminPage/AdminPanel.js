@@ -10,6 +10,7 @@ import ScholarshipEdit from "./ScholarshipEdit";
 import SignInLinkEdit from "./SignInLinkEdit";
 import useEffectNoInitialRender from "../../hooks/useEffectNoInitialRender";
 import EventAPI from "../../api/event";
+import JobAPI from "../../api/job";
 import ScholarshipAPI from "../../api/scholarship";
 
 function AdminPanel(props) {
@@ -18,6 +19,7 @@ function AdminPanel(props) {
   const [opps, setOpps] = useState(props.opportunities);
   const [uOpps, setUOpps] = useState(null);
   const [events, setEvents] = useState(null);
+  const [jobs, setJobs] = useState(null);
   const [scholarships, setScholarships] = useState(null);
 
   useEffect(() => {
@@ -52,11 +54,16 @@ function AdminPanel(props) {
   }, []);
 
   useEffect(() => {
-    events ?? EventAPI.list().then((data) => setEvents(data));
+    events ?? EventAPI.list().then((eData) => setEvents(eData));
   }, []);
 
   useEffect(() => {
-    scholarships ?? ScholarshipAPI.list().then((data) => setScholarships(data));
+    jobs ?? JobAPI.list().then((jData) => setJobs(jData));
+  }, []);
+
+  useEffect(() => {
+    scholarships ??
+      ScholarshipAPI.list().then((sData) => setScholarships(sData));
   }, []);
 
   useEffectNoInitialRender(() => {
@@ -290,32 +297,35 @@ function AdminPanel(props) {
     </div>
   );
 
-  if (opps) {
-    jobsEdit = (
-      <div className="form-group">
-        <h2 className="form-group-title">Job Postings</h2>
-        {opps.jobs
-          ? Object.keys(opps.jobs).map((uid) => (
+  const rerenderJobs = (data) => setJobs({ ...jobs, [data.uid]: data });
+  const deleteJob = (uid) => {
+    let updatedJobs = { ...jobs };
+    delete updatedJobs[uid];
+    setJobs(updatedJobs);
+  };
+  jobsEdit = (
+    <div className="form-group">
+      <h2 className="form-group-title">Job Postings</h2>
+      {jobs
+        ? Object.keys(jobs)
+            .map((uid) => jobs[uid])
+            .sort((a, b) => {
+              return new Date(b.startTime) - new Date(a.startTime);
+            })
+            .map((j) => (
               <JobEdit
-                id={uid}
-                key={uid}
-                data={opps.jobs[uid]}
-                handleUpdate={updateOpp}
-                handleDelete={deleteOpp}
+                id={j.uid}
+                key={j.uid}
+                data={j}
+                user={props.user}
+                handleUpdate={rerenderJobs}
+                handleDelete={deleteJob}
               />
             ))
-          : null}
-        <JobEdit
-          addNew
-          data={{}}
-          handleUpdate={updateOpp}
-          handleDelete={deleteOpp}
-        />
-      </div>
-    );
-  } else {
-    console.log("This is not supposed to happen...");
-  }
+        : null}
+      <JobEdit addNew user={props.user} handleUpdate={rerenderJobs} />
+    </div>
+  );
 
   return (
     <div className="admin-panel">

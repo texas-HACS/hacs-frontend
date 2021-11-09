@@ -1,21 +1,23 @@
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import "./AdminPage.scss";
 import { newUid } from "../utils/utils";
 import FileEdit from "../MediaManagement/FileEdit";
+import JobAPI from "../../api/job";
 
 function JobEdit(props) {
   const [editing, setEditing] = useState(false);
-  const [data, setData] = useState({
-    ...props.data,
-    uid: props.data?.uid ?? newUid("job"),
-  });
+  const [data, setData] = useState(props.data);
+  const { addNew, user } = props;
 
   const handleSave = () => {
-    props.handleUpdate("jobs", data);
-    setEditing(false);
-    if (props.addNew) {
-      setData({ uid: newUid("job") });
+    (addNew
+      ? JobAPI.create(user, data)
+      : JobAPI.update(user, data.uid, data)
+    ).then((resData) => props.handleUpdate(resData));
+    if (addNew) {
+      setData(null);
     }
+    setEditing(false);
   };
 
   const changeData = (key, value) => {
@@ -32,7 +34,9 @@ function JobEdit(props) {
   };
 
   const handleDelete = () => {
-    props.handleDelete("jobs", data.uid);
+    addNew
+      ? setData(null)
+      : JobAPI.delete(user, data.uid).then(() => props.handleDelete(data.uid));
     setEditing(false);
   };
 
@@ -51,7 +55,7 @@ function JobEdit(props) {
       <div>Image</div>
       <FileEdit
         key={"file_edit" + props.id}
-        file={data.image}
+        file={data?.image}
         onSelectFile={(file) => changeData("image", file)}
         onRemoveFile={() => changeData("image", null)}
       />
@@ -84,21 +88,25 @@ function JobEdit(props) {
         readOnly // TODO: Fix render before removing this tag
         onChange={handleChange}
       />
-      <label>Job UID</label>
-      <input
-        id="job-uid-edit"
-        className="form-control-small"
-        name="uid"
-        value={data?.uid ?? newUid("job")}
-        required
-        readOnly
-        onChange={handleChange}
-      />
+      {addNew ? null : (
+        <Fragment>
+          <label>Job UID</label>
+          <input
+            id="job-uid-edit"
+            className="form-control-small"
+            name="uid"
+            value={data.uid}
+            required
+            readOnly
+            onChange={handleChange}
+          />
+        </Fragment>
+      )}
       <button className="btn btn-primary" onClick={handleSave}>
-        Save
+        {addNew ? "Create" : "Save"}
       </button>
       <button className="btn btn-primary" onClick={handleDelete} type="button">
-        Delete
+        {addNew ? "Cancel" : "Delete"}
       </button>
     </div>
   );
@@ -106,11 +114,7 @@ function JobEdit(props) {
   const saveSection = (
     <div onClick={() => setEditing(editing ^ true)}>
       <p className="editable">
-        {props.data?.title == null ? (
-          "Add Job Posting"
-        ) : (
-          <span>{props.data?.title}</span>
-        )}
+        {addNew ? "Add Job Posting" : <span>{props.data?.title}</span>}
       </p>
       {/* TODO: Add X mark to close dropdown */}
     </div>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Fade from "react-reveal/Fade";
 import EventAPI from "../../api/event";
+import JobAPI from "../../api/job";
 import ScholarshipAPI from "../../api/scholarship";
 import "./Opportunities.scss";
 import {
@@ -14,10 +15,15 @@ import Modal from "../partials/Modal";
 function Opportunities(props) {
   const [data, setData] = useState({});
   const [events, setEvents] = useState(null);
+  const [jobs, setJobs] = useState(null);
   const [scholarships, setScholarships] = useState(null);
 
   useEffect(() => {
     EventAPI.list().then((e) => setEvents(e));
+  }, []);
+
+  useEffect(() => {
+    JobAPI.list().then((j) => setJobs(j));
   }, []);
 
   useEffect(() => {
@@ -44,13 +50,6 @@ function Opportunities(props) {
     setModalOpen(false);
   };
 
-  // an initial api call to get all opportunities data
-  if (!data && !events && !scholarships) {
-    return <div />;
-  }
-
-  // var { jobs, scholarships } = data;
-
   // events = placeholderEvents;
   // scholarships = placeholderSponsorScholarships;
   // jobs = placeholderSponsorListings;
@@ -66,16 +65,16 @@ function Opportunities(props) {
     <div />
   );
 
-  // const jobListingsSection = jobs ? (
-  //   <div className="job-listings">
-  //     <Fade bottom>
-  //       <h3 className="section-title">Job Listings</h3>
-  //     </Fade>
-  //     <Fade left>{renderJobListings(jobs, props.editable, openModal)}</Fade>
-  //   </div>
-  // ) : (
-  //   <div />
-  // );
+  const jobsSection = jobs ? (
+    <div className="job-listings">
+      <Fade bottom>
+        <h3 className="section-title">Job Listings</h3>
+      </Fade>
+      <Fade left>{renderJobListings(jobs, props.editable, openModal)}</Fade>
+    </div>
+  ) : (
+    <div />
+  );
 
   const scholarshipsSection = scholarships ? (
     <div className="scholarships">
@@ -116,8 +115,8 @@ function Opportunities(props) {
         </section>
       </Fade>
       {eventsSection}
+      {jobsSection}
       {scholarshipsSection}
-      {/* {jobsSection} */}
       {modal}
     </div>
   );
