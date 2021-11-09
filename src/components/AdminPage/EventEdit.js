@@ -7,16 +7,16 @@ import EventAPI from "../../api/event";
 function EventEdit(props) {
   const [editing, setEditing] = useState(false);
   const [data, setData] = useState(props.data);
-
   const { addNew, user } = props;
 
   const handleSave = () => {
     (addNew
       ? EventAPI.create(user, data)
       : EventAPI.update(user, data.uid, data)
-    ).then(() => {
-      props.handleUpdate();
-    });
+    ).then((resData) => props.handleUpdate(resData));
+    if (addNew) {
+      setData(null);
+    }
     setEditing(false);
   };
 
@@ -43,7 +43,11 @@ function EventEdit(props) {
   };
 
   const handleDelete = () => {
-    addNew ?? EventAPI.delete(user, data.uid).then(props.handleUpdate());
+    addNew
+      ? setData(null)
+      : EventAPI.delete(user, data.uid).then(() =>
+          props.handleDelete(data.uid)
+        );
     setEditing(false);
   };
 
@@ -139,11 +143,9 @@ function EventEdit(props) {
             value={data.uid}
             required
             readOnly
-            onChange={handleChange}
           />
         </Fragment>
       )}
-
       <button className="btn btn-primary" onClick={handleSave}>
         {addNew ? "Create" : "Save"}
       </button>

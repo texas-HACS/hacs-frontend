@@ -1,7 +1,7 @@
 import config from "../_config";
 
 const list = async (headers = {}) =>
-  fetch(`${config.url}/events`, {
+  fetch(`${config.url}/scholarships`, {
     Accept: "application/json",
     "Content-Type": "application/json",
     ...headers,
@@ -15,7 +15,7 @@ const list = async (headers = {}) =>
     .catch((error) => {});
 
 const get = async (id, headers = {}) =>
-  fetch(`${config.url}/event/${id}`, {
+  fetch(`${config.url}/scholarship/${id}`, {
     Accept: "application/json",
     "Content-Type": "application/json",
     ...headers,
@@ -32,7 +32,7 @@ const create = async (user, data, headers = {}) =>
   user
     .getIdToken(true)
     .then((idToken) =>
-      fetch(`${config.url}/event`, {
+      fetch(`${config.url}/scholarship`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -54,7 +54,7 @@ const update = async (user, id, data, headers = {}) =>
   user
     .getIdToken(true)
     .then((idToken) =>
-      fetch(`${config.url}/event/${id}`, {
+      fetch(`${config.url}/scholarship/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -76,7 +76,7 @@ const del = async (user, id, headers = {}) => {
   user
     .getIdToken(true)
     .then((idToken) =>
-      fetch(`${config.url}/event/${id}`, {
+      fetch(`${config.url}/scholarship/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

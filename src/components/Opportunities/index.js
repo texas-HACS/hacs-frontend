@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Fade from "react-reveal/Fade";
 import EventAPI from "../../api/event";
+import ScholarshipAPI from "../../api/scholarship";
 import "./Opportunities.scss";
 import {
   renderEvents,
@@ -13,9 +14,14 @@ import Modal from "../partials/Modal";
 function Opportunities(props) {
   const [data, setData] = useState({});
   const [events, setEvents] = useState(null);
+  const [scholarships, setScholarships] = useState(null);
 
   useEffect(() => {
-    EventAPI.list().then((events) => setEvents(events));
+    EventAPI.list().then((e) => setEvents(e));
+  }, []);
+
+  useEffect(() => {
+    ScholarshipAPI.list().then((s) => setScholarships(s));
   }, []);
 
   useEffect(() => {
@@ -39,7 +45,7 @@ function Opportunities(props) {
   };
 
   // an initial api call to get all opportunities data
-  if (!data && !events) {
+  if (!data && !events && !scholarships) {
     return <div />;
   }
 
@@ -71,18 +77,18 @@ function Opportunities(props) {
   //   <div />
   // );
 
-  // const scholarshipsSection = scholarships ? (
-  //   <div className="scholarships">
-  //     <Fade bottom>
-  //       <h3 className="section-title">Scholarships</h3>
-  //     </Fade>
-  //     <Fade left>
-  //       {renderScholarships(scholarships, props.editable, openModal)}
-  //     </Fade>
-  //   </div>
-  // ) : (
-  //   <div />
-  // );
+  const scholarshipsSection = scholarships ? (
+    <div className="scholarships">
+      <Fade bottom>
+        <h3 className="section-title">Scholarships</h3>
+      </Fade>
+      <Fade left>
+        {renderScholarships(scholarships, props.editable, openModal)}
+      </Fade>
+    </div>
+  ) : (
+    <div />
+  );
 
   const modal = (
     <div>
@@ -110,8 +116,8 @@ function Opportunities(props) {
         </section>
       </Fade>
       {eventsSection}
-      {/* {jobListingsSection}
-      {scholarshipsSection} */}
+      {scholarshipsSection}
+      {/* {jobsSection} */}
       {modal}
     </div>
   );

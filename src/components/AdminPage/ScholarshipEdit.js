@@ -1,21 +1,23 @@
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import "./AdminPage.scss";
 import { newUid } from "../utils/utils";
 import FileEdit from "../MediaManagement/FileEdit";
+import ScholarshipAPI from "../../api/scholarship";
 
 function ScholarshipEdit(props) {
   const [editing, setEditing] = useState(false);
-  const [data, setData] = useState({
-    ...props.data,
-    uid: props.data?.uid ?? newUid("scholarship"),
-  });
+  const [data, setData] = useState(props.data);
+  const { addNew, user } = props;
 
   const handleSave = () => {
-    props.handleUpdate("scholarships", data);
-    setEditing(false);
-    if (props.addNew) {
-      setData({ uid: newUid("scholarship") });
+    (addNew
+      ? ScholarshipAPI.create(user, data)
+      : ScholarshipAPI.update(user, data.uid, data)
+    ).then((resData) => props.handleUpdate(resData));
+    if (addNew) {
+      setData(null);
     }
+    setEditing(false);
   };
 
   const changeData = (key, value) => {
@@ -32,7 +34,11 @@ function ScholarshipEdit(props) {
   };
 
   const handleDelete = () => {
-    props.handleDelete("scholarships", data.uid);
+    addNew
+      ? setData(null)
+      : ScholarshipAPI.delete(user, data.uid).then(() =>
+          props.handleDelete(data.uid)
+        );
     setEditing(false);
   };
 
@@ -51,7 +57,7 @@ function ScholarshipEdit(props) {
       <div>Image</div>
       <FileEdit
         key={"file_edit" + props.id}
-        file={data.image}
+        file={data?.image}
         onSelectFile={(file) => changeData("image", file)}
         onRemoveFile={() => changeData("image", null)}
       />
@@ -76,21 +82,29 @@ function ScholarshipEdit(props) {
         placeholder="ex.: https://utexas.qualtrics.com/..."
         onChange={handleChange}
       />
-      <label>Scholarship UID</label>
-      <input
-        id="scholarship-uid-edit"
-        className="form-control-small"
-        name="uid"
-        value={data?.uid ?? newUid("scholarship")}
-        required
-        readOnly
-        onChange={handleChange}
-      />
+      {addNew ? null : (
+        <Fragment>
+          <label>Scholarship UID</label>
+          <input
+            id="scholarship-uid-edit"
+            className="form-control-small"
+            name="uid"
+            value={data.uid}
+            required
+            readOnly
+            onChange={handleChange}
+          />
+        </Fragment>
+      )}
       <button className="btn btn-primary" onClick={handleSave}>
-        Save
+        {addNew ? "Create" : "Save"}
       </button>
-      <button className="btn btn-primary" onClick={handleDelete} type="button">
-        Delete
+      <button
+        className="btn btn-primary"
+        onClick={() => handleDelete()}
+        type="button"
+      >
+        {addNew ? "Cancel" : "Delete"}
       </button>
     </div>
   );
@@ -98,11 +112,7 @@ function ScholarshipEdit(props) {
   const saveSection = (
     <div onClick={() => setEditing(editing ^ true)}>
       <p className="editable">
-        {props.data?.title == null ? (
-          "Add Scholarship Posting"
-        ) : (
-          <span>{props.data?.title}</span>
-        )}
+        {addNew ? "Add Scholarship Posting" : <span>{props.data?.title}</span>}
       </p>
       {/* TODO: Add X mark to close dropdown */}
     </div>

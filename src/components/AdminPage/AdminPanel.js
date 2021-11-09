@@ -10,6 +10,7 @@ import ScholarshipEdit from "./ScholarshipEdit";
 import SignInLinkEdit from "./SignInLinkEdit";
 import useEffectNoInitialRender from "../../hooks/useEffectNoInitialRender";
 import EventAPI from "../../api/event";
+import ScholarshipAPI from "../../api/scholarship";
 
 function AdminPanel(props) {
   const [data, setData] = useState(props.data);
@@ -17,6 +18,7 @@ function AdminPanel(props) {
   const [opps, setOpps] = useState(props.opportunities);
   const [uOpps, setUOpps] = useState(null);
   const [events, setEvents] = useState(null);
+  const [scholarships, setScholarships] = useState(null);
 
   useEffect(() => {
     fetch(config.url + "/siteContent", {
@@ -40,7 +42,7 @@ function AdminPanel(props) {
       .then((res) => res.json())
       .then((data) => {
         if (data == null) {
-          data = { jobs: {}, scholarships: {} };
+          data = { jobs: {} };
         }
         setOpps(data);
       })
@@ -51,7 +53,11 @@ function AdminPanel(props) {
 
   useEffect(() => {
     events ?? EventAPI.list().then((data) => setEvents(data));
-  }, [events]);
+  }, []);
+
+  useEffect(() => {
+    scholarships ?? ScholarshipAPI.list().then((data) => setScholarships(data));
+  }, []);
 
   useEffectNoInitialRender(() => {
     if (uData == null) {
@@ -218,7 +224,12 @@ function AdminPanel(props) {
 
   var eventsEdit, jobsEdit, scholarshipsEdit;
 
-  const rerenderEvents = () => setEvents(null);
+  const rerenderEvents = (data) => setEvents({ ...events, [data.uid]: data });
+  const deleteEvent = (uid) => {
+    let updatedEvents = { ...events };
+    delete updatedEvents[uid];
+    setEvents(updatedEvents);
+  };
   eventsEdit = (
     <div className="form-group">
       <h2 className="form-group-title">Events</h2>
@@ -229,17 +240,53 @@ function AdminPanel(props) {
               // Sort in descending order of date
               return new Date(b.startTime) - new Date(a.startTime);
             })
-            .map((event) => (
+            .map((e) => (
               <EventEdit
-                id={event.uid}
-                key={event.uid}
-                data={event}
+                id={e.uid}
+                key={e.uid}
+                data={e}
                 user={props.user}
                 handleUpdate={rerenderEvents}
+                handleDelete={deleteEvent}
               />
             ))
         : null}
       <EventEdit addNew user={props.user} handleUpdate={rerenderEvents} />
+    </div>
+  );
+
+  const rerenderScholarhsips = (data) =>
+    setScholarships({ ...scholarships, [data.uid]: data });
+  const deleteScholarship = (uid) => {
+    let updatedScholarships = { ...scholarships };
+    delete updatedScholarships[uid];
+    setScholarships(updatedScholarships);
+  };
+  scholarshipsEdit = (
+    <div className="form-group">
+      <h2 className="form-group-title">Scholarship Opportunities</h2>
+      {scholarships
+        ? Object.keys(scholarships)
+            .map((uid) => scholarships[uid])
+            .sort((a, b) => {
+              return new Date(b.startTime) - new Date(a.startTime);
+            })
+            .map((s) => (
+              <ScholarshipEdit
+                id={s.uid}
+                key={s.uid}
+                data={s}
+                user={props.user}
+                handleUpdate={rerenderScholarhsips}
+                handleDelete={deleteScholarship}
+              />
+            ))
+        : null}
+      <ScholarshipEdit
+        addNew
+        user={props.user}
+        handleUpdate={rerenderScholarhsips}
+      />
     </div>
   );
 
@@ -259,29 +306,6 @@ function AdminPanel(props) {
             ))
           : null}
         <JobEdit
-          addNew
-          data={{}}
-          handleUpdate={updateOpp}
-          handleDelete={deleteOpp}
-        />
-      </div>
-    );
-
-    scholarshipsEdit = (
-      <div className="form-group">
-        <h2 className="form-group-title">Scholarship Opportunities</h2>
-        {opps.scholarships
-          ? Object.keys(opps.scholarships).map((uid) => (
-              <ScholarshipEdit
-                id={uid}
-                key={uid}
-                data={opps.scholarships[uid]}
-                handleUpdate={updateOpp}
-                handleDelete={deleteOpp}
-              />
-            ))
-          : null}
-        <ScholarshipEdit
           addNew
           data={{}}
           handleUpdate={updateOpp}
