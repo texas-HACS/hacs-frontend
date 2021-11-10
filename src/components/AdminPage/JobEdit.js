@@ -13,7 +13,7 @@ function JobEdit(props) {
     (addNew
       ? JobAPI.create(user, data)
       : JobAPI.update(user, data.uid, data)
-    ).then((resData) => props.handleUpdate(resData));
+    ).then((resData) => (resData ? props.handleUpdate(resData) : null));
     if (addNew) {
       setData(null);
     }

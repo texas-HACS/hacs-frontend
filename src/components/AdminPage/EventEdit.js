@@ -4,16 +4,20 @@ import Datetime from "react-datetime";
 import FileEdit from "../MediaManagement/FileEdit";
 import EventAPI from "../../api/event";
 
+const DEFAULT_GCAL_STATES = { confirmed: true, potential: false };
+
 function EventEdit(props) {
   const [editing, setEditing] = useState(false);
   const [data, setData] = useState(props.data);
   const { addNew, user } = props;
 
   const handleSave = () => {
+    const gCal = data?.gCal ?? DEFAULT_GCAL_STATES;
+    const savedData = { ...data, gCal };
     (addNew
-      ? EventAPI.create(user, data)
-      : EventAPI.update(user, data.uid, data)
-    ).then((resData) => props.handleUpdate(resData));
+      ? EventAPI.create(user, savedData)
+      : EventAPI.update(user, savedData.uid, savedData)
+    ).then((resData) => (resData ? props.handleUpdate(resData) : null));
     if (addNew) {
       setData(null);
     }
@@ -40,6 +44,15 @@ function EventEdit(props) {
     } catch (e) {
       console.log("Invalid date");
     }
+  };
+
+  const handleGCalStateChange = (e) => {
+    let { name, checked } = e.target;
+    const gCalState = data?.gCal
+      ? { ...data.gCal }
+      : { ...DEFAULT_GCAL_STATES };
+    gCalState[name] = checked;
+    changeData("gCal", gCalState);
   };
 
   const handleDelete = () => {
@@ -133,6 +146,25 @@ function EventEdit(props) {
         readOnly // TODO: Fix render before removing this tag
         onChange={handleChange}
       />
+      <label>Enable Google Calendar</label>
+      <div className="calendar-options flex-row">
+        <input
+          id="potential-calendar"
+          type="checkbox"
+          name="potential"
+          checked={data?.gCal ? data.gCal.potential : false}
+          onChange={handleGCalStateChange}
+        />
+        <label htmlFor="potential-calendar">Potential Events</label>
+        <input
+          id="hacs-calendar"
+          type="checkbox"
+          name="confirmed"
+          checked={data?.gCal ? data.gCal.confirmed : true}
+          onChange={handleGCalStateChange}
+        />
+        <label htmlFor="hacs-calendar">HACS Calendar</label>
+      </div>
       {addNew ? null : (
         <Fragment>
           <label>Event UID</label>
