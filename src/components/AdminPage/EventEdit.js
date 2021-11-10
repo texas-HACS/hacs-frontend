@@ -13,7 +13,7 @@ function EventEdit(props) {
     (addNew
       ? EventAPI.create(user, data)
       : EventAPI.update(user, data.uid, data)
-    ).then((resData) => props.handleUpdate(resData));
+    ).then((resData) => (resData ? props.handleUpdate(resData) : null));
     if (addNew) {
       setData(null);
     }
