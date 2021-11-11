@@ -83,13 +83,14 @@ function App() {
   }, []);
 
   const { isSticky, element } = useSticky();
-
   if (!siteContent) {
     return <div />;
   }
 
   const testRoute =
-    config.env === "local" || config.env === "dev" ? (
+    config.env === "local" ||
+    config.env === "local-dev" ||
+    config.env === "dev" ? (
       <Route path="/test">
         <TestPage />
       </Route>

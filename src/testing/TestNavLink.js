@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 import config from "../_config";
 
 function TestNavLink(props) {
-  return config.env == "local" || config.env == "dev" ? (
+  return config.env == "local" ||
+    config.env === "local-dev" ||
+    config.env == "dev" ? (
     <Link to="/test">
       <div className="nav-link">Test</div>
     </Link>

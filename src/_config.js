@@ -4,7 +4,7 @@ const Joi = require("joi");
 const envVarsSchema = Joi.object({
   // NODE
   REACT_APP_ENV: Joi.string()
-    .allow("dev", "prod", "local", "test", "provision")
+    .allow("dev", "prod", "local", "local-dev", "test", "provision")
     .description("Current environment for API"),
   // FIREBASE
   REACT_APP_FIREBASE_API_KEY: Joi.string()
