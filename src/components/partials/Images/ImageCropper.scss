@@ -1,0 +1,16 @@
+@use "../../variables";
+
+.crop-container {
+  position: relative;
+  width: 50%;
+  height: 100px;
+}
+
+.slider {
+  padding: 22px 0px;
+}
+
+.span {
+  display: inline-block;
+  margin: 0;
+}

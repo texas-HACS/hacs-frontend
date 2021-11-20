@@ -11,7 +11,7 @@ import JobListingCard from "./JobListingCard";
 import ScholarshipCard from "./ScholarshipCard";
 
 export const HACS_LOGO_URL =
-  "https://firebasestorage.googleapis.com/v0/b/hacs-opensource.appspot.com/o/hacs_logo.png?alt=media&token=993e859b-5ae1-47c3-9f51-cf414d833a2c";
+  "https://firebasestorage.googleapis.com/v0/b/hacs-opensource.appspot.com/o/hacs-logo.png?alt=media&token=0ab02205-5b5f-4f8f-b15f-b80304ecea17";
 
 // Return array from firestore object representation of array
 function objectToArray(obj) {

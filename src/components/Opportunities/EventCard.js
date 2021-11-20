@@ -1,4 +1,5 @@
 import React from "react";
+import CroppedImage from "../partials/Images/CroppedImage";
 import { renderStartAndEndDateTime } from "../utils/utils";
 import "./Opportunities.scss";
 import { HACS_LOGO_URL } from "./utils";
@@ -16,20 +17,19 @@ function EventCard(props) {
           new Date() > new Date(event.endTime) ? "past" : "future"
         }`}
       />
-      <img
-        src={event.image?.url ?? HACS_LOGO_URL}
-        className="event-image"
-        alt="event-view"
-      />
-      <div className="details">
+      <div className="event-image">
+        <CroppedImage {...event.image} alt="event-view" />
+      </div>
+      <div className="details flex">
         <h3 className="title">{event.title}</h3>
-        <div className="event-time-container">
-          <span className="time">
-            {renderStartAndEndDateTime(event.startTime, event.endTime)}
-          </span>
-        </div>
-        <button onClick={() => props.onClick(event)}>See More</button>
-        {/* <div className="event-links-container flex-row">
+        <div className="event-extras-container flex">
+          <div className="event-time-container">
+            <span className="time">
+              {renderStartAndEndDateTime(event.startTime, event.endTime)}
+            </span>
+          </div>
+          <button onClick={() => props.onClick(event)}>See More</button>
+          {/* <div className="event-links-container flex-row">
           <LinkButton to={e.rsvpLink} className="rsvp-link">
             RSVP
           </LinkButton>
@@ -37,6 +37,7 @@ function EventCard(props) {
             JOIN
           </LinkButton>
         </div> */}
+        </div>
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import FileSystem from "../MediaManagement/FileSystem/FileSystem";
 import CloseButton from "../partials/CloseButton";
 import "./FileEdit.scss";
@@ -8,6 +8,12 @@ export const selectionTypes = { UPLOAD: "upload", SELECT: "select" };
 function FileEdit(props) {
   const [file, setFile] = useState(props.file);
   const [editing, setEditing] = useState(false);
+
+  useEffect(() => {
+    if (!file) {
+      setFile(props.file);
+    }
+  }, [props.file]);
 
   const handleSelectFile = (f) => {
     setFile(f);

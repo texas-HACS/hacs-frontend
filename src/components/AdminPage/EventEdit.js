@@ -3,6 +3,7 @@ import "./AdminPage.scss";
 import Datetime from "react-datetime";
 import FileEdit from "../MediaManagement/FileEdit";
 import EventAPI from "../../api/event";
+import ImageEdit from "../MediaManagement/ImageEdit";
 
 const DEFAULT_GCAL_STATES = { confirmed: true, potential: false };
 
@@ -103,11 +104,11 @@ function EventEdit(props) {
         }}
       />
       <div>Image</div>
-      <FileEdit
-        key={"file_edit" + props.id}
-        file={data?.image}
-        onSelectFile={(file) => changeData("image", file)}
-        onRemoveFile={() => changeData("image", null)}
+      <ImageEdit
+        key={"image_edit" + props.id}
+        {...data?.image}
+        onConfirm={(img) => changeData("image", img)}
+        onRemoveImage={() => changeData("image", null)}
       />
       <label>Meeting Link</label>
       <input
