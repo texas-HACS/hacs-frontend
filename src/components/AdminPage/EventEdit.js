@@ -1,7 +1,6 @@
 import React, { Fragment, useState } from "react";
 import "./AdminPage.scss";
 import Datetime from "react-datetime";
-import FileEdit from "../MediaManagement/FileEdit";
 import EventAPI from "../../api/event";
 import ImageEdit from "../MediaManagement/ImageEdit";
 

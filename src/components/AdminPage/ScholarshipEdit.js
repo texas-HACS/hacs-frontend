@@ -1,8 +1,7 @@
 import React, { Fragment, useState } from "react";
 import "./AdminPage.scss";
-import { newUid } from "../utils/utils";
-import FileEdit from "../MediaManagement/FileEdit";
 import ScholarshipAPI from "../../api/scholarship";
+import ImageEdit from "../MediaManagement/ImageEdit";
 
 function ScholarshipEdit(props) {
   const [editing, setEditing] = useState(false);
@@ -55,11 +54,11 @@ function ScholarshipEdit(props) {
         onChange={handleChange}
       />
       <div>Image</div>
-      <FileEdit
-        key={"file_edit" + props.id}
-        file={data?.image}
-        onSelectFile={(file) => changeData("image", file)}
-        onRemoveFile={() => changeData("image", null)}
+      <ImageEdit
+        key={"image_edit" + props.id}
+        {...data?.image}
+        onConfirm={(img) => changeData("image", img)}
+        onRemoveImage={() => changeData("image", null)}
       />
       <label>Scholarship Description</label>
       <small id="scholarshipDescriptionHelp" className="form-text text-muted">

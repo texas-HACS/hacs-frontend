@@ -1,4 +1,5 @@
 import React from "react";
+import CroppedImage from "../partials/Images/CroppedImage";
 import LinkButton from "../partials/LinkButton";
 import {
   isoDateToDateTimeString,
@@ -113,7 +114,7 @@ export function renderModalContent(content) {
   return (
     <div className="flex-row content" key={content.uid}>
       <div className="image">
-        <img src={content.image?.url ?? HACS_LOGO_URL} />
+        <CroppedImage {...content.image} alt="scholarship-view" />
       </div>
       <div className="flex other-content">
         <h1 className="title">{content.title}</h1>
