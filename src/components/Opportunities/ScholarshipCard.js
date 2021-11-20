@@ -1,27 +1,28 @@
 import React from "react";
+import CroppedImage from "../partials/Images/CroppedImage";
 import LinkButton from "../partials/LinkButton";
 import "./Opportunities.scss";
-import { HACS_LOGO_URL, renderTimeline } from "./utils";
+import { renderTimeline } from "./utils";
 
 function ScholarshipCard(props) {
-  const { s } = props;
+  const { s: scholarship } = props;
   return (
     <div
       className="scholarship-container opportunity flex card"
-      onClick={() => props.onClick(s)}
+      onClick={() => props.onClick(scholarship)}
     >
-      <img
-        src={s.image?.url ?? HACS_LOGO_URL}
-        className="scholarship-image"
-        alt="scholarship-view"
-      />
-      <div className="details">
-        <h3 className="title">{s.title}</h3>
-        <LinkButton to={s.link} className="scholarship-link">
-          Visit Site
-        </LinkButton>
-        <div className="scholarship-timeline-container">
-          {renderTimeline(s.timeline)}
+      <div className="scholarship-image">
+        <CroppedImage {...scholarship.image} alt="scholarship-view" />
+      </div>
+      <div className="details flex">
+        <h3 className="title">{scholarship.title}</h3>
+        <div className="scholarship-extras-container flex">
+          <LinkButton to={scholarship.link} className="scholarship-link">
+            Visit Site
+          </LinkButton>
+          <div className="scholarship-timeline-container">
+            {renderTimeline(scholarship.timeline)}
+          </div>
         </div>
       </div>
     </div>

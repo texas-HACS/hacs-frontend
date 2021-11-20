@@ -39,13 +39,21 @@
     align-items: stretch;
 
     .opportunity {
-      width: auto;
+      width: 300px;
       padding: 10px;
       flex: 0 0 auto;
       justify-content: space-between;
 
+      [class$="-image"] {
+        width: 100%;
+        min-height: 300px;
+        overflow: hidden;
+      }
+
       .details {
         padding: 0 25px;
+        height: 100%;
+        justify-content: space-between;
       }
 
       .title {

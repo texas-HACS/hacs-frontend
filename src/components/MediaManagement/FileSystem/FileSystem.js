@@ -5,6 +5,18 @@ import Folder from "./Folder";
 import File from "./File";
 import FileUpload from "../FileUpload";
 
+String.prototype.nthLastIndexOf = function (searchString, n) {
+  var url = this;
+  if (url === null) {
+    return -1;
+  }
+  if (!n || isNaN(n) || n <= 1) {
+    return url.lastIndexOf(searchString);
+  }
+  n--;
+  return url.lastIndexOf(searchString, url.nthLastIndexOf(searchString, n) - 1);
+};
+
 function FileSystem(props) {
   const [currentPath, setCurrentPath] = useState(null);
   const [folders, setFolders] = useState(null);
@@ -12,7 +24,7 @@ function FileSystem(props) {
 
   useEffect(() => {
     if (currentPath == null) {
-      setCurrentPath(props.path ?? "");
+      setCurrentPath(props.path ?? path.sep);
     }
 
     firebase.storage.listAll(currentPath).then((result) => {
@@ -22,14 +34,16 @@ function FileSystem(props) {
   }, [currentPath]);
 
   const changeToParent = () => {
-    setCurrentPath(currentPath.substring(0, currentPath.lastIndexOf(path.sep)));
+    setCurrentPath(
+      currentPath.substring(0, currentPath.nthLastIndexOf(path.sep, 2) + 1)
+    );
   };
 
   const openFolder = (name) => {
     if (props.onSelectFolder) {
       props.onSelectFolder();
     } else {
-      setCurrentPath(currentPath + path.sep + name);
+      setCurrentPath(currentPath + name + path.sep);
     }
   };
 
@@ -42,7 +56,7 @@ function FileSystem(props) {
   return (
     <div className="file-system">
       <div className="navigation flex-row">
-        <div>Current Path: hacs{currentPath + path.sep}</div>
+        <div>Current Path: hacs{currentPath}</div>
         {currentPath ? (
           <button className="level-up-button icon" onClick={changeToParent}>
             <i className="fas fa-level-up-alt" />
