@@ -28,18 +28,10 @@ const placeholderEvents = [
 ];
 
 function Homepage(props) {
-  const [events, setEvents] = useState(null);
-
-  useEffect(() => {
-    if (props.events != null) {
-      setEvents(Object.keys(props.events).map((uid) => props.events[uid]));
-    }
-  }, [props.events]);
-
   return (
     <section className="homepage">
       <Hero />
-      <CurrentEvents events={events} />
+      <CurrentEvents />
       <ImageSlider />
       <MemberHighlight member={props.memberOfWeek} />
       <UpcomingEvents events={placeholderEvents} />
