@@ -11,7 +11,9 @@ function CurrentEvents(props) {
 
   // Here is an array of all events, printed to the console for you to see their structure
   // You will want to pay attention to the event.startTime value
+
   console.log(events);
+
 
   const today = new Date();
   const dates = [
@@ -33,7 +35,16 @@ function CurrentEvents(props) {
     return date >= today && date <= limit;
   });
 
-  console.log(validDates);
+  if(events != null) {
+    const validEvents = events.filter((event) => {
+      if(!event) {
+        return <div></div>;
+      }
+      return event.startTime >= today && event.startTime <= limit;
+    });
+  }
+
+  //console.log(validEvents);
   return (
     <section className="current-events">
       <div className="content-wrapper">
