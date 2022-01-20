@@ -1,5 +1,5 @@
 # (GUIDE) Git, GitHub, and Version Control
-This guide teaches by example (with the HACS frontend repo: `[texas-HACS/hacs-frontend](https://github.com/texas-HACS/hacs-frontend)`), but these commands can be applied to virtually any use case.
+This guide teaches by example (with the HACS frontend repo: [texas-HACS/hacs-frontend](https://github.com/texas-HACS/hacs-frontend)), but these commands can be applied to virtually any use case.
 
 # Table of Contents
 [Local: Working on your machine](#local)
