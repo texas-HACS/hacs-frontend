@@ -23,10 +23,8 @@ function CurrentEvents(props) {
 
   // Here is an array of all events, printed to the console for you to see their structure
   // You will want to pay attention to the event.startTime value
-
-  console.log(events);
-
-  const today = new Date();
+/*
+  const today = new Date("August 31, 2021 03:24:00");
   const dates = [
     today,
     new Date(today.getFullYear(), today.getMonth(), today.getDate() + 3),
@@ -34,6 +32,7 @@ function CurrentEvents(props) {
     new Date(today.getFullYear(), today.getMonth(), today.getDate() + 7),
     new Date(today.getFullYear(), today.getMonth(), today.getDate() + 8),
   ];
+  */
   const limit = new Date(
     today.getFullYear(),
     today.getMonth(),
@@ -46,8 +45,19 @@ function CurrentEvents(props) {
     return date >= today && date <= limit;
   });
 
+  // Check if the first event hasn't "loaded" in yet, and if it hasn't, log the event startTime
+  const event1 = events[0];
+  if(event1 != null) {
+    console.log(event1.startTime);
+   // const testStart = new Date(event1.startTime);
+  }
+  console.log(events);
   const validEvents = events.filter((event) => {
-    return event.startTime >= today && event.startTime <= limit;
+    const date = new Date(event.startTime);
+    if(date >= today && date <= limit) {
+      console.log(true);
+      return event;
+    }
   });
 
   console.log(validEvents);
