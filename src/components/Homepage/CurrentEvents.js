@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import config from "../../_config";
 import "./Homepage.scss";
 import Fade from "react-reveal/Fade";
+import EventCard from "./Opportunities.EventCard.js"
 
 function CurrentEvents(props) {
   const [events, setEvents] = useState([]);
@@ -59,6 +60,10 @@ function CurrentEvents(props) {
       return event;
     }
   });
+
+  for(let i = 0; i < validEvents.length; i++) {
+    // make an EventCard for each event here and store in array "events"
+  }
 
   console.log(validEvents);
 
