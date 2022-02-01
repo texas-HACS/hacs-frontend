@@ -38,9 +38,9 @@ function MemberOfTheWeekEdit(props) {
       />
       <label>Description</label>
       <textarea
-        id="motw-role-edit"
+        id="motw-description-edit"
         className="form-control-small"
-        name="role"
+        name="description"
         defaultValue={data.description}
         placeholder="ex.: President"
         required
