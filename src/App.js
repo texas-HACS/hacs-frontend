@@ -138,7 +138,7 @@ function App() {
               <Route path="/login">
                 <Login loginUser={loginUser} />
               </Route>
-              <Route path="/sign-in">
+              <Route path={["/sign-in", "/signin", "/check-in", "checkin"]}>
                 <Redirect to={signInLink} />
               </Route>
               {testRoute}
