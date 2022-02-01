@@ -15,7 +15,6 @@
     "joi": "^17.4.2",
     "moment": "^2.29.1",
     "nanoid": "^3.1.25",
-    "node-sass": "^7.0.1",
     "react": "^16.13.1",
     "react-burger-menu": "^3.0.6",
     "react-datetime": "^3.0.4",
@@ -28,6 +27,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
     "react-twitter-embed": "^3.0.3",
+    "sass": "^1.49.7",
     "use-deep-compare-effect": "^1.8.1"
   },
   "scripts": {
