@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import config from "../../_config";
 import "./Homepage.scss";
 import Fade from "react-reveal/Fade";
-import EventCard from "./Opportunities.EventCard.js"
+import EventCard from "../Opportunities/EventCard"
 
 function CurrentEvents(props) {
   const [events, setEvents] = useState([]);
@@ -22,29 +22,13 @@ function CurrentEvents(props) {
       });
   }, []);
 
-  // Here is an array of all events, printed to the console for you to see their structure
-  // You will want to pay attention to the event.startTime value
-/*
-  const today = new Date("August 31, 2021 03:24:00");
-  const dates = [
-    today,
-    new Date(today.getFullYear(), today.getMonth(), today.getDate() + 3),
-    new Date(today.getFullYear(), today.getMonth(), today.getDate() - 3),
-    new Date(today.getFullYear(), today.getMonth(), today.getDate() + 7),
-    new Date(today.getFullYear(), today.getMonth(), today.getDate() + 8),
-  ];
-  */
+  const today = new Date();
+
   const limit = new Date(
     today.getFullYear(),
     today.getMonth(),
     today.getDate() + 7
   );
-
-  // Filter the dates to get the valid date
-  // A date is valid iff it is between the current date, and the current date + 7 inclusive
-  const validDates = dates.filter((date) => {
-    return date >= today && date <= limit;
-  });
 
   // Check if the first event hasn't "loaded" in yet, and if it hasn't, log the event startTime
   const event1 = events[0];
@@ -61,11 +45,9 @@ function CurrentEvents(props) {
     }
   });
 
-  for(let i = 0; i < validEvents.length; i++) {
-    // make an EventCard for each event here and store in array "events"
-  }
-
-  console.log(validEvents);
+  var renderedEvents = validEvents.map((event) => {
+    return <EventCard data={event}></EventCard>
+  });
 
   return (
     <section className="current-events">
@@ -74,8 +56,7 @@ function CurrentEvents(props) {
           <h3 className="seciton-title">Current Events</h3>
         </Fade>
         <div className="event-slider">
-          {/* Here I want to feed in the next 7 days events into the EventCard,
-          and somehow add these instances of EventCard into a slider. */}
+          {renderedEvents}
         </div>
       </div>
     </section>
