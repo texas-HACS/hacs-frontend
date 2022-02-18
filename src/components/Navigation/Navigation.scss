@@ -64,6 +64,10 @@ $nav-link-margin: 0 10px;
   }
 }
 
+a {
+  color: $light-light
+}
+
 @media only screen and (max-width: 768px) {
   .navigation-container {
     display: none;
@@ -71,6 +75,16 @@ $nav-link-margin: 0 10px;
 
   .burger-menu {
     display: initial;
+    width: auto;
+
+    .burger-menu-links {
+      text-align: right;
+
+      .nav-link {
+        margin-bottom: 20px;
+      }      
+    }
+
   }
 }
 

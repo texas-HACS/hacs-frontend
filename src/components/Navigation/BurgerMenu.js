@@ -24,7 +24,7 @@ export default function BurgerMenu(props) {
   }
 
   const links = (
-    <Fragment>
+    <section className="flex burger-menu-links">
       <Link to="/home" onClick={() => toggleMenu(false)}>
         <div className="nav-link">Home</div>
       </Link>
@@ -56,7 +56,7 @@ export default function BurgerMenu(props) {
           <i className="fas fa-cog" />
         </div>
       </Link>
-    </Fragment>
+    </section>
   );
 
   return (
@@ -66,7 +66,7 @@ export default function BurgerMenu(props) {
         isOpen={menuOpen}
         onStateChange={(state) => toggleMenu(state.isOpen)}
       >
-        <section className="flex">{links}</section>
+      {links}
       </Menu>
     </div>
   );

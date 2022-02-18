@@ -21,6 +21,7 @@
 
 /* Position and sizing of clickable cross button */
 .bm-cross-button {
+  display: none;
   height: 24px;
   width: 24px;
 }
@@ -37,12 +38,13 @@ Note: Beware of modifying this element as it can break the animations - you shou
 .bm-menu-wrap {
   position: fixed;
   height: 100%;
+  width: 70% !important;
 }
 
 /* General sidebar styles */
 .bm-menu {
   background: $focus-blue;
-  padding: 2.5em 1.5em 0;
+  padding: 1em 1em 0;
   font-size: 1.15em;
   height: 50%;
 }
