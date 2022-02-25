@@ -3,6 +3,7 @@ import "./AdminPage.scss";
 import Datetime from "react-datetime";
 import EventAPI from "../../api/event";
 import ImageEdit from "../MediaManagement/ImageEdit";
+import LinksEdit from "../editables/LinksEdit";
 
 const DEFAULT_GCAL_STATES = { confirmed: true, potential: false };
 
@@ -137,14 +138,9 @@ function EventEdit(props) {
         onChange={handleChange}
       />
       <label>Other Links</label>
-      <input
-        id="event-other-links-edit"
-        className="form-control-small"
-        name="otherLinks"
-        defaultValue={data?.otherLinks}
-        placeholder="ex.: flyer link, merch sign up, etc."
-        readOnly // TODO: Fix render before removing this tag
-        onChange={handleChange}
+      <LinksEdit
+        data={data?.otherLinks}
+        onUpdate={(links) => changeData("otherLinks", links)}
       />
       <label>Enable Google Calendar</label>
       <div className="calendar-options flex-row">
