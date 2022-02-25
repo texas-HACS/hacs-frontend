@@ -16,6 +16,7 @@ function EventCard(props) {
         className={`card-overlay ${
           new Date() > new Date(event.endTime) ? "past" : "future"
         }`}
+        key={props.key}
       />
       <div className="event-image">
         <CroppedImage {...event.image} alt="event-view" />
