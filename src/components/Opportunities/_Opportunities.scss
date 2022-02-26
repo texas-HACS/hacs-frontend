@@ -1,0 +1,96 @@
+@import "../../variables";
+
+.opportunities {
+  width: 100vw;
+  padding: $full-screen-safe-zone;
+  box-sizing: border-box;
+
+  .description {
+    margin-right: 20vw;
+  }
+
+  .carousel {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    justify-content: left;
+    padding: 10px 0;
+
+    &::-webkit-scrollbar {
+      width: 50px;
+    }
+    &::-webkit-scrollbar-track {
+      background-color: transparent;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: $faded-blue;
+      border-radius: 30px;
+      border: 6px solid transparent;
+      background-clip: content-box;
+    }
+    &:hover {
+      &::-webkit-scrollbar-thumb {
+        background-color: $hacs-blue;
+      }
+    }
+  }
+
+  .opportunity-row {
+    align-items: stretch;
+    padding-top: 20px;
+
+    .opportunity {
+      width: 300px;
+      padding: 10px;
+      flex: 0 0 auto;
+      justify-content: space-between;
+
+      [class$="-image"] {
+        width: 100%;
+        min-height: 300px;
+        overflow: hidden;
+      }
+
+      .details {
+        padding: 0 25px;
+        justify-content: space-between;
+      }
+
+      .title {
+        text-align: center;
+      }
+
+      .time {
+        font-weight: bold;
+        color: $hacs-blue;
+        margin-bottom: 5px;
+      }
+    }
+
+    .card {
+      padding: 0;
+      margin: 0 20px;
+    }
+  }
+
+  h1 {
+    font-family: $title-font;
+    font-size: 36px;
+  }
+
+  h3 {
+    margin-bottom: 0.5em;
+  }
+}
+
+// Smartphone/Low-Res Tablets
+@media only screen and (max-width: 768px) {
+  .opportunities {
+    .description {
+      margin: 0;
+    }
+
+    .corporate-events {
+      width: 100%;
+    }
+  }
+}

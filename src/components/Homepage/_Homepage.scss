@@ -12,7 +12,6 @@
     min-height: calc($display-max-height - 150px);
     box-sizing: border-box;
     padding: $full-screen-safe-zone;
-    margin: 5% 0;
 
     a {
       height: 46px;
@@ -195,7 +194,8 @@
 
     .member-container {
       display: flex;
-      justify-content: space-between;
+      flex-direction: row;
+      justify-content: space-around;
       width: 100%;
       margin-top: 60px;
       color: $title-text;
@@ -209,6 +209,10 @@
           font-size: 24px;
           line-height: 32px;
           font-family: $title-font;
+
+          i {
+            padding: 0;
+          }
         }
 
         .description {
@@ -225,6 +229,7 @@
     min-height: $display-max-height;
     box-sizing: border-box;
     padding: $full-screen-safe-zone;
+    padding-bottom: 5vh;
     background-color: $faded-blue;
 
     .section-title {
@@ -239,7 +244,9 @@
       }
     }
   }
-
+  .timeline-Widget {
+    max-width: none !important;
+  }
   .twitter-feed {
     width: $display-max-width;
     min-height: $display-max-height;
@@ -258,6 +265,7 @@
 
     .feed-wrapper {
       min-height: 380px;
+      width: 100%;
     }
   }
 
@@ -325,6 +333,8 @@
 
       .member-container {
         flex-wrap: wrap;
+        flex-direction: initial;
+        align-items: center;
         margin: 0;
 
         .content {
@@ -334,16 +344,11 @@
         img {
           margin: 0 auto;
         }
-
-        i {
-          padding: 0;
-        }
       }
     }
 
     .upcoming-events {
       min-height: initial;
-      padding-bottom: 5vh;
 
       .content-wrapper {
         #calendar-mobile {

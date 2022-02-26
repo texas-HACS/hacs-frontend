@@ -81,7 +81,7 @@ function TwitterFeed() {
   }, []);
 
   return (
-    <div className="twitter-feed">
+    <section className="twitter-feed">
       <Fade bottom>
         <h3 className="section-title">Latest Tweets</h3>
       </Fade>
@@ -94,7 +94,7 @@ function TwitterFeed() {
           />
         </Fade>
       </div>
-    </div>
+    </section>
   );
 }
 
