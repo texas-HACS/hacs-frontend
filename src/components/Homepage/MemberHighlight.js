@@ -1,5 +1,4 @@
 import React, { Fragment } from "react";
-import "./Homepage.scss";
 import Fade from "react-reveal/Fade";
 
 function MemberHighlight(props) {
@@ -11,7 +10,7 @@ function MemberHighlight(props) {
             <h3 className="section-title">Member of the Week</h3>
           </Fade>
           <Fade bottom>
-            <div className="member-wrapper">
+            <div className="member-container flex">
               <a href={props.member.linkedin}>
                 <img
                   src={props.member.image?.url}

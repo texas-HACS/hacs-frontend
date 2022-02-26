@@ -1,0 +1,29 @@
+@import "../../form";
+
+.admin-panel {
+  margin: 60px auto;
+  width: $display-max-width;
+  padding: 0 20px;
+  font-family: $title-font;
+
+
+  .admin-group {
+    margin-bottom: 1rem;
+    margin-right: 5%;
+    max-width: 50%;
+
+    .admin-group-title {
+      margin-block-end: 1rem;
+    }
+  }
+
+  .admin-edit {
+    padding: 5px 50px;
+    border-left: 2px solid #495057;
+  }
+
+  .flex-row {
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+}

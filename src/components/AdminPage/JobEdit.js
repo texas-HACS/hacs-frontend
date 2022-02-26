@@ -1,5 +1,4 @@
 import React, { Fragment, useState } from "react";
-import "./AdminPage.scss";
 import JobAPI from "../../api/job";
 import ImageEdit from "../MediaManagement/ImageEdit";
 
@@ -40,7 +39,7 @@ function JobEdit(props) {
   };
 
   const editSection = (
-    <div className="admin-edit">
+    <div className="admin-edit form-wrapper">
       <label>Job Title</label>
       <input
         id="job-title-edit"

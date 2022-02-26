@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import "./AdminPage.scss";
 import config from "../../_config";
 import OfficerEdit from "./OfficerEdit";
 import MeetingLinkEdit from "./MeetingLinkEdit";
@@ -193,8 +192,8 @@ function AdminPanel(props) {
     ) : null;
 
   const officersEdit = (
-    <div className="form-group">
-      <h2 className="form-group-title">Officers</h2>
+    <div className="admin-group">
+      <h2 className="admin-group-title">Officers</h2>
       {data.officers !== undefined
         ? Object.keys(data.officers)
             ?.sort((a_uid, b_uid) => {
@@ -238,8 +237,8 @@ function AdminPanel(props) {
     setEvents(updatedEvents);
   };
   eventsEdit = (
-    <div className="form-group">
-      <h2 className="form-group-title">Events</h2>
+    <div className="admin-group">
+      <h2 className="admin-group-title">Events</h2>
       {events
         ? Object.keys(events)
             .map((uid) => events[uid])
@@ -270,8 +269,8 @@ function AdminPanel(props) {
     setScholarships(updatedScholarships);
   };
   scholarshipsEdit = (
-    <div className="form-group">
-      <h2 className="form-group-title">Scholarship Opportunities</h2>
+    <div className="admin-group">
+      <h2 className="admin-group-title">Scholarship Opportunities</h2>
       {scholarships
         ? Object.keys(scholarships)
             .map((uid) => scholarships[uid])
@@ -304,8 +303,8 @@ function AdminPanel(props) {
     setJobs(updatedJobs);
   };
   jobsEdit = (
-    <div className="form-group">
-      <h2 className="form-group-title">Job Postings</h2>
+    <div className="admin-group">
+      <h2 className="admin-group-title">Job Postings</h2>
       {jobs
         ? Object.keys(jobs)
             .map((uid) => jobs[uid])

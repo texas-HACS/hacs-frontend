@@ -1,5 +1,4 @@
 import React from "react";
-import "./AdminPage.scss";
 import AdminPanel from "./AdminPanel";
 
 function AdminPage(props) {

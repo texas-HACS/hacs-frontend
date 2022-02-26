@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import FileEdit from "../MediaManagement/FileEdit";
 import { newUid } from "../utils/utils";
-import "./AdminPage.scss";
 
 function OfficerEdit(props) {
   const [editing, setEditing] = useState(false);
@@ -36,7 +35,7 @@ function OfficerEdit(props) {
   };
 
   const editSection = (
-    <div className="admin-edit">
+    <div className="admin-edit form-wrapper">
       <label>{"First & Last Name"}</label>
       <input
         id="officer-name-edit"
@@ -132,7 +131,7 @@ function OfficerEdit(props) {
   );
 
   return (
-    <div className="editable-group">
+    <div className="officer-edit editable-group">
       {saveSection}
       {!!editing && editSection}
     </div>

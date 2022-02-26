@@ -1,11 +1,10 @@
 import React from "react";
-import "./Footer.scss";
 import Socials from "../partials/Socials";
 
 function Footer() {
   return (
-    <div className="footer">
-      <div className="footer-container">
+    <div className="footer-container">
+      <div className="footer">
         <p className="title">Hispanic Association of Computer Scientists</p>
         <p>
           Email:{" "}

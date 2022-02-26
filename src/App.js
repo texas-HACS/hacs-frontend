@@ -103,7 +103,7 @@ function App() {
     <div className="App" id="AppRoot">
       <Router>
         <JumpToTop />
-        <div>
+        <div className="flex-full">
           <Navigation
             redirects={siteContent.redirects}
             sticky={isSticky}

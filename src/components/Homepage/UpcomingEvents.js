@@ -1,16 +1,15 @@
 import React from "react";
-import "./Homepage.scss";
 import Fade from "react-reveal/Fade";
 
 function UpcomingEvents(props) {
   return (
-    <section className="upcoming-events">
+    <section className="upcoming-events flex">
       <div className="content-wrapper">
         <Fade bottom>
           <h3 className="section-title">Upcoming Events</h3>
         </Fade>
         <Fade>
-          <div className="calendar-wrapper">
+          <div className="calendar-wrapper flex">
             <iframe
               src="https://enigmatic-shore-29691.herokuapp.com/calendar"
               style={{

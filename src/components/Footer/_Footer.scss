@@ -1,18 +1,18 @@
 @import "../../variables";
 
-.footer {
+.footer-container {
+  width: $display-max-width;
   color: $light-light;
   background-color: $hacs-blue;
   font-family: $content-font;
 
-  .footer-container {
-    max-width: 1240px;
-    margin: 0 auto;
+  .footer {
+    height: 250px;
+    padding: 0 10px;
     display: flex;
     flex-flow: column;
     justify-content: center;
     align-items: flex-start;
-    height: 250px;
   }
 
   .title {
@@ -35,5 +35,11 @@
 
   .socials {
     padding: 8px 0;
+    color: $light-light;
+
+    a,
+    a:visited {
+      color: $light-light;
+    }
   }
 }

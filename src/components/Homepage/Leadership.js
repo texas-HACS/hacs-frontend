@@ -1,5 +1,4 @@
 import React from "react";
-import "./Homepage.scss";
 import OfficerCard from "../partials/OfficerCard";
 import Fade from "react-reveal/Fade";
 
@@ -7,8 +6,7 @@ function Leadership(props) {
   var officers = props.officers;
   return (
     <section className="leadership">
-      <div className="container">
-        <h1>Leadership</h1>
+        <h3 className="section-title">Leadership</h3>
         <div className="leadership-wrapper">
           {Object.keys(officers)
             .sort((a_uid, b_uid) => {
@@ -23,7 +21,6 @@ function Leadership(props) {
               );
             })}
         </div>
-      </div>
     </section>
   );
 }

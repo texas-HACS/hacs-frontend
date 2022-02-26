@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import "./Homepage.scss";
 import Fade from "react-reveal/Fade";
 import { TwitterTimelineEmbed } from "react-twitter-embed";
 

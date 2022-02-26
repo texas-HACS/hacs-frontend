@@ -25,7 +25,7 @@ function Login(props) {
   return redirectToReferrer ? (
     <Redirect to={locState?.from || "/"} />
   ) : (
-    <div className="login-wrapper">
+    <div className="login-wrapper form-wrapper">
       <div className="login">
         <div className="form-group">
           <label htmlFor="email">Email address</label>

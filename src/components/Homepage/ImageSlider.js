@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./Homepage.scss";
 import ImageGallery from "react-image-gallery";
 import ABCSQuora from "../../media/Game Night w ABCS & Quora.jpg";
 import GeneralMeeting from "../../media/General Meeting.jpg";
@@ -68,7 +67,7 @@ function ImageSlider() {
   const [captionIndex, updateCaptionIndex] = useState(0);
 
   return (
-    <section className="slider">
+    <section className="image-slider">
       <Fade>
         <ImageGallery
           items={images}

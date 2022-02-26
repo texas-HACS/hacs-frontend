@@ -1,7 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { slide as Menu } from "react-burger-menu";
 import { Link } from "react-router-dom";
-import "./BurgerMenu.scss";
 
 export default function BurgerMenu(props) {
   const [menuOpen, setMenuOpen] = useState(false);

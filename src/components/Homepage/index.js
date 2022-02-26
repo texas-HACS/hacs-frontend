@@ -1,5 +1,4 @@
 import React from "react";
-import "./Homepage.scss";
 import Hero from "./Hero";
 import ImageSlider from "./ImageSlider";
 import MemberHighlight from "./MemberHighlight";
@@ -28,7 +27,7 @@ const placeholderEvents = [
 
 function Homepage(props) {
   return (
-    <section className="homepage">
+    <section className="homepage flex-full">
       <Hero />
       <ImageSlider />
       <MemberHighlight member={props.memberOfWeek} />

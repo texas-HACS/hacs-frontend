@@ -1,7 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import FileSystem from "../MediaManagement/FileSystem/FileSystem";
 import CloseButton from "../partials/CloseButton";
-import "./FileEdit.scss";
 
 export const selectionTypes = { UPLOAD: "upload", SELECT: "select" };
 

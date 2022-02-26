@@ -1,7 +1,6 @@
 import React, { useRef, useState } from "react";
 import firebase from "../../_firebase";
 import CloseButton from "../partials/CloseButton";
-import "./MediaManagement.scss";
 
 function FileUpload(props) {
   const [selectedFile, setSelectedFile] = useState();

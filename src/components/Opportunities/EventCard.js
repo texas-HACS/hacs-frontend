@@ -1,23 +1,17 @@
-import React from "react";
+import React, { Fragment } from "react";
 import CroppedImage from "../partials/Images/CroppedImage";
 import { renderStartAndEndDateTime } from "../utils/utils";
-import "./Opportunities.scss";
 import { HACS_LOGO_URL } from "./utils";
 
 function EventCard(props) {
   const { e: event } = props;
 
-  return (
+  let cardDetails = (
     <div
-      className="event-container opportunity flex card"
-      onClick={() => props.onClick(event)}
+      className={`card-overlay ${
+        new Date() > new Date(event.endTime) ? "past" : "future"
+      }`}
     >
-      <div
-        className={`card-overlay ${
-          new Date() > new Date(event.endTime) ? "past" : "future"
-        }`}
-        key={props.key}
-      />
       <div className="event-image">
         <CroppedImage {...event.image} alt="event-view" />
       </div>
@@ -40,6 +34,14 @@ function EventCard(props) {
         </div> */}
         </div>
       </div>
+    </div>
+  );
+  return (
+    <div
+      className="event-container opportunity flex card"
+      onClick={() => props.onClick(event)}
+    >
+      {cardDetails}
     </div>
   );
 }

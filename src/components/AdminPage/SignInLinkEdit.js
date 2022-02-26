@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./AdminPage.scss";
 function SignInLinkEdit(props) {
   const [editing, setEditing] = useState(false);
   const [data, setData] = useState(props.data);
@@ -17,7 +16,7 @@ function SignInLinkEdit(props) {
   };
 
   const editSection = (
-    <div className="admin-edit">
+    <div className="admin-edit form-wrapper">
       <form onSubmit={handleSave}>
         <input
           id="sign-in-link-edit"
@@ -38,7 +37,7 @@ function SignInLinkEdit(props) {
 
   const saveSection = (
     <div onClick={() => setEditing(editing ^ true)} aria-describedby="urlHelp">
-      <span>{data.link}</span>
+      <span className="editable">{data.link}</span>
     </div>
   );
 

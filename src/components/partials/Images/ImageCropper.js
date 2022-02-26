@@ -1,7 +1,6 @@
 import shadows from "@material-ui/core/styles/shadows";
 import React, { useState, useCallback, useEffect } from "react";
 import Cropper from "react-easy-crop";
-import "./ImageCropper.scss";
 
 const ImageCropper = (props) => {
   const [shift, setShift] = useState({ x: 0, y: 0 });

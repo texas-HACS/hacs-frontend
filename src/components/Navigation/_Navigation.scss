@@ -13,6 +13,7 @@ $nav-link-margin: 0 10px;
 
 .navigation-container {
   height: $nav-height;
+  width: 100%;
 
   section.navigation {
     position: relative;
@@ -64,10 +65,6 @@ $nav-link-margin: 0 10px;
   }
 }
 
-a {
-  color: $light-light
-}
-
 @media only screen and (max-width: 768px) {
   .navigation-container {
     display: none;
@@ -77,14 +74,17 @@ a {
     display: initial;
     width: auto;
 
+    a {
+      color: $light-light;
+    }
+
     .burger-menu-links {
       text-align: right;
 
       .nav-link {
         margin-bottom: 20px;
-      }      
+      }
     }
-
   }
 }
 

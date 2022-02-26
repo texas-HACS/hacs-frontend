@@ -1,7 +1,6 @@
 import React from "react";
 import path from "path";
 import firebase from "../../../_firebase";
-import "./FileSystem.scss";
 
 function File(props) {
   const handleClick = async () => {

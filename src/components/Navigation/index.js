@@ -1,5 +1,4 @@
 import React, { Fragment } from "react";
-import "./Navigation.scss";
 import BurgerMenu from "./BurgerMenu";
 import NavMenu from "./NavMenu";
 
