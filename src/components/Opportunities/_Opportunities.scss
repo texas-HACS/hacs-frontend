@@ -86,11 +86,17 @@
 @media only screen and (max-width: 768px) {
   .opportunities {
     .description {
-      margin: 0;
+      text-align: center;
+      margin: 10px;
     }
 
     .corporate-events {
       width: 100%;
     }
+  }
+
+  // Modal Styling
+  .opportunity-content {
+    margin: 10px;
   }
 }

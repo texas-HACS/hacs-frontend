@@ -112,11 +112,11 @@ export function renderScholarships(scholarships, editable, openModal) {
 
 export function renderModalContent(content) {
   return (
-    <div className="flex-row content" key={content.uid}>
+    <div className="flex-row opportunity-content" key={content.uid}>
       <div className="image">
         <CroppedImage {...content.image} alt="opportunity-view" />
       </div>
-      <div className="flex other-content">
+      <div className="flex other-opportunity-content">
         <h1 className="title">{content.title}</h1>
         <span className="time">
           {renderStartAndEndDateTime(content.startTime, content.endTime)}
