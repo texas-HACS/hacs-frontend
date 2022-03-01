@@ -1,5 +1,4 @@
 import React from "react";
-import "./TestPage.scss";
 
 function TestPage(props) {
   return (

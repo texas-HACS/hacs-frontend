@@ -1,11 +1,15 @@
 import React, { useEffect } from "react";
-import "./Homepage.scss";
 import Fade from "react-reveal/Fade";
 import { TwitterTimelineEmbed } from "react-twitter-embed";
 
 const styles = `
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto+Slab:wght@100;400;700&display=swap');
+
+    .timeline-Widget {
+        width: 100%;
+        max-width: none !important;
+    }
 
     .timeline-Header {
         display: none;
@@ -34,7 +38,13 @@ const styles = `
     .timeline-TweetList {
         display: flex;
         justify-content: space-between;
-        overflow-x: scroll;
+        overflow-x: auto;
+        overflow-y: auto;
+    }
+
+    .timeline-Viewport {
+        overflow-y: auto !important;
+        height: auto !important;
     }
 
     .timeline-Body {
@@ -82,7 +92,7 @@ function TwitterFeed() {
   }, []);
 
   return (
-    <div className="twitter-feed">
+    <section className="twitter-feed">
       <Fade bottom>
         <h3 className="section-title">Latest Tweets</h3>
       </Fade>
@@ -95,7 +105,7 @@ function TwitterFeed() {
           />
         </Fade>
       </div>
-    </div>
+    </section>
   );
 }
 

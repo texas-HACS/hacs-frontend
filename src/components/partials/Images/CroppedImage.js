@@ -2,7 +2,6 @@ import React, { useState, useCallback, useEffect } from "react";
 import { HACS_LOGO_URL } from "../../Opportunities/utils";
 import getCroppedImg from "../../utils/cropImage";
 
-import "./ImageCropper.scss";
 
 const CroppedImage = (props) => {
   const [inputImage, setInputImage] = useState(null);

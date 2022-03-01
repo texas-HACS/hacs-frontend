@@ -1,7 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { slide as Menu } from "react-burger-menu";
 import { Link } from "react-router-dom";
-import "./BurgerMenu.scss";
 
 export default function BurgerMenu(props) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -24,7 +23,7 @@ export default function BurgerMenu(props) {
   }
 
   const links = (
-    <Fragment>
+    <section className="flex burger-menu-links">
       <Link to="/home" onClick={() => toggleMenu(false)}>
         <div className="nav-link">Home</div>
       </Link>
@@ -48,15 +47,15 @@ export default function BurgerMenu(props) {
       {/* <Link to="/contact" onClick={() => toggleMenu(false)}>
               <div className="nav-link">Contact</div>
             </Link> */}
-      <Link to="/sign-in">
+      <Link to="/sign-in" onClick={() => toggleMenu(false)}>
         <div className="nav-link">Sign In</div>
       </Link>
-      <Link to="/admin" aria-label="admin">
+      <Link to="/admin" aria-label="admin" onClick={() => toggleMenu(false)}>
         <div className="nav-link">
           <i className="fas fa-cog" />
         </div>
       </Link>
-    </Fragment>
+    </section>
   );
 
   return (
@@ -66,7 +65,7 @@ export default function BurgerMenu(props) {
         isOpen={menuOpen}
         onStateChange={(state) => toggleMenu(state.isOpen)}
       >
-        <section className="flex">{links}</section>
+      {links}
       </Menu>
     </div>
   );

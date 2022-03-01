@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import "./Redirect.scss";
 
 function Redirect(props) {
   const [dest, setDest] = useState(props.to);

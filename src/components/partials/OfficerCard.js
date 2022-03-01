@@ -1,5 +1,4 @@
 import React from "react";
-import "./OfficerCard.scss";
 
 function OfficerCard(props) {
   return (

@@ -1,0 +1,36 @@
+@import "../../form";
+
+.admin-panel {
+  width: $display-max-width;
+  padding: $full-screen-safe-zone;
+  font-family: $title-font;
+
+  .admin-edit {
+    padding: 5px 50px;
+    border-left: 2px solid #495057;
+  }
+
+  .opportunities-edit {
+    overflow-x: auto;
+  }
+
+  .flex-row {
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 5%;
+  }
+
+  .admin-group {
+    margin-bottom: 1rem;
+    max-width: 50%;
+
+    .admin-group-title {
+      margin-block-end: 1rem;
+    }
+  }
+}
+
+// Smartphone/Low-Res Tablets
+@media only screen and (max-width: 768px) {
+  
+}

@@ -1,13 +1,11 @@
 @import "../../variables";
 
 .opportunities {
-  margin: 60px auto;
-  max-width: 1240px;
-  padding: 0 20px;
-  text-align: center;
+  width: 95vw;
+  padding: $full-screen-safe-zone;
 
   .description {
-    margin: 0 10vw;
+    margin-right: 20vw;
   }
 
   .carousel {
@@ -37,6 +35,7 @@
 
   .opportunity-row {
     align-items: stretch;
+    padding-top: 20px;
 
     .opportunity {
       width: 300px;
@@ -52,7 +51,6 @@
 
       .details {
         padding: 0 25px;
-        height: 100%;
         justify-content: space-between;
       }
 
@@ -71,5 +69,33 @@
       padding: 0;
       margin: 0 20px;
     }
+  }
+
+  h1 {
+    font-family: $title-font;
+    font-size: 36px;
+  }
+
+  h3 {
+    margin-bottom: 0.5em;
+  }
+}
+
+// Smartphone/Low-Res Tablets
+@media only screen and (max-width: 768px) {
+  .opportunities {
+    .description {
+      text-align: center;
+      margin: 10px;
+    }
+
+    .corporate-events {
+      width: 100%;
+    }
+  }
+
+  // Modal Styling
+  .opportunity-content {
+    margin: 10px;
   }
 }

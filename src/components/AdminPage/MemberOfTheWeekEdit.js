@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import FileEdit from "../MediaManagement/FileEdit";
-import "./AdminPage.scss";
 
 function MemberOfTheWeekEdit(props) {
   const [editing, setEditing] = useState(false);
@@ -25,7 +24,7 @@ function MemberOfTheWeekEdit(props) {
   };
 
   const editSection = (
-    <div className="admin-edit">
+    <div className="admin-edit form-wrapper">
       <label>Name</label>
       <input
         id="motw-name-edit"
@@ -72,7 +71,7 @@ function MemberOfTheWeekEdit(props) {
   const saveSection = (
     <div onClick={() => setEditing(editing ^ true)}>
       <p>
-        <span>{data.name}</span>
+        <span className="editable">{data.name}</span>
       </p>
       {/* TODO: Add X mark to close dropdown */}
     </div>

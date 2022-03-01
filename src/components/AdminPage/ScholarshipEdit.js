@@ -1,5 +1,4 @@
 import React, { Fragment, useState } from "react";
-import "./AdminPage.scss";
 import ScholarshipAPI from "../../api/scholarship";
 import ImageEdit from "../MediaManagement/ImageEdit";
 
@@ -42,7 +41,7 @@ function ScholarshipEdit(props) {
   };
 
   const editSection = (
-    <div className="admin-edit">
+    <div className="admin-edit form-wrapper">
       <label>Scholarship Title</label>
       <input
         id="scholarship-title-edit"

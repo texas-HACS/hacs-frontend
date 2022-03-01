@@ -1,5 +1,4 @@
 import React, { Fragment, useState } from "react";
-import "./AdminPage.scss";
 import Datetime from "react-datetime";
 import EventAPI from "../../api/event";
 import ImageEdit from "../MediaManagement/ImageEdit";
@@ -65,7 +64,7 @@ function EventEdit(props) {
   };
 
   const editSection = (
-    <div className="admin-edit">
+    <div className="admin-edit form-wrapper">
       <label>Event Title</label>
       <input
         id="event-title-edit"

@@ -3,7 +3,6 @@ import Fade from "react-reveal/Fade";
 import EventAPI from "../../api/event";
 import JobAPI from "../../api/job";
 import ScholarshipAPI from "../../api/scholarship";
-import "./Opportunities.scss";
 import {
   renderEvents,
   renderJobListings,

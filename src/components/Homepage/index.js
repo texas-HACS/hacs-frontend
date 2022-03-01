@@ -1,5 +1,4 @@
 import React from "react";
-import "./Homepage.scss";
 import Hero from "./Hero";
 import ImageSlider from "./ImageSlider";
 import MemberHighlight from "./MemberHighlight";

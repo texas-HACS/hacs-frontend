@@ -1,7 +1,6 @@
 import React from "react";
 import CroppedImage from "../partials/Images/CroppedImage";
 import LinkButton from "../partials/LinkButton";
-import "./Opportunities.scss";
 import { HACS_LOGO_URL, renderLinks, renderTimeline } from "./utils";
 
 function JobListingCard(props) {

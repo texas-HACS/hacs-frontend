@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ReactModal from "react-modal";
 import CloseButton from "./CloseButton";
-import "./Modal.scss";
 
 function Modal(props) {
   const [isOpen, setIsOpen] = useState(props.isOpen);

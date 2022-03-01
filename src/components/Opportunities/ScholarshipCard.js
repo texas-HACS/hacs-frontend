@@ -1,7 +1,6 @@
 import React from "react";
 import CroppedImage from "../partials/Images/CroppedImage";
 import LinkButton from "../partials/LinkButton";
-import "./Opportunities.scss";
 import { renderTimeline } from "./utils";
 
 function ScholarshipCard(props) {

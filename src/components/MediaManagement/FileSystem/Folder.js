@@ -1,5 +1,4 @@
 import React from "react";
-import "./FileSystem.scss";
 
 function Folder(props) {
   return (

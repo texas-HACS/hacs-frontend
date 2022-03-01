@@ -1,9 +1,8 @@
 import React from "react";
-import "./Socials.scss";
 
 function Socials(props) {
   return (
-    <div className="socials">
+    <div className="socials flex-row">
       <a
         href="https://www.facebook.com/groups/TexasHACS"
         target="_blank"

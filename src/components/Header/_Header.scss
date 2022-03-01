@@ -1,0 +1,59 @@
+@import "../../variables";
+.global-header-container {
+  width: $display-max-width;
+  height: 100px;
+  padding: $full-screen-safe-zone;
+
+  .global-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin: 0 auto;
+    border-bottom: 5px solid $hacs-blue;
+
+    .header-mobile {
+      display: none;
+    }
+
+    h3 {
+      font-family: $title-font;
+      color: $title-text;
+      font-size: 16px;
+    }
+  }
+}
+
+/* Smartphones (portrait) ----------- */
+@media only screen and (max-width: 768px) {
+  .global-header-container {
+    width: $display-max-width;
+    height: initial;
+    padding: $full-screen-safe-zone;
+
+    .global-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 0 auto;
+      border-bottom: 5px solid $hacs-blue;
+
+      h3, .header-mobile {
+        font-family: $title-font;
+        color: $title-text;
+        font-size: 16px;
+        display: block;
+        font-size: 2rem;
+        margin: 10px 0;
+      }
+
+      .socials {
+        margin-right: 20%;
+        padding-bottom: 0;
+      }
+    }
+  }
+
+  .header-desktop {
+    display: none;
+  }
+}

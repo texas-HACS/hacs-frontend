@@ -22,5 +22,9 @@ $content-font: "Open Sans", sans-serif;
 
 /* Sizing */
 $nav-height: 50px;
-
 $hacs-border: 2px solid $hacs-blue;
+$display-max-width: 100%;
+$display-max-height: 100vh;
+$display-max-width-mobile: 100vw;
+$full-screen-safe-zone: 0 2.5%;
+$card-max-width: 380px;

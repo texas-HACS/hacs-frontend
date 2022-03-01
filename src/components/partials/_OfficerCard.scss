@@ -1,22 +1,9 @@
 @import "../../variables";
 
-.card-overlay {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  pointer-events: none;
-}
-
-.past {
-  background-color: $faded;
-}
-
 .card {
   background-color: white;
   border-radius: 5px;
-  max-width: 380px;
+  max-width: card-max-width;
   filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.25));
   display: flex;
   flex-flow: column;
