@@ -6,6 +6,11 @@ const styles = `
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto+Slab:wght@100;400;700&display=swap');
 
+    .timeline-Widget {
+        width: 100%;
+        max-width: none !important;
+    }
+
     .timeline-Header {
         display: none;
     }
@@ -33,7 +38,13 @@ const styles = `
     .timeline-TweetList {
         display: flex;
         justify-content: space-between;
-        overflow-x: scroll;
+        overflow-x: auto;
+        overflow-y: auto;
+    }
+
+    .timeline-Viewport {
+        overflow-y: auto !important;
+        height: auto !important;
     }
 
     .timeline-Body {

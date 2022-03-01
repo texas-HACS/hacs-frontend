@@ -333,7 +333,7 @@ function AdminPanel(props) {
       {/* TODO: Add ability to drag and drop ordering to enforce indices. */}
       {officersEdit}
       {memberOfTheWeekEdit}
-      <div className="flex-row">
+      <div className="opportunities-edit flex-row">
         {eventsEdit}
         {jobsEdit}
         {scholarshipsEdit}

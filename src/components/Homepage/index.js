@@ -27,7 +27,7 @@ const placeholderEvents = [
 
 function Homepage(props) {
   return (
-    <section className="homepage flex-full">
+    <section className="homepage">
       <Hero />
       <ImageSlider />
       <MemberHighlight member={props.memberOfWeek} />

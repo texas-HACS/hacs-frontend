@@ -68,6 +68,7 @@ function ImageSlider() {
 
   return (
     <section className="image-slider">
+      <h3 className="section-title">Leadership</h3>
       <Fade>
         <ImageGallery
           items={images}

@@ -1,5 +1,9 @@
 @import "variables";
 
+* {
+  box-sizing: border-box;
+}
+
 body,
 html {
   margin: 0;
@@ -28,6 +32,7 @@ textarea {
 
 .main-content {
   min-height: 60vh;
+  width: $display-max-width;
 }
 
 a {
@@ -45,7 +50,6 @@ i {
 
 button {
   border: $hacs-border;
-  box-sizing: border-box;
   border-radius: 5px;
   height: 40px;
   width: 100px;
@@ -83,7 +87,7 @@ button {
 }
 
 .flex-full {
-  width: 100%;
+  width: $display-max-width;
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -95,6 +99,11 @@ button {
   display: flex;
   flex-direction: row;
   justify-content: center;
+}
+
+.align-left {
+  width: 100%;
+  text-align: left;
 }
 
 .fancy {
@@ -131,7 +140,7 @@ button {
   font-family: $title-font;
   position: relative;
   width: max-content;
-  margin-bottom: 100px;
+  margin-bottom: 50px;
 
   &::after {
     content: " ";
@@ -147,4 +156,7 @@ button {
 }
 
 @media only screen and (max-width: 768px) {
+  .main-content {
+    width: $display-max-width-mobile;
+  }
 }

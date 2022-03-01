@@ -2,7 +2,6 @@
 .global-header-container {
   width: $display-max-width;
   height: 100px;
-  box-sizing: border-box;
   padding: $full-screen-safe-zone;
 
   .global-header {
@@ -29,7 +28,6 @@
   .global-header-container {
     width: $display-max-width;
     height: initial;
-    box-sizing: border-box;
     padding: $full-screen-safe-zone;
 
     .global-header {
