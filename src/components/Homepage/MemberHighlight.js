@@ -10,7 +10,7 @@ function MemberHighlight(props) {
             <h3 className="section-title">Member of the Week</h3>
           </Fade>
           <Fade bottom>
-            <div className="member-container flex">
+            <div className="member-container flex-row">
               <a href={props.member.linkedin}>
                 <img
                   src={props.member.image?.url}
