@@ -48,3 +48,10 @@
 
 // Testing Page Styling
 @import "src/testing/TestPage";
+
+.App {
+  .full-site-view {
+    justify-content: space-between;
+    min-height: 100vh;
+  }
+}
