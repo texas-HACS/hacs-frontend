@@ -2,7 +2,7 @@ import React from "react";
 
 function Hero() {
   return (
-    <section className="hero">
+    <section className="hero flex-row">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 50 763 450">
         <g id="Layer_6" data-name="Layer 6">
           <text className="cls-3" transform="translate(260.81 292.69)">
@@ -422,15 +422,19 @@ function Hero() {
       </svg>
       <div className="content">
         <h1 className="welcome">Welcome to HACS!</h1>
-        <p className="introduction">We're the Hispanic Association of Computer Scientists</p>
+        <p className="introduction">
+          We're the Hispanic Association of Computer Scientists
+        </p>
         <p className="description">
           The <span>Hispanic Association of Computer Scientists (HACS)</span>{" "}
           aims to empower and provide support for Hispanic and Latinx students
           in computer science through academic, professional, and social events.
         </p>
-        <a href="https://t.co/KUhKphLx2d?amp=1">
-          <button className="mailing-list">Join Our Mailing List</button>
-        </a>
+        <div className="mailing-list-wrapper">
+          <a href="https://t.co/KUhKphLx2d?amp=1">
+            <button className="mailing-list">Join Our Mailing List</button>
+          </a>
+        </div>
       </div>
     </section>
   );

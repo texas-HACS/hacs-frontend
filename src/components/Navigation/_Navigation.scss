@@ -36,7 +36,7 @@ $nav-link-margin: 0 10px;
       transition: 0.3s ease-out;
       width: 100%;
       text-align: right;
-      margin-right: 2.5vw;
+      margin-right: 2.5%;
 
       .nav-link {
         color: $light-light;
@@ -82,7 +82,7 @@ $nav-link-margin: 0 10px;
       text-align: right;
 
       .nav-link {
-        margin-bottom: 20px;
+        padding: 10px 0;
         font-family: $content-font;
         font-size: 24px;
       }
