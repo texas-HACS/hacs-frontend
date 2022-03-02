@@ -1,0 +1,19 @@
+.qrcode-manager {
+  .qrcode-display-container {
+    justify-content: center;
+
+    .qrcode-wrapper {
+      text-align: center;
+      
+      #full-res-qrcode-wrapper {
+        height: 0;
+        overflow: hidden;
+      }
+
+      #low-res-qrcode-preview {
+        height: 300px !important;
+        width: 300px !important;
+      }
+    }
+  }
+}

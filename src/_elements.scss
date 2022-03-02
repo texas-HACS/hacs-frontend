@@ -19,7 +19,9 @@ h6 {
   font-family: $title-font;
 }
 
-p {
+p,
+label,
+input {
   font-family: $content-font;
 }
 
