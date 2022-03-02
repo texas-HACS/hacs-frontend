@@ -38,7 +38,6 @@ Note: Beware of modifying this element as it can break the animations - you shou
 .bm-menu-wrap {
   position: fixed;
   height: 100%;
-  width: 70% !important;
 }
 
 /* General sidebar styles */
@@ -70,13 +69,14 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 /* Styling of overlay */
 .bm-overlay {
-  background: rgba(0, 0, 0, 0) !important;
-  overflow-y: hidden;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, .1) !important;
 }
 
 @media only screen and (max-width: 768px) {
   .bm-burger-button {
-    right: 2.5vw;
+    right: 2.5%;
     top: 18px;
   }
 }
