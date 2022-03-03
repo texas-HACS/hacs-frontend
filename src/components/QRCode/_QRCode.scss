@@ -5,10 +5,14 @@ $qrcode-preview-size: 300px;
     justify-content: center;
     align-items: flex-start;
 
+    #download-qrcode-button-mobile {
+      display: none;
+    }
+
     .qrcode-wrapper {
       width: $qrcode-preview-size;
       text-align: left;
-      
+
       #full-res-qrcode-wrapper {
         height: 0;
         overflow: hidden;
@@ -17,6 +21,21 @@ $qrcode-preview-size: 300px;
       #low-res-qrcode-preview {
         height: $qrcode-preview-size !important;
         width: $qrcode-preview-size !important;
+      }
+    }
+  }
+}
+
+// Smartphone/Low-Res Tablets
+@media only screen and (max-width: 768px) {
+  .qrcode-manager {
+    .qrcode-display-container {
+      #download-qrcode-button {
+        display: none;
+      }
+      
+      #download-qrcode-button-mobile {
+        display: block;
       }
     }
   }

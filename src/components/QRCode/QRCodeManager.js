@@ -21,16 +21,8 @@ export default function QRCodeManager(props) {
     setSubmitted(true);
   };
 
-  const handleDownload = () => {
-    const qrcode = document.getElementById("full-res-qrcode");
-
-    var link = document.createElement("a");
-    var windowRef;
-    if (typeof link.download == "undefined") {
-      windowRef = window.open();
-    }
-
-    html2canvas(qrcode).then((canvas) => {
+  const canvasToImage = (qrcode) => {
+    return html2canvas(qrcode).then((canvas) => {
       document.getElementById("full-res-qrcode-wrapper").style.display =
         "block";
 
@@ -40,18 +32,49 @@ export default function QRCodeManager(props) {
       img.id = `${formData.name}`;
       img.src = canvas.toDataURL();
 
-      if (windowRef) {
-        // Open and display image in new tab: likely Safari (support for all browsers)
-        windowRef.document.body.innerHTML = `<img src=\"${img.src}\" height=\"50%\">`;
-        window.location = ""
-      } else {
-        // Browser supports downloading link: no need for it
-        link.href = img.src;
-        link.download = `${formData.name}.png`;
-        link.click();
-      }
+      return img;
     });
   };
+
+  const handleDownload = () => {
+    const qrcode = document.getElementById("full-res-qrcode");
+
+    var link = document.createElement("a");
+    var windowRef;
+    if (typeof link.download == "undefined") {
+      windowRef = window.open();
+    }
+
+    // Download image
+    canvasToImage(qrcode).then((img) => {
+      link.href = img.src;
+      link.download = `${formData.name}.png`;
+      link.click();
+    });
+  };
+
+  const qrcodeDownloadPrepObserver = new MutationObserver((mutations, obs) => {
+    const qrcode = document.getElementById("full-res-qrcode");
+    if (qrcode && formData) {
+      // Disconnect observer
+      obs.disconnect();
+
+      // Assign open link for image
+      canvasToImage(qrcode).then((img) => {
+        const link = document.getElementById("download-qrcode-button-mobile");
+        link.href = img.src;
+        link.target = "_blank";
+      });
+      return;
+    }
+  });
+
+  useEffect(() => {
+    qrcodeDownloadPrepObserver.observe(document, {
+      childList: true,
+      subtree: true,
+    });
+  }, [formData]);
 
   return (
     <section className="qrcode-manager">
@@ -73,6 +96,11 @@ export default function QRCodeManager(props) {
                 >
                   Download
                 </button>
+                <a id="download-qrcode-button-mobile">
+                  <button className="button" onClick={handleDownload}>
+                    Download
+                  </button>
+                </a>
               </div>
             </div>
           ) : (
