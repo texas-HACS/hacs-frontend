@@ -43,6 +43,7 @@ export default function QRCodeManager(props) {
       if (windowRef) {
         // Open and display image in new tab: likely Safari (support for all browsers)
         windowRef.document.body.innerHTML = `<img src=\"${img.src}\" height=\"50%\">`;
+        window.location = ""
       } else {
         // Browser supports downloading link: no need for it
         link.href = img.src;
