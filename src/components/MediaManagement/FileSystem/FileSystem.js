@@ -54,7 +54,7 @@ function FileSystem(props) {
   };
 
   return (
-    <div className="file-system">
+    <div className="file-system flex">
       <div className="navigation flex-row">
         <div>Current Path: hacs{currentPath}</div>
         {currentPath ? (
@@ -63,24 +63,22 @@ function FileSystem(props) {
           </button>
         ) : null}
       </div>
-      <div className="flex">
-        <div className="folder-contents flex">
-          {folders?.map((folder) => (
-            <Folder
-              name={folder.name}
-              key={folder.name}
-              handleClick={openFolder}
-            />
-          ))}
-          {files?.map((file) => (
-            <File
-              name={file.name}
-              path={currentPath}
-              key={file.name}
-              handleClick={selectFile}
-            />
-          ))}
-        </div>
+      <div className="folder-contents flex">
+        {folders?.map((folder) => (
+          <Folder
+            name={folder.name}
+            key={folder.name}
+            handleClick={openFolder}
+          />
+        ))}
+        {files?.map((file) => (
+          <File
+            name={file.name}
+            path={currentPath}
+            key={file.name}
+            handleClick={selectFile}
+          />
+        ))}
       </div>
 
       <FileUpload path={currentPath} onUploadFile={selectFile} />

@@ -101,7 +101,7 @@ function EventEdit(props) {
           handleDateChange("endTime", date);
         }}
       />
-      <div>Image</div>
+      <label>Image</label>
       <ImageEdit
         key={"image_edit" + props.id}
         {...data?.image}

@@ -87,7 +87,7 @@ function OfficerEdit(props) {
         placeholder="ex.: https://linkedin.com/in/firstnamelastname"
         onChange={handleChange}
       />
-      <div>Image</div>
+      <label>Image</label>
       <FileEdit
         key={"file_edit" + props.id}
         file={data.image}

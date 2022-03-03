@@ -329,6 +329,7 @@ function AdminPanel(props) {
 
   return (
     <div className="admin-panel">
+      <QRCodeManager />
       {meetingLinkEdit}
       {signInLinkEdit}
       {/* TODO: Add ability to drag and drop ordering to enforce indices. */}
@@ -339,13 +340,7 @@ function AdminPanel(props) {
         {jobsEdit}
         {scholarshipsEdit}
       </div>
-      <QRCodeManager />
       <div className="button-container flex-row">
-        <button
-          className="btn btn-primary" /* onClick={ TODO: Implement db update } */
-        >
-          Update
-        </button>
         <button className="btn btn-primary" onClick={submitSignout}>
           Sign Out
         </button>

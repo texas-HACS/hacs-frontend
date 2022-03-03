@@ -22,8 +22,9 @@
 @import "src/components/Homepage/Homepage";
 
 // Media Management Styling
-@import "src/components/MediaManagement/MediaManagement";
 @import "src/components/MediaManagement/FileSystem/FileSystem";
+@import "src/components/MediaManagement/FileEdit";
+@import "src/components/MediaManagement/MediaManagement";
 
 // Navigation Styling
 @import "src/components/Navigation/Navigation";
