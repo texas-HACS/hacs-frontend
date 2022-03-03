@@ -27,6 +27,7 @@ export default function QRCodeManager(props) {
     html2canvas(qrcode).then((canvas) => {
       document.getElementById("full-res-qrcode-wrapper").style.display =
         "block";
+        const windowRef = window.open();
 
       // Create image from canvas
       var img = new Image();
@@ -34,9 +35,16 @@ export default function QRCodeManager(props) {
       img.id = `${formData.name}`;
       img.src = canvas.toDataURL();
 
-      // Open and display image in new tab (support for all browsers)
-      var newTab = window.open();
-      newTab.document.body.innerHTML = `<img src=\"${img.src}\" height=\"50%\">`;
+      var link = document.createElement("a");
+      if (typeof link.download != "undefined") {
+        // Browser supports downloading link
+        link.href = img.src;
+        link.download = `${formData.name}.png`;
+        link.click();
+      } else {
+        // Open and display image in new tab (support for all browsers)
+        windowRef.document.body.innerHTML = `<img src=\"${img.src}\" height=\"50%\">`;
+      }
     });
   };
 
@@ -53,7 +61,11 @@ export default function QRCodeManager(props) {
               <div className="flex-row">
                 <p className="filename">{formData.name}.png</p>
                 <CloseButton icon onClick={() => setSubmitted(false)} />
-                <button className="button" onClick={handleDownload}>
+                <button
+                  id="download-qrcode-button"
+                  className="button"
+                  onClick={handleDownload}
+                >
                   Download
                 </button>
               </div>
