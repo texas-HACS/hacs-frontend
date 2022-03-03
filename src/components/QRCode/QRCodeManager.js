@@ -1,5 +1,5 @@
 import html2canvas from "html2canvas";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { URL_PATTERN } from "../forms/utils/validation";
 import CloseButton from "../partials/CloseButton";
@@ -22,28 +22,21 @@ export default function QRCodeManager(props) {
   };
 
   const handleDownload = () => {
-    html2canvas(document.querySelector("#full-res-qrcode")).then((canvas) => {
+    const qrcode = document.getElementById("full-res-qrcode");
+
+    html2canvas(qrcode).then((canvas) => {
       document.getElementById("full-res-qrcode-wrapper").style.display =
         "block";
 
-      // Create mime type for image
+      // Create image from canvas
       var img = new Image();
       img.crossOrigin = "Anonymous";
       img.id = `${formData.name}`;
       img.src = canvas.toDataURL();
-      document.body.appendChild(img);
 
-      // Support Safari by not downloading image
-      // const link = document.createElement("a");
-      // link.href = img.src;
-      // link.target = "_blank";
-      var doc = document.open(img.src, `${formData.name}.png`, "noopener=true");
-      // var window = window.open("");
-      console.log("HI" + window);
-      doc.window.document.write('<img src="' + img.src + '"/>');
-      // // link.download = `${formData.name}.png`;
-      // link.click();
-      // document.body.removeChild(img);
+      // Open and display image in new tab (support for all browsers)
+      var newTab = window.open();
+      newTab.document.body.innerHTML = `<img src=\"${img.src}\" height=\"50%\">`;
     });
   };
 
