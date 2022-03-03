@@ -24,10 +24,15 @@ export default function QRCodeManager(props) {
   const handleDownload = () => {
     const qrcode = document.getElementById("full-res-qrcode");
 
+    var link = document.createElement("a");
+    var windowRef;
+    if (typeof link.download == "undefined") {
+      windowRef = window.open();
+    }
+
     html2canvas(qrcode).then((canvas) => {
       document.getElementById("full-res-qrcode-wrapper").style.display =
         "block";
-        const windowRef = window.open();
 
       // Create image from canvas
       var img = new Image();
@@ -35,15 +40,14 @@ export default function QRCodeManager(props) {
       img.id = `${formData.name}`;
       img.src = canvas.toDataURL();
 
-      var link = document.createElement("a");
-      if (typeof link.download != "undefined") {
-        // Browser supports downloading link
+      if (windowRef) {
+        // Open and display image in new tab: likely Safari (support for all browsers)
+        windowRef.document.body.innerHTML = `<img src=\"${img.src}\" height=\"50%\">`;
+      } else {
+        // Browser supports downloading link: no need for it
         link.href = img.src;
         link.download = `${formData.name}.png`;
         link.click();
-      } else {
-        // Open and display image in new tab (support for all browsers)
-        windowRef.document.body.innerHTML = `<img src=\"${img.src}\" height=\"50%\">`;
       }
     });
   };
