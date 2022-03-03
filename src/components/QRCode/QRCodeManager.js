@@ -23,12 +23,22 @@ export default function QRCodeManager(props) {
 
   const handleDownload = () => {
     html2canvas(document.querySelector("#full-res-qrcode")).then((canvas) => {
-      const link = document.createElement("a");
-      link.download = `${formData.name}.png`;
       document.getElementById("full-res-qrcode-wrapper").style.display =
         "block";
-      link.href = canvas.toDataURL();
+
+      // Create mime type for image
+      var img = new Image();
+      img.crossOrigin = "Anonymous";
+      img.id = `${formData.name}`;
+      img.src = canvas.toDataURL();
+      document.body.appendChild(img);
+
+      // Support Safari by not downloading image
+      const link = document.createElement("a");
+      link.href = img.src;
+      link.download = `${formData.name}.png`;
       link.click();
+      document.body.removeChild(img);
     });
   };
 
