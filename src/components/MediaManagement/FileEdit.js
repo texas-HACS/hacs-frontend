@@ -28,8 +28,8 @@ function FileEdit(props) {
 
   return editing ? (
     <div className="file-edit">
-      <CloseButton icon onClick={() => setEditing(false)} />
       <FileSystem onSelectFile={handleSelectFile} />
+      <button onClick={() => setEditing(false)}>Cancel</button>
     </div>
   ) : file ? (
     <div id="existing-file" className="flex-row">
