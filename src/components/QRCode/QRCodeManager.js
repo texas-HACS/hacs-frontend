@@ -34,11 +34,16 @@ export default function QRCodeManager(props) {
       document.body.appendChild(img);
 
       // Support Safari by not downloading image
-      const link = document.createElement("a");
-      link.href = img.src;
-      link.download = `${formData.name}.png`;
-      link.click();
-      document.body.removeChild(img);
+      // const link = document.createElement("a");
+      // link.href = img.src;
+      // link.target = "_blank";
+      var doc = document.open(img.src, `${formData.name}.png`, "noopener=true");
+      // var window = window.open("");
+      console.log("HI" + window);
+      doc.window.document.write('<img src="' + img.src + '"/>');
+      // // link.download = `${formData.name}.png`;
+      // link.click();
+      // document.body.removeChild(img);
     });
   };
 
