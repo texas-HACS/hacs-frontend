@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Redirect, Route } from "react-router";
+import { Navigate, Outlet } from "react-router-dom";
 import Loading from "../Loading/Loading";
 import AdminAuth from "./AdminAuth";
 
@@ -19,16 +19,11 @@ export default function PrivateRoute(props) {
 
   const loggedIn = AdminAuth(user);
   return initialized ? (
-    <Route
-      {...props.rest}
-      render={({ location }) => {
-        return loggedIn ? (
-          props.children
-        ) : (
-          <Redirect to={{ pathname: "/login", state: { from: location } }} />
-        );
-      }}
-    />
+    loggedIn ? (
+      <Outlet />
+    ) : (
+      <Navigate to={"/login"} />
+    )
   ) : (
     <Loading />
   );

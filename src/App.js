@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import React, { Fragment, useEffect, useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.scss";
 import config from "./_config";
 import Navigation from "./components/Navigation";
@@ -16,6 +16,8 @@ import Login from "./components/auth/Login";
 import "react-datetime/css/react-datetime.css";
 import PrivateRoute from "./components/auth/PrivateRoute";
 import TestPage from "./testing/TestPage";
+import QRCodeManager from "./components/QRCode/QRCodeManager";
+import DisplayImg from "./components/QRCode/DisplayImg";
 
 function App() {
   const [initialized, setInitialized] = useState(false);
@@ -91,9 +93,7 @@ function App() {
     config.env === "local" ||
     config.env === "local-dev" ||
     config.env === "dev" ? (
-      <Route path="/test">
-        <TestPage />
-      </Route>
+      <Route path="/test" element={<TestPage />} />
     ) : null;
 
   let { meetingLink, signInLink, newsletterLink, developLink } =
@@ -101,7 +101,7 @@ function App() {
 
   return (
     <div className="App" id="AppRoot">
-      <Router>
+      <BrowserRouter>
         <JumpToTop />
         <div className="full-site-view flex-full">
           <Navigation
@@ -111,48 +111,65 @@ function App() {
           />
           <Header />
           <div className="main-content">
-            <Switch>
-              <Route path="/meet">
-                <Redirect to={meetingLink} />
-              </Route>
-              <Route path="/newsletter">
-                <Redirect to={newsletterLink} />
-              </Route>
-              <Route path="/develop">
-                <Redirect to={developLink} />
-              </Route>
-              <Route path="/opportunities">
-                <Opportunities
-                  // editable={user != null}
-                  opportunities={opportunitiesContent}
+            <Routes>
+              <Route path="meet" element={<Redirect to={meetingLink} />} />
+              <Route
+                path="newsletter"
+                element={<Redirect to={newsletterLink} />}
+              />
+              <Route path="develop" element={<Redirect to={developLink} />} />
+              <Route
+                path="opportunities"
+                element={<Opportunities opportunities={opportunitiesContent} />}
+              />
+              <Route
+                path="admin"
+                element={<PrivateRoute user={user} init={initialized} />}
+              >
+                <Route
+                  index
+                  element={
+                    <AdminPage
+                      user={user}
+                      signoutUser={signoutUser}
+                      siteContent={siteContent}
+                      opportunities={opportunitiesContent}
+                    />
+                  }
                 />
+                {["qr", "qr-code", "generate-qr"].map((path, i) => (
+                  <Fragment>
+                    <Route path={path} element={<QRCodeManager />} key={i} />
+                    <Route
+                      path={`${path}/:id`}
+                      element={<DisplayImg />}
+                    />
+                  </Fragment>
+                ))}
               </Route>
-              <PrivateRoute path="/admin" user={user} init={initialized}>
-                <AdminPage
-                  user={user}
-                  signoutUser={signoutUser}
-                  siteContent={siteContent}
-                  opportunities={opportunitiesContent}
+              <Route path="login" element={<Login loginUser={loginUser} />} />
+              {["sign-in", "signin", "check-in", "checkin"].map((path, i) => (
+                <Route
+                  path={path}
+                  element={<Redirect to={signInLink} />}
+                  key={i}
                 />
-              </PrivateRoute>
-              <Route path="/login">
-                <Login loginUser={loginUser} />
-              </Route>
-              <Route path={["/sign-in", "/signin", "/check-in", "checkin"]}>
-                <Redirect to={signInLink} />
-              </Route>
+              ))}
               {testRoute}
-              <Route path="/">
-                <Homepage
-                  memberOfWeek={siteContent.memberOfTheWeek}
-                  officers={siteContent.officers}
-                />
-              </Route>
-            </Switch>
+              <Route
+                path="/"
+                element={
+                  <Homepage
+                    memberOfWeek={siteContent.memberOfTheWeek}
+                    officers={siteContent.officers}
+                  />
+                }
+              />
+            </Routes>
           </div>
           <Footer />
         </div>
-      </Router>
+      </BrowserRouter>
     </div>
   );
 }

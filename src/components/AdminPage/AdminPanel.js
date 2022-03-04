@@ -329,7 +329,6 @@ function AdminPanel(props) {
 
   return (
     <div className="admin-panel">
-      <QRCodeManager />
       {meetingLinkEdit}
       {signInLinkEdit}
       {/* TODO: Add ability to drag and drop ordering to enforce indices. */}

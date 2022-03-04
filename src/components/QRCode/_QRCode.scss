@@ -1,27 +1,36 @@
+$qrcode-size: 1500px;
 $qrcode-preview-size: 300px;
 
 .qrcode-manager {
-  .qrcode-display-container {
-    justify-content: center;
-    align-items: flex-start;
+  justify-content: center;
+  align-items: flex-start;
 
-    #download-qrcode-button-mobile {
-      display: none;
+  #download-qrcode-button-mobile {
+    display: none;
+  }
+
+  .qrcode-wrapper {
+    width: $qrcode-size;
+    text-align: left;
+
+    #hacs-qrcode {
+      height: $qrcode-size !important;
+      width: $qrcode-size !important;
     }
 
-    .qrcode-wrapper {
-      width: $qrcode-preview-size;
-      text-align: left;
+    &.invisible {
+      height: 0;
+      overflow: hidden;
+    }
+  }
 
-      #full-res-qrcode-wrapper {
-        height: 0;
-        overflow: hidden;
-      }
+  .qrcode-wrapper-preview {
+    width: $qrcode-preview-size;
+    text-align: left;
 
-      #low-res-qrcode-preview {
-        height: $qrcode-preview-size !important;
-        width: $qrcode-preview-size !important;
-      }
+    #hacs-qrcode-preview {
+      height: $qrcode-preview-size !important;
+      width: $qrcode-preview-size !important;
     }
   }
 }
@@ -29,14 +38,12 @@ $qrcode-preview-size: 300px;
 // Smartphone/Low-Res Tablets
 @media only screen and (max-width: 768px) {
   .qrcode-manager {
-    .qrcode-display-container {
-      #download-qrcode-button {
-        display: none;
-      }
-      
-      #download-qrcode-button-mobile {
-        display: block;
-      }
+    #download-qrcode-button {
+      display: none;
+    }
+
+    #download-qrcode-button-mobile {
+      display: block;
     }
   }
 }
