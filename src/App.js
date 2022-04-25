@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import "./App.scss";
 import config from "./_config";
 import Navigation from "./components/Navigation";
@@ -140,10 +140,7 @@ function App() {
                 {["qr", "qr-code", "generate-qr"].map((path, i) => (
                   <Fragment>
                     <Route path={path} element={<QRCodeManager />} key={i} />
-                    <Route
-                      path={`${path}/:id`}
-                      element={<DisplayImg />}
-                    />
+                    <Route path={`${path}/:id`} element={<DisplayImg />} />
                   </Fragment>
                 ))}
               </Route>
@@ -165,6 +162,7 @@ function App() {
                   />
                 }
               />
+              <Route path="*" element={<Navigate to="/" />} />
             </Routes>
           </div>
           <Footer />
