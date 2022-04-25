@@ -4,7 +4,9 @@
   border: 1px solid $hacs-blue;
   width: 100%;
   height: auto;
-  text-align: initial;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px;
 
   .navigation {
     justify-content: flex-start;

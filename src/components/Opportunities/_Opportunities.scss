@@ -46,22 +46,27 @@
       [class$="-image"] {
         width: 100%;
         min-height: 300px;
+        max-height: 60%;
         overflow: hidden;
       }
 
       .details {
-        padding: 0 25px;
-        justify-content: space-between;
+        height: 40%;
+        gap: 5px;
+        padding: 5px 25px;
+        justify-content: flex-end;
       }
 
       .title {
+        margin: 0;
         text-align: center;
       }
 
       .time {
+        text-align: center;
         font-weight: bold;
         color: $hacs-blue;
-        margin-bottom: 5px;
+        margin: 5px 0;
       }
     }
 

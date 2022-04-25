@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Redirect, useLocation } from "react-router";
+import { Navigate, useLocation } from "react-router-dom";
 
 function Login(props) {
   const userField = useRef(null);
@@ -23,7 +23,7 @@ function Login(props) {
 
   // Redirect if authenticated or prompt for login
   return redirectToReferrer ? (
-    <Redirect to={locState?.from || "/"} />
+    <Navigate to={locState?.from || "/"} />
   ) : (
     <div className="login-wrapper form-wrapper">
       <div className="login">

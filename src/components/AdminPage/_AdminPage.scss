@@ -1,22 +1,20 @@
-@import "../../form";
-
 .admin-panel {
   width: $display-max-width;
   padding: $full-screen-safe-zone;
   font-family: $title-font;
 
   .admin-edit {
-    padding: 5px 50px;
+    padding-left: 50px;
     border-left: 2px solid #495057;
   }
 
   .opportunities-edit {
     overflow-x: auto;
+    align-items: flex-start;
   }
 
-  .flex-row {
+  .opportunities-edit {
     justify-content: flex-start;
-    align-items: flex-start;
     gap: 5%;
   }
 
@@ -28,9 +26,18 @@
       margin-block-end: 1rem;
     }
   }
+
+  .button-container {
+    justify-content: flex-start;
+  }
 }
 
 // Smartphone/Low-Res Tablets
 @media only screen and (max-width: 768px) {
-  
+  .admin-panel {
+    .admin-group {
+      width: 80vw;
+      max-width: none;
+    }
+  }
 }

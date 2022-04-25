@@ -39,7 +39,6 @@
 
   .flex-row {
     justify-content: flex-start;
-    align-items: flex-start;
   }
 
   small {
@@ -88,5 +87,14 @@
     border-radius: 0.25rem;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
       border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  }
+}
+
+// Smartphone/Low-Res Tablets
+@media only screen and (max-width: 768px) {
+  .form-wrapper {    
+    .form-group {
+      max-width: none;
+    }
   }
 }

@@ -1,6 +1,5 @@
 @import "variables";
 @import "elements";
-@import "form";
 @import "editable";
 @import "~react-image-gallery/styles/scss/image-gallery.scss";
 
@@ -14,14 +13,18 @@
 // Auth Styling
 @import "src/components/auth/Login";
 
+// Form Styling
+@import "src/components/forms/form";
+
 // Homepage Styling
 @import "src/components/Footer/Footer";
 @import "src/components/Header/Header";
 @import "src/components/Homepage/Homepage";
 
 // Media Management Styling
-@import "src/components/MediaManagement/MediaManagement";
 @import "src/components/MediaManagement/FileSystem/FileSystem";
+@import "src/components/MediaManagement/FileEdit";
+@import "src/components/MediaManagement/MediaManagement";
 
 // Navigation Styling
 @import "src/components/Navigation/Navigation";
@@ -38,6 +41,9 @@
 @import "src/components/partials/OfficerCard";
 @import "src/components/partials/Socials";
 @import "src/components/partials/Tweet";
+
+// QR Code Styling
+@import "src/components/QRCode/QRCode";
 
 // Redirect Styling
 @import "src/components/Redirect/Redirect";

@@ -1,0 +1,49 @@
+$qrcode-size: 1500px;
+$qrcode-preview-size: 300px;
+
+.qrcode-manager {
+  justify-content: center;
+  align-items: flex-start;
+
+  #download-qrcode-button-mobile {
+    display: none;
+  }
+
+  .qrcode-wrapper {
+    width: $qrcode-size;
+    text-align: left;
+
+    #hacs-qrcode {
+      height: $qrcode-size !important;
+      width: $qrcode-size !important;
+    }
+
+    &.invisible {
+      height: 0;
+      overflow: hidden;
+    }
+  }
+
+  .qrcode-wrapper-preview {
+    width: $qrcode-preview-size;
+    text-align: left;
+
+    #hacs-qrcode-preview {
+      height: $qrcode-preview-size !important;
+      width: $qrcode-preview-size !important;
+    }
+  }
+}
+
+// Smartphone/Low-Res Tablets
+@media only screen and (max-width: 768px) {
+  .qrcode-manager {
+    #download-qrcode-button {
+      display: none;
+    }
+
+    #download-qrcode-button-mobile {
+      display: block;
+    }
+  }
+}

@@ -55,7 +55,7 @@ function MemberOfTheWeekEdit(props) {
         placeholder="ex.: linkedin.com/in/firstnamelastname"
         onChange={handleChange}
       />
-      <div>Image</div>
+      <label>Image</label>
       <FileEdit
         key={"file_edit" + props.id}
         file={data.image}

@@ -122,7 +122,7 @@ export function renderModalContent(content) {
           {renderStartAndEndDateTime(content.startTime, content.endTime)}
         </span>
         <p className="description">{content.description}</p>
-        <div className="links flex-row">
+        <div className="links flex-row button-container">
           <LinkButton to={content.meetingLink} className="meeting link">
             Join Meeting
           </LinkButton>

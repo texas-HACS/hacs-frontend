@@ -10,6 +10,7 @@ import SignInLinkEdit from "./SignInLinkEdit";
 import useEffectNoInitialRender from "../../hooks/useEffectNoInitialRender";
 import EventAPI from "../../api/event";
 import JobAPI from "../../api/job";
+import QRCodeManager from "../QRCode/QRCodeManager";
 import ScholarshipAPI from "../../api/scholarship";
 
 function AdminPanel(props) {
@@ -338,14 +339,11 @@ function AdminPanel(props) {
         {jobsEdit}
         {scholarshipsEdit}
       </div>
-      <button
-        className="btn btn-primary" /* onClick={ TODO: Implement db update } */
-      >
-        Update
-      </button>
-      <button className="btn btn-primary" onClick={submitSignout}>
-        Sign Out
-      </button>
+      <div className="button-container flex-row">
+        <button className="btn btn-primary" onClick={submitSignout}>
+          Sign Out
+        </button>
+      </div>
     </div>
   );
 }

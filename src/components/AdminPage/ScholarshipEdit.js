@@ -52,7 +52,7 @@ function ScholarshipEdit(props) {
         required
         onChange={handleChange}
       />
-      <div>Image</div>
+      <label>Image</label>
       <ImageEdit
         key={"image_edit" + props.id}
         {...data?.image}

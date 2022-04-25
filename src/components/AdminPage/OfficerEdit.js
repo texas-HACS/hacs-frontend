@@ -87,7 +87,7 @@ function OfficerEdit(props) {
         placeholder="ex.: https://linkedin.com/in/firstnamelastname"
         onChange={handleChange}
       />
-      <div>Image</div>
+      <label>Image</label>
       <FileEdit
         key={"file_edit" + props.id}
         file={data.image}
@@ -105,12 +105,18 @@ function OfficerEdit(props) {
         readOnly
         onChange={handleChange}
       />
-      <button className="btn btn-primary" onClick={handleSave}>
-        Save
-      </button>
-      <button className="btn btn-primary" onClick={handleDelete} type="button">
-        Delete
-      </button>
+      <div className="button-container flex-row">
+        <button className="btn btn-primary" onClick={handleSave}>
+          Save
+        </button>
+        <button
+          className="btn btn-primary"
+          onClick={handleDelete}
+          type="button"
+        >
+          Delete
+        </button>
+      </div>
     </div>
   );
 

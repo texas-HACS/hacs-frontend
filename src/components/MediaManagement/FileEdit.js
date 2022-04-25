@@ -27,10 +27,10 @@ function FileEdit(props) {
   };
 
   return editing ? (
-    <Fragment>
-      <CloseButton icon onClick={() => setEditing(false)} />
+    <div className="file-edit">
       <FileSystem onSelectFile={handleSelectFile} />
-    </Fragment>
+      <button onClick={() => setEditing(false)}>Cancel</button>
+    </div>
   ) : file ? (
     <div id="existing-file" className="flex-row">
       <p>{file.name}</p>
