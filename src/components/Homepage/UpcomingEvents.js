@@ -12,7 +12,7 @@ function UpcomingEvents(props) {
       <Fade>
         <div className="calendar-wrapper flex">
           <iframe
-            src="https://enigmatic-shore-29691.herokuapp.com/calendar"
+            src="https://hacs-server.herokuapp.com/calendar"
             style={{
               border: 0,
               height: "600px",
@@ -24,7 +24,7 @@ function UpcomingEvents(props) {
             title="HACS Calendar"
           ></iframe>
           <iframe
-            src="https://enigmatic-shore-29691.herokuapp.com/calendar?agenda=true"
+            src="https://hacs-server.herokuapp.com/calendar?agenda=true"
             style={{
               border: 0,
               height: "400px",
