@@ -45,6 +45,7 @@ function Socials(props) {
       >
         <i className="fab fa-discord"></i>
       </a>
+      
     </div>
   );
 }
