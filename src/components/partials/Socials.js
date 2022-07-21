@@ -38,6 +38,14 @@ function Socials(props) {
       >
         <i className="fab fa-github" />
       </a>
+      <a
+        href="https://discord.gg/ynMdcDBf7y"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <i className="fab fa-discord"></i>
+      </a>
+      
     </div>
   );
 }
