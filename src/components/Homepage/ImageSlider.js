@@ -3,12 +3,15 @@ import ImageGallery from "react-image-gallery";
 import ABCSQuora from "../../media/Game Night w ABCS & Quora.jpg";
 import GeneralMeeting from "../../media/General Meeting.jpg";
 import GroupPhoto from "../../media/Group Photo.jpg";
-import GoogleMeeting from "../../media/Meeting w Google.jpg";
 import NetworkingDinner from "../../media/Networking Dinner.jpg";
-import StudyNight from "../../media/Study Night.jpg";
-import TopGolfFood from "../../media/Top Golf Food Line.jpg";
 import TopGolfPlaying from "../../media/Top Golf Playing.jpg";
 import TopGolfTalking from "../../media/Top Golf Talking w Google.jpg";
+import HACSbanquet1 from "../../media/HACSBanquet.jpg"
+import HACSbanquet2 from "../../media/Banquet2.JPG"
+import DaveNBuster from "../../media/DaveNBusters.jpg"
+import kayak from "../../media/Kayak.jpg"
+import kayak2 from "../../media/Kayak2.jpg"
+import parkNpizza from "../../media/ParkNPizza.jpg"
 import Fade from "react-reveal/Fade";
 
 const HACSFallKickoff1 =
@@ -18,7 +21,35 @@ const HACSFallKickoff2 =
 
 const images = [
   {
+    original: HACSbanquet1,
+    originalAlt: "2022 CS Diversity Banquet",
+  },
+  {
+    original: HACSbanquet2,
+    originalAlt: "2022 CS Diversity Banquet",
+  },
+  {
+    original: parkNpizza,
+    originalAlt: "HACS Austin's Park and Pizza",
+  },
+  {
+    original: kayak,
+    originalAlt: "HACS Kayaking Social",
+  },
+  {
+    original: kayak2,
+    originalAlt: "HACS Kayaking Social",
+  },
+  {
+    original: DaveNBuster,
+    originalAlt: "HACS Dave and Busters Social",
+  },
+  {
     original: HACSFallKickoff1,
+    originalAlt: "HACS Fall 2021 Kickoff",
+  },
+  {
+    original: HACSFallKickoff2,
     originalAlt: "HACS Fall 2021 Kickoff",
   },
   {
@@ -33,25 +64,10 @@ const images = [
     original: GroupPhoto,
     originalAlt: "Group Photo of HACS Members",
   },
-  {
-    original: GoogleMeeting,
-    originalAlt: "General Meeting with Google Employees",
-  },
-  {
-    original: HACSFallKickoff2,
-    originalAlt: "HACS Fall 2021 Kickoff",
-  },
+  
   {
     original: NetworkingDinner,
     originalAlt: "Diversity Networking Dinner with ABCS",
-  },
-  {
-    original: StudyNight,
-    originalAlt: "Study Night with HACS Members",
-  },
-  {
-    original: TopGolfFood,
-    originalAlt: "Waiting in line for food at TopGolf social",
   },
   {
     original: TopGolfPlaying,
