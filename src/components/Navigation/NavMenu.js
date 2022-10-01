@@ -48,12 +48,20 @@ export default function NavMenu(props) {
     </Fragment>
   );
 
+  const scrollToTop = () =>{
+    window.scrollTo({
+      top: 0,
+      behavior: 'auto'
+    })
+  };
+
   return (
     <div className="navigation-container" ref={props.element}>
       <section
         className={`flex ${
           props.sticky ? "navigation-sticky navigation" : "navigation"
         }`}
+        onClick={scrollToTop}
       >
         <div className="navigation-links-container">{links}</div>{" "}
       </section>
