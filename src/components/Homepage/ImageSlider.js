@@ -12,6 +12,8 @@ import DaveNBuster from "../../media/DaveNBusters.jpg"
 import kayak from "../../media/Kayak.jpg"
 import kayak2 from "../../media/Kayak2.jpg"
 import parkNpizza from "../../media/ParkNPizza.jpg"
+import kayak3 from "../../media/HACSKayak.jpg"
+import park from "../../media/HACSPark.jpg"
 import Fade from "react-reveal/Fade";
 
 const HACSFallKickoff1 =
@@ -76,6 +78,14 @@ const images = [
   {
     original: TopGolfTalking,
     originalAlt: "Talking to Google recruiters at TopGolf social",
+  },
+  {
+    original: kayak3,
+    originalAlt: "HACS 2023 Kayaking Social",
+  },
+  {
+    original: park,
+    originalAlt: "HACS 2023 Park Social",
   },
 ];
 
