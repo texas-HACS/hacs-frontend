@@ -5,6 +5,7 @@ import Folder from "./Folder";
 import File from "./File";
 import FileUpload from "../FileUpload";
 
+// used to create a substring of the url path and navigate up in a directory
 String.prototype.nthLastIndexOf = function (searchString, n) {
   var url = this;
   if (url === null) {

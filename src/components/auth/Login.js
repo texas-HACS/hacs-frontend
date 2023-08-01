@@ -1,13 +1,13 @@
 import React, { useRef, useState } from "react";
-import { Navigate, useLocation } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 function Login(props) {
   const userField = useRef(null);
   const passField = useRef(null);
 
+  // used to rerender the page and redirect to admin if logged in successfully
   const [redirectToReferrer, setRedirectToReferrer] = useState(false);
 
-  const locState = useLocation().state;
   const submitLogin = (e) => {
     props
       .loginUser({
@@ -23,7 +23,7 @@ function Login(props) {
 
   // Redirect if authenticated or prompt for login
   return redirectToReferrer ? (
-    <Navigate to={locState?.from || "/"} />
+    <Navigate to={"/admin"} />
   ) : (
     <div className="login-wrapper form-wrapper">
       <div className="login">

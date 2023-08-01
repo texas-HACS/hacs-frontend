@@ -3,13 +3,15 @@ import Datetime from "react-datetime";
 import EventAPI from "../../api/event";
 import ImageEdit from "../MediaManagement/ImageEdit";
 
+// for google calendar functionality
 const DEFAULT_GCAL_STATES = { confirmed: true, potential: false };
 
 function EventEdit(props) {
-  const [editing, setEditing] = useState(false);
+  const [editing, setEditing] = useState(false); // used to show or hide edit options
   const [data, setData] = useState(props.data);
   const { addNew, user } = props;
 
+  // saves and updates the data on the backend then the frontend
   const handleSave = () => {
     const gCal = data?.gCal ?? DEFAULT_GCAL_STATES;
     const savedData = { ...data, gCal };
@@ -23,6 +25,8 @@ function EventEdit(props) {
     setEditing(false);
   };
 
+  // changes in data are done by first being passed into the handleChange/handleDateChange/handleGCal...
+  //function and then into the changeData function. At this point the changes are not saved yet.
   const changeData = (key, value) => {
     let newData = { ...data };
     newData[key] = value;
@@ -63,6 +67,7 @@ function EventEdit(props) {
     setEditing(false);
   };
 
+  // setting up the structure of the edit section
   const editSection = (
     <div className="admin-edit form-wrapper">
       <label>Event Title</label>
@@ -186,6 +191,7 @@ function EventEdit(props) {
     </div>
   );
 
+  // setting up the element for the event that is always viewable
   const saveSection = (
     <div onClick={() => setEditing(!!(editing ^ true))}>
       <p className="editable">
@@ -195,6 +201,8 @@ function EventEdit(props) {
     </div>
   );
 
+  // This will return the structure of an editable event on the admin page
+  // the edit section will be hidden if !!editing is false and will be shown when it's true.
   return (
     <div className="editable-group">
       {saveSection}

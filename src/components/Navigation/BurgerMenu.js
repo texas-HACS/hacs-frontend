@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 export default function BurgerMenu(props) {
   const [menuOpen, setMenuOpen] = useState(false);
 
+  // this useEffect might not be needed
   useEffect(() => {
     if (menuOpen) {
       document.body.style.overflow = "hidden";
@@ -17,6 +18,7 @@ export default function BurgerMenu(props) {
     setMenuOpen(isOpen);
   };
 
+  // these lines might not be needed as well
   let meetingLink, newsletterLink, developLink;
   if (props.redirects) {
     ({ meetingLink, newsletterLink, developLink } = props.redirects);

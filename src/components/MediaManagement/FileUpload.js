@@ -33,7 +33,8 @@ function FileUpload(props) {
       props.onUploadFile({ url, name: file.name, path });
     }
   };
-
+  
+  // the input element is hidden on the frontend but is still functional because of the useRef hook
   return (
     <div className="file-upload flex-row">
       <input
