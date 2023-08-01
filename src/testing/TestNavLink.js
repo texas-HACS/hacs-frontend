@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import config from "../_config";
 
-function TestNavLink(props) {
+function TestNavLink() {
   return config.env == "local" ||
     config.env === "local-dev" ||
     config.env == "dev" ? (

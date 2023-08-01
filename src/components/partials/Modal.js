@@ -9,6 +9,7 @@ function Modal(props) {
     setIsOpen(props.isOpen);
   }, [props.isOpen]);
 
+  // might not be needed
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";

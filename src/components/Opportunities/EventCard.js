@@ -1,3 +1,4 @@
+// can definitely be cleaned up and updated
 import React, { Fragment } from "react";
 import CroppedImage from "../partials/Images/CroppedImage";
 import { renderStartAndEndDateTime } from "../utils/utils";
@@ -38,6 +39,8 @@ function EventCard(props) {
       </div>
     </Fragment>
   );
+  // The onlick makes it so that the modal will open if you click anywhere on the card and not
+  // just the see more button.
   return (
     <div
       className="event-container opportunity flex card"

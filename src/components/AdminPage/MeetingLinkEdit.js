@@ -6,7 +6,7 @@ function MeetingLinkEdit(props) {
   const handleSave = (event) => {
     props.handleUpdate(data);
     setEditing(false);
-    event.preventDefault();
+    event.preventDefault(); // prevents the form from actually submitting
   };
 
   const handleChange = (event) => {
