@@ -20,11 +20,13 @@ function objectToArray(obj) {
 }
 
 // Return JSX for a provided array of links
+// this might need editing as well
 export function renderLinks(links) {
   return <div className="other-links" />;
 }
 
 // Return JSX of a timeline
+// might need to add an open date and close date to job and scholarship edit sections on admin pg
 export function renderTimeline(t) {
   return (
     <div className="timeline-container">
@@ -41,6 +43,7 @@ export function renderTimeline(t) {
 }
 
 // Return JSX for an array of job-listings
+// the else portions of these sections are never shown due to the if/else nature in the index functions
 export function renderJobListings(listings, editable, openModal) {
   let uids = Object.keys(listings);
   return !!uids.length ? (

@@ -35,7 +35,7 @@ const envVarsSchema = Joi.object({
   .unknown()
   .required();
 
-// Validate env vars against schema
+// Validate env vars against schema and return the object of env variables which is assigned to envVars
 const { error, value: envVars } = envVarsSchema.validate(process.env);
 if (error) {
   throw new Error(`Config validation error: ${error.message}`);

@@ -22,6 +22,7 @@ function AdminPanel(props) {
   const [jobs, setJobs] = useState(null);
   const [scholarships, setScholarships] = useState(null);
 
+  // Redundant? We already get this info from the props passed in. Might be to allow updates to show
   useEffect(() => {
     fetch(config.url + "/siteContent", {
       Accept: "application/json",
@@ -36,6 +37,7 @@ function AdminPanel(props) {
       });
   }, []);
 
+  // probably still not used
   useEffect(() => {
     fetch(config.url + "/opportunities", {
       Accept: "application/json",
@@ -53,6 +55,7 @@ function AdminPanel(props) {
       });
   }, []);
 
+  // these assign the data from the api to the corresponding variables
   useEffect(() => {
     events ?? EventAPI.list().then((eData) => setEvents(eData));
   }, []);
@@ -66,6 +69,7 @@ function AdminPanel(props) {
       ScholarshipAPI.list().then((sData) => setScholarships(sData));
   }, []);
 
+  // These useEffects are used to update the data stored in firebase when changes are made
   useEffectNoInitialRender(() => {
     if (uData == null) {
       return;
@@ -91,6 +95,7 @@ function AdminPanel(props) {
       });
   }, [uData]);
 
+  // probably not used since replaced by api files
   useEffectNoInitialRender(() => {
     if (uOpps == null) {
       return;
@@ -116,6 +121,7 @@ function AdminPanel(props) {
       });
   }, [uOpps]);
 
+  // these functions will update the frontend when changes are made and saved
   const updateOfficer = (officerData) => {
     let updating = { ...data };
     updating.officers[officerData.uid] = officerData;
@@ -153,6 +159,7 @@ function AdminPanel(props) {
     setUData(updating);
   };
 
+  // not used
   const updateOpp = (oppType, oppData) => {
     let updating = { ...opps };
     if (!updating[oppType]) {
@@ -163,6 +170,7 @@ function AdminPanel(props) {
     setUOpps(updating);
   };
 
+  // not used
   const deleteOpp = (oppType, uid) => {
     let updating = { ...opps };
     if (updating[oppType]?.[uid] != null) {
@@ -176,6 +184,7 @@ function AdminPanel(props) {
     props.signoutUser();
   };
 
+  // setting up the various elements that allow editing on the admin page
   const meetingLinkEdit =
     data.redirects.meetingLink !== undefined ? (
       <MeetingLinkEdit

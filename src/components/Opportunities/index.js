@@ -38,6 +38,7 @@ function Opportunities(props) {
     "Something is wrong, no data in the modal..."
   );
 
+  // check what this does
   useEffect(() => {}, [modalOpen, modalContent]);
 
   const openModal = (content) => {

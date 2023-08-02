@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import TestNavLink from "../../testing/TestNavLink";
 
 export default function NavMenu(props) {
+  // might be able to remove the menuOpen stuff
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -25,6 +26,7 @@ export default function NavMenu(props) {
       <Link to="/opportunities">
         <div className="nav-link">Opportunities</div>
       </Link>
+      {/* target opens a new tab so when making their pages remove them */}
       <Link to="/meet" target={meetingLink?.target}>
         <div className="nav-link">Meet</div>
       </Link>
@@ -45,6 +47,10 @@ export default function NavMenu(props) {
           <i className="fas fa-cog" />
         </div>
       </Link>
+      {/* The TestNavLink below should only be used in cases where you want to test how things will
+      render on the website. Make sure to comment it out before pushing to github. To test things
+      just add your code to TestPage.js */}
+      {/* <TestNavLink /> */}
     </Fragment>
   );
 

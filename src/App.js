@@ -20,11 +20,13 @@ import QRCodeManager from "./components/QRCode/QRCodeManager";
 import DisplayImg from "./components/QRCode/DisplayImg";
 
 function App() {
+  // setting up the variables that will hold the data and user info
   const [initialized, setInitialized] = useState(false);
   const [user, setUser] = useState(null);
   const [siteContent, updateSiteContent] = useState(null);
   const [opportunitiesContent, updateOpportunitiesContent] = useState(null);
 
+  // This will get info on whether the user is currently signed in or not
   useEffect(() => {
     const unsubscribe = firebase.auth.getCurrentUser((user) => {
       setUser(user);
@@ -35,6 +37,7 @@ function App() {
     return unsubscribe;
   }, []);
 
+  // functions to login and sign out by using firebase authentication
   const loginUser = (loginData) => {
     return firebase.auth
       .signIn(loginData.username, loginData.password)
@@ -53,6 +56,7 @@ function App() {
       });
   };
 
+  // getting the data about the site's content
   useEffect(() => {
     fetch(config.url + "/siteContent", {
       Accept: "application/json",
@@ -67,6 +71,7 @@ function App() {
       });
   }, []);
 
+  // Probably not used anymore since the opp data is obtained from the three api's instead
   useEffect(() => {
     fetch(config.url + "/opportunities", {
       Accept: "application/json",
@@ -99,6 +104,7 @@ function App() {
   let { meetingLink, signInLink, newsletterLink, developLink } =
     siteContent.redirects;
 
+  // returns the structure of the website as well as the routes for the various links
   return (
     <div className="App" id="AppRoot">
       <BrowserRouter>
@@ -137,6 +143,7 @@ function App() {
                     />
                   }
                 />
+                {/* Not sure why there are three different links made for the same page */}
                 {["qr", "qr-code", "generate-qr"].map((path, i) => (
                   <Fragment>
                     <Route path={path} element={<QRCodeManager />} key={i} />
