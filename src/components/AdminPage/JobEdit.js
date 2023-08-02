@@ -38,6 +38,14 @@ function JobEdit(props) {
     setEditing(false);
   };
 
+  const confirmDelete = () => {
+    if (window.confirm("Are you sure you want to delete this job opportunity?")) {
+      handleDelete();
+    } else {
+      return;
+    };
+  }
+
   const editSection = (
     <div className="admin-edit form-wrapper">
       <label>Job Title</label>
@@ -103,7 +111,7 @@ function JobEdit(props) {
       <button className="btn btn-primary" onClick={handleSave}>
         {addNew ? "Create" : "Save"}
       </button>
-      <button className="btn btn-primary" onClick={handleDelete} type="button">
+      <button className="btn btn-primary" onClick={confirmDelete} type="button">
         {addNew ? "Cancel" : "Delete"}
       </button>
     </div>

@@ -34,6 +34,14 @@ function OfficerEdit(props) {
     setEditing(false);
   };
 
+  const confirmDelete = () => {
+    if (window.confirm("Are you sure you want to delete this officer?")) {
+      handleDelete();
+    } else {
+      return;
+    };
+  }
+
   const editSection = (
     <div className="admin-edit form-wrapper">
       <label>{"First & Last Name"}</label>
@@ -111,7 +119,7 @@ function OfficerEdit(props) {
         </button>
         <button
           className="btn btn-primary"
-          onClick={handleDelete}
+          onClick={confirmDelete}
           type="button"
         >
           Delete
