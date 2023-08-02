@@ -40,6 +40,14 @@ function ScholarshipEdit(props) {
     setEditing(false);
   };
 
+  const confirmDelete = () => {
+    if (window.confirm("Are you sure you want to delete this scholarship opportunity?")) {
+      handleDelete();
+    } else {
+      return;
+    };
+  }
+
   const editSection = (
     <div className="admin-edit form-wrapper">
       <label>Scholarship Title</label>
@@ -99,7 +107,7 @@ function ScholarshipEdit(props) {
       </button>
       <button
         className="btn btn-primary"
-        onClick={() => handleDelete()}
+        onClick={confirmDelete}
         type="button"
       >
         {addNew ? "Cancel" : "Delete"}
