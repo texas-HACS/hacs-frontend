@@ -23,27 +23,29 @@ Most if not all tags have attributes which act as parameters and provide more de
 Finally, Some tags are used to group sections of content together, some apply certain styles without using css, and others can add components/widgets to a page.
 
 A page containing the various attributes can be found [here](https://www.w3schools.com/tags/ref_attributes.asp)
+
 A page containing a list of HTML tags can be found [here](https://www.w3schools.com/tags/ref_byfunc.asp)
+
 A video reviewing the basics of HTML can be found [here](https://youtu.be/qz0aGYrrlhU). It also goes over how the Internet works and some basic css.
 
 # CSS
 Cascading Stylesheet, or CSS is one of the styling languages used to style a web page. It can also be quite complex at first. Without CSS and styling all web pages will essentially look like word documents.
 
 CSS is basically a set of rules that dictates how sections of content are styled. These CSS rules include a selector, declaration block, and a declaration.
-    - Selectors specifies which HTML elements will be styled with the rule
-    - The declaration block will have one or more declarations separated by semicolons
-    - Declarations are a CSS property followed by a colon and an appropriate value
+- Selectors specifies which HTML elements will be styled with the rule
+- The declaration block will have one or more declarations separated by semicolons
+- Declarations are a CSS property followed by a colon and an appropriate value
 An example of this is shown below:
 
 ![CSS example](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics/css-declaration-small.png)
 
 There are also three different ways to apply CSS:
-    - Inline style which uses the style attribute to style a single specific element
+- Inline style which uses the style attribute to style a single specific element
 
     ```
     <span style="font-size: 16pt">Inline Style Example</span>
     ```
-    - Embedded stylesheet which uses the <style> tag to define CSS rules
+- Embedded stylesheet which uses the `<style>` tag to define CSS rules
 
     ```
     <style>
@@ -52,13 +54,11 @@ There are also three different ways to apply CSS:
         }
     </style>
     ```
-    - External stylesheet which involves placing all of your CSS in a separate .css file and is imported using the `<link>` tag.
-    The link tag should look something like this:
+- External stylesheet which involves placing all of your CSS in a separate .css file and is imported using the `<link>` tag. The .css file will have the same format as the image shown above while the link tag should look something like this:
 
     ```
     <link href="styles.css" rel="stylesheet">
     ```
-    The .css file will have the same format as the image shown above.
 
 There are also many options available for selectors including element selectors, ID name selectors,Class name selectors, descendant selectors, pseudo-class selectors, and multiple selectors.
 A link to a page explaining these selectors can be found [here](https://www.w3schools.com/css/css_selectors.asp)

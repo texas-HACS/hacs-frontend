@@ -17,9 +17,9 @@ There are 5 commonly used HTTP requests methods: GET, POST, PUT, PATCH, DELETE
 At the moment, the website's code only involves the use of GET, POST, PUT, and DELETE.
 
 # How to Make a Web Request in React?
-There are two main ways to make HTTP request:
-    -[fetch()](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch): The built-in Fetch API provided by Javascript
-    -Axios: An HTTP client library which requires installation
+There are two main ways to make HTTP request: 
+- [fetch()](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch): The built-in Fetch API provided by Javascript
+- Axios: An HTTP client library which requires installation
 
 So far, fetch() is the only method used in order to run the website.
 
