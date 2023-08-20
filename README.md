@@ -24,15 +24,15 @@ This project is only intended for students at The University of Texas at Austin!
 
 You will need:
 
-- node.js [(install)](https://nodejs.org/en/)
+- node.js [(install)](https://nodejs.org/en/), specifically version 16
   - or use `homebrew` (macOS only)
 - git [(install)](https://git-scm.com/downloads)
 - a text editor of your choice or IDE. [Brackets](https://brackets.io/), [VSCode](https://code.visualstudio.com/download), and [Webstorm](https://www.jetbrains.com/webstorm/download/) are all great.
 - a terminal to access the command line
   - see 
-[`Inro to the Command Line`](https://github.com/texas-HACS/hacs-frontend/blob/master/guides/intro_to_the_command_line.md) in our [guides](https://github.com/texas-HACS/hacs-frontend/tree/master/guides/)
+[`Intro to the Command Line`](https://github.com/texas-HACS/hacs-frontend/blob/master/guides/intro_to_the_command_line.md) in our [guides](https://github.com/texas-HACS/hacs-frontend/tree/master/guides/)
 
-If you aren't familiar with `git`, please be sure to check out [this tutorial](http://noodle.med.yale.edu/hdtag/notes/git_tut.pdf) before working with the site, and reach out to the current web development officer for more help.
+If you aren't familiar with `git`, please be sure to check out [this tutorial](http://noodle.med.yale.edu/hdtag/notes/git_tut.pdf) or [this video](https://youtu.be/DVRQoVRzMIY) before working with the site, and reach out to the current web development officer for more help.
 
 Bonus Tip: Follow the [`Great Environment Setup`](https://github.com/texas-HACS/hacs-frontend/blob/master/guides/great_environment_setup.md) guide for a good starter development environment.
 
@@ -65,13 +65,13 @@ cd hacs-frontend
 And install the npm dependencies:
 
 ```
-npm install
+npm install --legacy-peer-deps
 ```
 
 OR
 
 ```
-npm i
+npm i --legacy-peer-deps
 ```
 
 This installs all packages/libraries you currently needed for this project locally.
@@ -127,7 +127,7 @@ Refer to this readme and the guides found in [`hacs-frontend/guides`](https://gi
 
 ### Beginners
 
-Watch this [React Tutorial for Beginners](https://www.youtube.com/watch?v=QJZ-xgt4SJo). This aligns pretty well with our site, and goes through a fairly simple tutorial to get started. Try and relate the concepts discussed to what you see inside of our own codebase.
+Watch this [React Tutorial for Beginners](https://www.youtube.com/watch?v=QJZ-xgt4SJo) and these videos about react hooks: [useState](https://youtu.be/V9i3cGD-mts), [useEffect](https://youtu.be/-4XpG5_Lj_o), [useRef](https://youtu.be/42BkpGe8oxg). This aligns pretty well with our site, and goes through a fairly simple tutorial to get started. Try and relate the concepts discussed to what you see inside of our own codebase.
 
 ### Guides
 
@@ -156,7 +156,7 @@ Feel free to assign yourself to any issue that hasn't been claimed, or message t
 
 If there is an issue that you want to work on that someone else is working on, feel free to message them and see if they want any help!
 
-With any questions, feel free to reach out to Jeffrey Moulckers!
+With any questions, feel free to reach out to Alexander Valdez!
 
 # Conventions
 
