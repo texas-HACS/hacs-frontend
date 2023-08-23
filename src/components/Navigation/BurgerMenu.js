@@ -19,9 +19,9 @@ export default function BurgerMenu(props) {
   };
 
   // these lines might not be needed as well
-  let meetingLink, newsletterLink, developLink;
+  let newsletterLink, developLink;
   if (props.redirects) {
-    ({ meetingLink, newsletterLink, developLink } = props.redirects);
+    ({ newsletterLink, developLink } = props.redirects);
   }
 
   const links = (
@@ -37,8 +37,8 @@ export default function BurgerMenu(props) {
       <Link to="/opportunities" onClick={() => toggleMenu(false)}>
         <div className="nav-link">Opportunities</div>
       </Link>
-      <Link to="/meet" onClick={() => toggleMenu(false)}>
-        <div className="nav-link">Meet</div>
+      <Link to="/familias" onClick={() => toggleMenu(false)}>
+        <div className="nav-link">Familias</div>
       </Link>
       <Link to="/newsletter" onClick={() => toggleMenu(false)}>
         <div className="nav-link">Newsletter</div>

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import config from "../../_config";
 import OfficerEdit from "./OfficerEdit";
-import MeetingLinkEdit from "./MeetingLinkEdit";
 import MemberOfTheWeekEdit from "./MemberOfTheWeekEdit";
 import EventEdit from "./EventEdit";
 import JobEdit from "./JobEdit";
@@ -138,13 +137,6 @@ function AdminPanel(props) {
     setUData(updating);
   };
 
-  const updateMeetingLink = (linkData) => {
-    let updating = { ...data };
-    updating.redirects.meetingLink = linkData;
-    setData(updating);
-    setUData(updating);
-  };
-
   const updateSignInLink = (linkData) => {
     let updating = { ...data };
     updating.redirects.signInLink = linkData;
@@ -185,14 +177,6 @@ function AdminPanel(props) {
   };
 
   // setting up the various elements that allow editing on the admin page
-  const meetingLinkEdit =
-    data.redirects.meetingLink !== undefined ? (
-      <MeetingLinkEdit
-        data={data.redirects.meetingLink}
-        handleUpdate={updateMeetingLink}
-      />
-    ) : null;
-
   const signInLinkEdit =
     data.redirects.signInLink !== undefined ? (
       <SignInLinkEdit
@@ -338,7 +322,6 @@ function AdminPanel(props) {
 
   return (
     <div className="admin-panel">
-      {meetingLinkEdit}
       {signInLinkEdit}
       {/* TODO: Add ability to drag and drop ordering to enforce indices. */}
       {officersEdit}

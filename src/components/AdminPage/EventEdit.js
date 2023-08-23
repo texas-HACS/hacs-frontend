@@ -120,15 +120,6 @@ function EventEdit(props) {
         onConfirm={(img) => changeData("image", img)}
         onRemoveImage={() => changeData("image", null)}
       />
-      <label>Meeting Link</label>
-      <input
-        id="event-meeting-link-edit"
-        className="form-control-small"
-        name="meetingLink"
-        defaultValue={data?.meetingLink}
-        placeholder="ex.: https://utexas.zoom.us/j/..."
-        onChange={handleChange}
-      />
       <label>RSVP Link</label>
       <input
         id="event-rsvp-link-edit"
