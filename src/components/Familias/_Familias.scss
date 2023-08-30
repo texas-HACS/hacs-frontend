@@ -1,0 +1,28 @@
+@import "../../variables";
+
+.familias {
+  width: 95vw;
+  padding: $full-screen-safe-zone;
+
+  .description {
+    margin-right: 20vw;
+  }
+
+  h1 {
+    font-family: $title-font;
+    font-size: 36px;
+  }
+
+  h3 {
+    margin-bottom: 0.5em;
+  }
+
+  table {
+    margin-top: 2em;
+    margin-bottom: 2em;
+  }
+
+  .blank_row {
+    height: 20px;
+  }
+}
