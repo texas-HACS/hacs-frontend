@@ -10,7 +10,7 @@ function Leadership(props) {
         <div className="leadership-wrapper">
           {Object.keys(officers)
             .sort((a_uid, b_uid) => {
-              return officers[a_uid].order > officers[b_uid].order ? 1 : -1;
+              return officers[a_uid].order - officers[b_uid].order;
             })
             .map((uid) => {
               let officer = officers[uid];
