@@ -166,6 +166,7 @@ function App() {
                   <Homepage
                     memberOfWeek={siteContent.memberOfTheWeek}
                     officers={siteContent.officers}
+                    images={siteContent.slider}
                   />
                 }
               />
