@@ -23,13 +23,13 @@ export default function NavMenu(props) {
       {/* <Link to="/about">
         <div className="nav-link">About</div>
       </Link> */}
+      <Link to="/familias">
+        <div className="nav-link">Familias</div>
+      </Link>
       <Link to="/opportunities">
         <div className="nav-link">Opportunities</div>
       </Link>
       {/* target opens a new tab so when making their pages remove them */}
-      <Link to="/familias">
-        <div className="nav-link">Familias</div>
-      </Link>
       <Link to="/newsletter" target={newsletterLink?.target}>
         <div className="nav-link">Newsletter</div>
       </Link>

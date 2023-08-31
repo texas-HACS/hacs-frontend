@@ -11,6 +11,7 @@ import EventAPI from "../../api/event";
 import JobAPI from "../../api/job";
 import QRCodeManager from "../QRCode/QRCodeManager";
 import ScholarshipAPI from "../../api/scholarship";
+import FamiliaEdit from "./FamiliaEdit";
 
 function AdminPanel(props) {
   const [data, setData] = useState(props.data);
@@ -172,6 +173,22 @@ function AdminPanel(props) {
     setUOpps(updating);
   };
 
+  const updateFamilia = (familiaData) => {
+    let updating = {...data};
+    updating.familias[familiaData.uid] = familiaData;
+    setData(updating);
+    setUData(updating);
+  }
+
+  const deleteFamilia = (uid) => {
+    let updating = {...data};
+    if (updating.familias?.[uid] != null) {
+      delete updating.familias[uid];
+    }
+    setData(updating);
+    setUData(updating);
+  }
+
   const submitSignout = () => {
     props.signoutUser();
   };
@@ -221,6 +238,31 @@ function AdminPanel(props) {
         handleUpdate={updateMemberOfTheWeek}
       />
     ) : null;
+
+  const familiasEdit = (
+    <div className="admin-group">
+    <h2 className="admin-group-title">Familias</h2>
+    {data.familias !== undefined
+      ? Object.keys(data.familias)
+          .map((uid) => (
+            <FamiliaEdit
+              id={uid}
+              key={uid}
+              data={data.familias[uid]}
+              handleUpdate={updateFamilia}
+              handleDelete={deleteFamilia}
+            />
+          ))
+      : null}
+    <FamiliaEdit
+      addNew
+      handleUpdate={updateFamilia}
+      handleDelete={deleteFamilia}
+      data={{}}
+    />  
+  </div>
+  );
+      
 
   var eventsEdit, jobsEdit, scholarshipsEdit;
 
@@ -326,6 +368,7 @@ function AdminPanel(props) {
       {/* TODO: Add ability to drag and drop ordering to enforce indices. */}
       {officersEdit}
       {memberOfTheWeekEdit}
+      {familiasEdit}
       <div className="opportunities-edit flex-row">
         {eventsEdit}
         {jobsEdit}

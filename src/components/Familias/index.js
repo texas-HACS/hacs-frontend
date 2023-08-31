@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Fade from "react-reveal/Fade";
+import renderScoreboard from "./Scoreboard.js";
 
 function Familias(props) {
 
@@ -10,6 +11,7 @@ function Familias(props) {
       </Fade>
       <Fade right>
       <table className="points">
+        <tbody>
         <tr>
           <th>Points</th>
           <th>Activity</th>
@@ -63,24 +65,39 @@ function Familias(props) {
           <td>x2</td>
           <td>Do any of these activities with every Familia (HACS events don't count)</td>
         </tr>
+        </tbody>
       </table>
       </Fade>
     </div>
-  )
+  );
 
-    return (
-        <div className="familias">
-          <Fade>
-            <section>
-              <h1>Familias</h1>
-              <p className="description">
-                Familias Description here
-              </p>
-            </section>
-          </Fade>
-          {pointSystem}
-        </div>
-      );
+  const scoreboard = props.data ? (
+    <div>
+      <Fade bottom>
+        <h3 className="section-title">Scoreboard</h3>
+      </Fade>
+      <Fade right>
+        {renderScoreboard(props.data)}
+      </Fade>
+    </div>
+  ) : (
+    <div/>
+  );
+
+  return (
+    <div className="familias">
+      <Fade>
+        <section>
+          <h1>Familias</h1>
+          <p className="description">
+            Familias Description here
+          </p>
+        </section>
+      </Fade>
+      {scoreboard}
+      {pointSystem}
+    </div>
+  );
 }
 
 export default Familias;
