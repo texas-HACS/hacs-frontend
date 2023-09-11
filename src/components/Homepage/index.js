@@ -3,7 +3,7 @@ import Hero from "./Hero";
 import ImageSlider from "./ImageSlider";
 import MemberHighlight from "./MemberHighlight";
 import UpcomingEvents from "./UpcomingEvents";
-import TwitterFeed from "./TwitterFeed";
+import InstagramPosts from "./InstagramPosts";
 import Leadership from "./Leadership";
 
 const placeholderEvents = [
@@ -32,7 +32,7 @@ function Homepage(props) {
       <ImageSlider images={props.images}/>
       <MemberHighlight member={props.memberOfWeek} />
       <UpcomingEvents events={placeholderEvents} />
-      <TwitterFeed />
+      <InstagramPosts />
       <Leadership officers={props.officers} />
     </section>
   );
