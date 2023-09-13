@@ -10,9 +10,9 @@ export default function NavMenu(props) {
     setMenuOpen(props.isOpen);
   }, [props.isOpen]);
 
-  let meetingLink, newsletterLink, developLink;
+  let newsletterLink, developLink;
   if (props.redirects) {
-    ({ meetingLink, newsletterLink, developLink } = props.redirects);
+    ({ newsletterLink, developLink } = props.redirects);
   }
 
   const links = (
@@ -23,13 +23,13 @@ export default function NavMenu(props) {
       {/* <Link to="/about">
         <div className="nav-link">About</div>
       </Link> */}
+      <Link to="/familias">
+        <div className="nav-link">Familias</div>
+      </Link>
       <Link to="/opportunities">
         <div className="nav-link">Opportunities</div>
       </Link>
       {/* target opens a new tab so when making their pages remove them */}
-      <Link to="/meet" target={meetingLink?.target}>
-        <div className="nav-link">Meet</div>
-      </Link>
       <Link to="/newsletter" target={newsletterLink?.target}>
         <div className="nav-link">Newsletter</div>
       </Link>

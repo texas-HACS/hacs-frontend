@@ -1,0 +1,54 @@
+@import "../../variables";
+
+.familias {
+  width: 95vw;
+  padding: $full-screen-safe-zone;
+
+  .description {
+    margin-right: 20vw;
+  }
+
+  h1 {
+    font-family: $title-font;
+    font-size: 36px;
+  }
+
+  h3 {
+    margin-bottom: 0.5em;
+  }
+
+  table {
+    margin-top: 2em;
+    margin-bottom: 2em;
+  }
+
+  .blank_row {
+    height: 20px;
+  }
+
+  .scoreboard {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80vw
+
+  }
+
+  .scoreboard td {
+    text-align: center;
+    border-bottom: 2px solid $hacs-blue;
+  }
+
+  .scoreboard th {
+    background-color: $hacs-blue;
+    color: white;
+  }
+
+  .scoreboard td, .scoreboard th {
+    border-radius: 10px;
+    border-left: 5px solid white;
+    border-right: 5px solid white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+}

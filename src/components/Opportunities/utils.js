@@ -126,9 +126,6 @@ export function renderModalContent(content) {
         </span>
         <p className="description">{content.description}</p>
         <div className="links flex-row button-container">
-          <LinkButton to={content.meetingLink} className="meeting link">
-            Join Meeting
-          </LinkButton>
           <LinkButton to={content.rsvpLink} className="rsvp-link">
             RSVP
           </LinkButton>

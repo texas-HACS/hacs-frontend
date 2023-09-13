@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import config from "../../_config";
 import OfficerEdit from "./OfficerEdit";
-import MeetingLinkEdit from "./MeetingLinkEdit";
 import MemberOfTheWeekEdit from "./MemberOfTheWeekEdit";
 import EventEdit from "./EventEdit";
 import JobEdit from "./JobEdit";
@@ -13,6 +12,8 @@ import EventAPI from "../../api/event";
 import JobAPI from "../../api/job";
 import QRCodeManager from "../QRCode/QRCodeManager";
 import ScholarshipAPI from "../../api/scholarship";
+import FamiliaEdit from "./FamiliaEdit";
+import PointSystemEdit from "./PointSystemEdit";
 // import SliderApi from "../../api/slider"; // not working would need to check heroku!
 
 function AdminPanel(props) {
@@ -156,13 +157,6 @@ function AdminPanel(props) {
     setUData(updating);
   };
 
-  const updateMeetingLink = (linkData) => {
-    let updating = { ...data };
-    updating.redirects.meetingLink = linkData;
-    setData(updating);
-    setUData(updating);
-  };
-
   const updateSignInLink = (linkData) => {
     let updating = { ...data };
     updating.redirects.signInLink = linkData;
@@ -198,19 +192,57 @@ function AdminPanel(props) {
     setUOpps(updating);
   };
 
+  const updateFamilia = (familiaData) => {
+    let updating = {...data};
+    if (updating.familiasContent.familias !== undefined) {
+      updating.familiasContent.familias[familiaData.uid] = familiaData
+    } else {
+      let uid = familiaData.uid
+      let familias = {}
+      familias[uid] = familiaData
+      updating.familiasContent = {...updating.familiasContent, familias:{...familias}}
+    }
+    setData(updating);
+    setUData(updating);
+  }
+
+  const deleteFamilia = (uid) => {
+    let updating = {...data};
+    if (updating.familiasContent?.familias?.[uid] != null) {
+      delete updating.familiasContent.familias[uid];
+    }
+    setData(updating);
+    setUData(updating);
+  }
+
+  const updatePoints = (pointData) => {
+    let updating = {...data};
+    updating.familiasContent.points[pointData.uid] = pointData;
+    setData(updating);
+    setUData(updating);
+  }
+
+  const deletePoints = (uid) => {
+    let updating = {...data};
+    if (updating.familiasContent.points?.[uid] != null) {
+      delete updating.familiasContent.points[uid];
+    }
+    setData(updating);
+    setUData(updating);
+  }
+
+  const updateBonus = (bonusData) => {
+    let updating = {...data};
+    updating.familiasContent.bonus = bonusData ;
+    setData(updating);
+    setUData(updating);
+  }
+
   const submitSignout = () => {
     props.signoutUser();
   };
 
   // setting up the various elements that allow editing on the admin page
-  const meetingLinkEdit =
-    data.redirects.meetingLink !== undefined ? (
-      <MeetingLinkEdit
-        data={data.redirects.meetingLink}
-        handleUpdate={updateMeetingLink}
-      />
-    ) : null;
-
   const signInLinkEdit =
     data.redirects.signInLink !== undefined ? (
       <SignInLinkEdit
@@ -254,6 +286,57 @@ function AdminPanel(props) {
       />
     ) : null;
 
+  const familiasEdit = (
+    <div className="admin-group">
+    <h2 className="admin-group-title">Familias</h2>
+    {console.log(data.familiasContent.familias)}
+    {data.familiasContent.familias !== undefined
+      ? Object.keys(data.familiasContent.familias)
+          .map((uid) => (
+            <FamiliaEdit
+              id={uid}
+              key={uid}
+              data={data.familiasContent.familias[uid]}
+              handleUpdate={updateFamilia}
+              handleDelete={deleteFamilia}
+            />
+          ))
+      : null}
+    <FamiliaEdit
+      addNew
+      handleUpdate={updateFamilia}
+      handleDelete={deleteFamilia}
+      data={{}}
+    />  
+    <h2 className="admin-group-title">Point System</h2> 
+    {data.familiasContent.points !== undefined 
+      ? Object.keys(data?.familiasContent?.points)
+        .map((uid) => (
+          <PointSystemEdit
+            id={uid}
+            key={uid}
+            data={data?.familiasContent?.points[uid]}
+            handleUpdate={updatePoints}
+            handleDelete={deletePoints}
+          />
+        ))
+    : null}
+    <PointSystemEdit
+      bonus
+      id={"bonus"}
+      key={"bonus"}
+      data={data?.familiasContent?.bonus}
+      handleUpdate={updateBonus}
+    />
+    <PointSystemEdit
+      addNew
+      handleUpdate={updatePoints}
+      handleDelete={deletePoints}
+      data={{}}
+    />
+  </div>
+  );
+      
   var eventsEdit, jobsEdit, scholarshipsEdit, sliderEdit;
 
   const rerenderEvents = (data) => setEvents({ ...events, [data.uid]: data });
@@ -445,11 +528,11 @@ function AdminPanel(props) {
 
   return (
     <div className="admin-panel">
-      {meetingLinkEdit}
       {signInLinkEdit}
       {/* TODO: Add ability to drag and drop ordering to enforce indices. */}
       {officersEdit}
       {memberOfTheWeekEdit}
+      {familiasEdit}
       {sliderEdit}
       <div className="opportunities-edit flex-row">
         {eventsEdit}

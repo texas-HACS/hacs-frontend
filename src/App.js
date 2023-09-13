@@ -9,6 +9,7 @@ import Footer from "./components/Footer";
 import AdminPage from "./components/AdminPage";
 import Redirect from "./components/Redirect";
 import Opportunities from "./components/Opportunities";
+import Familias from "./components/Familias";
 import firebase from "./_firebase";
 import useSticky from "./components/utils/useSticky";
 import JumpToTop from "./components/utils/jumpToTop";
@@ -101,7 +102,7 @@ function App() {
       <Route path="/test" element={<TestPage />} />
     ) : null;
 
-  let { meetingLink, signInLink, newsletterLink, developLink } =
+  let { signInLink, newsletterLink, developLink } =
     siteContent.redirects;
 
   // returns the structure of the website as well as the routes for the various links
@@ -118,7 +119,10 @@ function App() {
           <Header />
           <div className="main-content">
             <Routes>
-              <Route path="meet" element={<Redirect to={meetingLink} />} />
+              <Route 
+                path="familias" 
+                element= {<Familias data={siteContent.familiasContent}/>}
+              />
               <Route
                 path="newsletter"
                 element={<Redirect to={newsletterLink} />}
@@ -126,7 +130,7 @@ function App() {
               <Route path="develop" element={<Redirect to={developLink} />} />
               <Route
                 path="opportunities"
-                element={<Opportunities opportunities={opportunitiesContent} />}
+                element={<Opportunities />}
               />
               <Route
                 path="admin"

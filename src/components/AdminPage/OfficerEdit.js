@@ -40,7 +40,7 @@ function OfficerEdit(props) {
     } else {
       return;
     };
-  }
+  };
 
   const editSection = (
     <div className="admin-edit form-wrapper">
@@ -114,16 +114,12 @@ function OfficerEdit(props) {
         onChange={handleChange}
       />
       <div className="button-container flex-row">
-        <button className="btn btn-primary" onClick={handleSave}>
-          Save
-        </button>
-        <button
-          className="btn btn-primary"
-          onClick={confirmDelete}
-          type="button"
-        >
-          Delete
-        </button>
+      <button className="btn btn-primary" onClick={handleSave}>
+        {props.addNew ? "Create" : "Save"}
+      </button>
+      <button className="btn btn-primary" onClick={confirmDelete} type="button">
+        {props.addNew ? "Cancel" : "Delete"}
+      </button>
       </div>
     </div>
   );
