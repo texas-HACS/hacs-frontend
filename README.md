@@ -133,21 +133,19 @@ Watch this [React Tutorial for Beginners](https://www.youtube.com/watch?v=QJZ-xg
 
 There are also a few guides (and more to come) found in [`hacs-frontend/guides`](https://github.com/texas-HACS/hacs-frontend/tree/master/guides).
 
-Here are the topics covered (all soon to come):
+Here are the topics covered:
 
-[`git, GitHub, and Version Control`](https://github.com/texas-HACS/hacs-frontend/blob/master/guides/git_github_and_version_control.md)
+[`Introduction to Website Development`](https://github.com/texas-HACS/hacs-frontend/blob/master/guides/1_intro_to_web_dev.md)
 
-[`Inro to the Command Line`](https://github.com/texas-HACS/hacs-frontend/blob/master/guides/intro_to_the_command_line.md)
+[`Web Requests in React`](https://github.com/texas-HACS/hacs-frontend/blob/master/guides/2_web_requests_in_react.md)
 
-[`Developing in React`](https://github.com/texas-HACS/hacs-frontend/blob/master/guides/developing_in_react.md)
+[`Developing in React`](https://github.com/texas-HACS/hacs-frontend/blob/master/guides/3_developing_in_react.md)
 
-[`Great Environment Setup`](https://github.com/texas-HACS/hacs-frontend/blob/master/guides/great_environment_setup.md)
+[`Functional React`](https://github.com/texas-HACS/hacs-frontend/blob/master/guides/4_functional_react.md)
 
-[`Web Requests in React`](https://github.com/texas-HACS/hacs-frontend/blob/master/guides/web_requests_in_react.md)
+[`git, GitHub, and Version Control`](https://github.com/texas-HACS/hacs-frontend/blob/master/guides/5_git_github_and_version_control.md)
 
-[`Functional React`](https://github.com/texas-HACS/hacs-frontend/blob/master/guides/functional_react.md)
-
-[`How texashacs.org Functions`](https://github.com/texas-HACS/hacs-frontend/blob/master/guides/how_texashacs.org_functions.md)
+[`How texashacs.org Functions`](https://github.com/texas-HACS/hacs-frontend/blob/master/guides/6_how_texashacs.org_functions.md)
 
 # How to Contribute
 

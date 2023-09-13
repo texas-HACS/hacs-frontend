@@ -6,6 +6,7 @@ import EventEdit from "./EventEdit";
 import JobEdit from "./JobEdit";
 import ScholarshipEdit from "./ScholarshipEdit";
 import SignInLinkEdit from "./SignInLinkEdit";
+import SliderEdit from "./SliderEdit";
 import useEffectNoInitialRender from "../../hooks/useEffectNoInitialRender";
 import EventAPI from "../../api/event";
 import JobAPI from "../../api/job";
@@ -13,6 +14,7 @@ import QRCodeManager from "../QRCode/QRCodeManager";
 import ScholarshipAPI from "../../api/scholarship";
 import FamiliaEdit from "./FamiliaEdit";
 import PointSystemEdit from "./PointSystemEdit";
+// import SliderApi from "../../api/slider"; // not working would need to check heroku!
 
 function AdminPanel(props) {
   const [data, setData] = useState(props.data);
@@ -22,6 +24,8 @@ function AdminPanel(props) {
   const [events, setEvents] = useState(null);
   const [jobs, setJobs] = useState(null);
   const [scholarships, setScholarships] = useState(null);
+  const [images, setImages] = useState(null);
+  const [selected, setSelected] = useState(null);
 
   // Redundant? We already get this info from the props passed in. Might be to allow updates to show
   useEffect(() => {
@@ -70,6 +74,12 @@ function AdminPanel(props) {
       ScholarshipAPI.list().then((sData) => setScholarships(sData));
   }, []);
 
+  useEffect(() => {
+    images ??
+      // SliderApi.list().then((iData) => setImages(iData));
+      setImages({...data.slider});
+  }, []);
+
   // These useEffects are used to update the data stored in firebase when changes are made
   useEffectNoInitialRender(() => {
     if (uData == null) {
@@ -96,6 +106,14 @@ function AdminPanel(props) {
       });
   }, [uData]);
 
+  useEffectNoInitialRender(() => {
+    if (images == null) {
+      return;
+    }
+
+    setData({...data, slider: images});
+    setUData({...data, slider: images});
+  }, [images])
   // probably not used since replaced by api files
   useEffectNoInitialRender(() => {
     if (uOpps == null) {
@@ -239,9 +257,7 @@ function AdminPanel(props) {
       {data.officers !== undefined
         ? Object.keys(data.officers)
             ?.sort((a_uid, b_uid) => {
-              return data.officers[a_uid].order > data.officers[b_uid].order
-                ? 1
-                : -1;
+              return data.officers[a_uid].order - data.officers[b_uid].order
             })
             .map((uid) => (
               <OfficerEdit
@@ -321,8 +337,7 @@ function AdminPanel(props) {
   </div>
   );
       
-
-  var eventsEdit, jobsEdit, scholarshipsEdit;
+  var eventsEdit, jobsEdit, scholarshipsEdit, sliderEdit;
 
   const rerenderEvents = (data) => setEvents({ ...events, [data.uid]: data });
   const deleteEvent = (uid) => {
@@ -420,6 +435,97 @@ function AdminPanel(props) {
     </div>
   );
 
+  const rerenderImages = (data, newImage) => {
+    if (newImage &&  data.order > Object.keys(images).length) {
+      setImages({...images, [data.uid]: data})
+    } else {
+      let imgs = {...images}
+      let sorted = Object.keys(images)
+        .map((uid) => images[uid])
+        ?.sort((a_uid, b_uid) => {
+          return a_uid?.order - b_uid?.order
+        })
+      let count = 1;
+      for (let item of sorted) {
+        if (data.uid != item.uid) {
+          if (count == data.order) {
+            count += 1;
+          }
+          item.order = count;
+          count += 1;
+          setImages({...imgs, [item.uid]: item})
+        }
+      }
+      setImages({...imgs, [data.uid]: data})
+    }
+
+  };
+  const deleteImage = (uid) => {
+    let updatedImages = {...images};
+    delete updatedImages[uid];
+    let count = 1;
+    let sorted = Object.keys(updatedImages)
+    .map((uid) => updatedImages[uid])
+    ?.sort((a_uid, b_uid) => {
+      return a_uid?.order - b_uid?.order
+    })
+    for (let item of sorted) {
+      if (item.order != count) {
+        item.order = count;
+        setImages({...updatedImages, [item.uid]: item})
+      }
+      count += 1;
+    }
+    setImages({...updatedImages})
+    setSelected(null)
+  };
+  const handleSelect = (e) => {
+    let uid = e.target.id;
+    if (!selected) {
+      setSelected(images[uid]);
+      e.target.style.filter = "brightness(50%)";
+    } else if (selected?.uid == uid) {
+      setSelected(null);
+      e.target.style.filter = "brightness(100%)";
+    } else {
+      document.getElementById(selected.uid).style.filter = "brightness(100%)";
+      setSelected(images[uid]);
+      e.target.style.filter = "brightness(50%)";
+    }
+  }
+  sliderEdit =
+  <div className="admin-group">
+  <h2 className="admin-group-title" style={{marginBottom:0}}>Image Slider</h2>
+  <div className="flex-row carousel">
+  {images
+    ? Object.keys(images)
+      ?.map((uid) => images[uid])
+      ?.sort((a_uid, b_uid) => {
+        return a_uid?.order - b_uid?.order
+      })
+      ?.map((i) => (
+      // will need to adjust sizing
+        <div>
+          <p style={{textAlign:"center"}}>{i.order + ". " + i.alt}</p>
+          <img src={i?.image?.url} alt={i?.alt} id={i?.uid} key={i?.uid} className="image" onClick={handleSelect}/>
+        </div>
+      ))
+    : null}
+  </div>
+  {selected
+    ? <SliderEdit
+            id={selected?.uid}
+            key={selected?.uid}
+            data={selected}
+            user={props.user}
+            handleUpdate={rerenderImages}
+            handleDelete={deleteImage}
+          />
+    : null
+  }
+  <SliderEdit addNew user={props.user} handleUpdate={rerenderImages} />
+  </div>
+
   return (
     <div className="admin-panel">
       {signInLinkEdit}
@@ -427,10 +533,12 @@ function AdminPanel(props) {
       {officersEdit}
       {memberOfTheWeekEdit}
       {familiasEdit}
+      {sliderEdit}
       <div className="opportunities-edit flex-row">
         {eventsEdit}
         {jobsEdit}
         {scholarshipsEdit}
+        {/* move position of slider edit to look nicer */} 
       </div>
       <div className="button-container flex-row">
         <button className="btn btn-primary" onClick={submitSignout}>
