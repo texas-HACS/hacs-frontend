@@ -121,7 +121,7 @@ function App() {
             <Routes>
               <Route 
                 path="familias" 
-                element= {<Familias data={siteContent.familias}/>}
+                element= {<Familias data={siteContent.familiasContent}/>}
               />
               <Route
                 path="newsletter"

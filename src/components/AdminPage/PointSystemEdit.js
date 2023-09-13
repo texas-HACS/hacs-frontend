@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 import { newUid } from "../utils/utils";
 
-function FamiliaEdit(props) {
+function PointSystemEdit(props) {
     const [editing, setEditing] = useState(false);
     const [data, setData] = useState({
         ...props.data,
-        uid: props.data?.uid ?? newUid("familia"),
+        uid: props.data?.uid ?? newUid("activity"),
     });
 
     const handleSave = () => {
         props.handleUpdate(data);
         setEditing(false);
         if (props.addNew) {
-            setData({uid: newUid("familia")});
+            setData({uid: newUid("activity")});
         }
     };
 
@@ -34,7 +34,7 @@ function FamiliaEdit(props) {
     };
     
     const confirmDelete = () => {
-        if (window.confirm("Are you sure you want to delete this Familia?")) {
+        if (window.confirm("Are you sure you want to delete this part of the Point System?")) {
           handleDelete();
         } else {
           return;
@@ -43,30 +43,28 @@ function FamiliaEdit(props) {
 
     const editSection = (
         <div className="admin-edit form-wrapper">
-            {/* Will familias be shown with a group name or with all the names in familia */}
-          <label>{"Familia Name"}</label>
-          <input
-            id="familia-name-edit"
-            className="form-control-small"
-            name="name"
-            defaultValue={data?.name}
-            required
-            onChange={handleChange}
-          />
           <label>Points</label>
           <input
-            id="familia-points-edit"
+            id="points-edit"
             className="form-control-small"
             name="points"
-            type="number"
-            min={0}
             defaultValue={data?.points}
             required
             onChange={handleChange}
           />
-          <label>Familia UID</label>
+          <label>Activity</label>
           <input
-            id="familia-uid-edit"
+            id="activity-edit"
+            className="form-control-small"
+            name="activity"
+            type="text"
+            defaultValue={data.activity}
+            required
+            onChange={handleChange}
+          />
+          <label>Activity UID</label>
+          <input
+            id="activity-uid-edit"
             className="form-control-small"
             name="uid"
             type="text"
@@ -78,9 +76,12 @@ function FamiliaEdit(props) {
           <button className="btn btn-primary" onClick={handleSave}>
             {props.addNew ? "Create" : "Save"}
           </button>
-          <button className="btn btn-primary" onClick={props.addNew ? () => setEditing(false) : confirmDelete} type="button">
-            {props.addNew ? "Cancel" : "Delete"}
-          </button>
+          {props.bonus 
+            ? <div/> 
+            : <button className="btn btn-primary" onClick={props.addNew ? () => setEditing(false) : confirmDelete} type="button">
+                {props.addNew ? "Cancel" : "Delete"}
+              </button>
+          }
           </div>
         </div>
       );
@@ -88,11 +89,11 @@ function FamiliaEdit(props) {
       const saveSection = (
         <div onClick={() => setEditing(editing ^ true)}>
           <p className="editable">
-            {props.data?.name == null ? (
-              "Add Familia"
+            {props.data?.activity == null ? (
+              "Add Activity"
             ) : (
               <span>
-                {props.data?.name}
+                {props.bonus ? "Bonus - " + props.data?.activity : props.data?.points + " - " + props.data?.activity}
               </span>
             )}
           </p>
@@ -107,4 +108,4 @@ function FamiliaEdit(props) {
         </div>
       );
 }
- export default FamiliaEdit;
+ export default PointSystemEdit;

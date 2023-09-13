@@ -12,6 +12,7 @@ import JobAPI from "../../api/job";
 import QRCodeManager from "../QRCode/QRCodeManager";
 import ScholarshipAPI from "../../api/scholarship";
 import FamiliaEdit from "./FamiliaEdit";
+import PointSystemEdit from "./PointSystemEdit";
 
 function AdminPanel(props) {
   const [data, setData] = useState(props.data);
@@ -175,16 +176,46 @@ function AdminPanel(props) {
 
   const updateFamilia = (familiaData) => {
     let updating = {...data};
-    updating.familias[familiaData.uid] = familiaData;
+    if (updating.familiasContent.familias !== undefined) {
+      updating.familiasContent.familias[familiaData.uid] = familiaData
+    } else {
+      let uid = familiaData.uid
+      let familias = {}
+      familias[uid] = familiaData
+      updating.familiasContent = {...updating.familiasContent, familias:{...familias}}
+    }
     setData(updating);
     setUData(updating);
   }
 
   const deleteFamilia = (uid) => {
     let updating = {...data};
-    if (updating.familias?.[uid] != null) {
-      delete updating.familias[uid];
+    if (updating.familiasContent?.familias?.[uid] != null) {
+      delete updating.familiasContent.familias[uid];
     }
+    setData(updating);
+    setUData(updating);
+  }
+
+  const updatePoints = (pointData) => {
+    let updating = {...data};
+    updating.familiasContent.points[pointData.uid] = pointData;
+    setData(updating);
+    setUData(updating);
+  }
+
+  const deletePoints = (uid) => {
+    let updating = {...data};
+    if (updating.familiasContent.points?.[uid] != null) {
+      delete updating.familiasContent.points[uid];
+    }
+    setData(updating);
+    setUData(updating);
+  }
+
+  const updateBonus = (bonusData) => {
+    let updating = {...data};
+    updating.familiasContent.bonus = bonusData ;
     setData(updating);
     setUData(updating);
   }
@@ -242,13 +273,14 @@ function AdminPanel(props) {
   const familiasEdit = (
     <div className="admin-group">
     <h2 className="admin-group-title">Familias</h2>
-    {data.familias !== undefined
-      ? Object.keys(data.familias)
+    {console.log(data.familiasContent.familias)}
+    {data.familiasContent.familias !== undefined
+      ? Object.keys(data.familiasContent.familias)
           .map((uid) => (
             <FamiliaEdit
               id={uid}
               key={uid}
-              data={data.familias[uid]}
+              data={data.familiasContent.familias[uid]}
               handleUpdate={updateFamilia}
               handleDelete={deleteFamilia}
             />
@@ -260,6 +292,32 @@ function AdminPanel(props) {
       handleDelete={deleteFamilia}
       data={{}}
     />  
+    <h2 className="admin-group-title">Point System</h2> 
+    {data.familiasContent.points !== undefined 
+      ? Object.keys(data?.familiasContent?.points)
+        .map((uid) => (
+          <PointSystemEdit
+            id={uid}
+            key={uid}
+            data={data?.familiasContent?.points[uid]}
+            handleUpdate={updatePoints}
+            handleDelete={deletePoints}
+          />
+        ))
+    : null}
+    <PointSystemEdit
+      bonus
+      id={"bonus"}
+      key={"bonus"}
+      data={data?.familiasContent?.bonus}
+      handleUpdate={updateBonus}
+    />
+    <PointSystemEdit
+      addNew
+      handleUpdate={updatePoints}
+      handleDelete={deletePoints}
+      data={{}}
+    />
   </div>
   );
       
