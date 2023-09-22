@@ -9,6 +9,7 @@ function InstagramPosts() {
       
       <h3 className="section-title">Latest Posts</h3>
 
+    {/* need to fix styling so that it works on mobile */}
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         <InstagramEmbed url="https://www.instagram.com/p/Cwyc4mfM5ds/" width={400} />
         <InstagramEmbed url="https://www.instagram.com/p/CwvxqMeLGZc/" width={400} />
