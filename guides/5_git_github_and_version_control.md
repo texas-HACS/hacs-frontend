@@ -29,7 +29,7 @@ Also called a "repo", a repository is a location in which software packages are 
 Oftentimes, these repositories are created and managed on version control/hosting sites like [GitHub](https://github.com).
 
 ## Cloning a Repository
-```
+```bash
 git clone https://github.com/texas-HACS/hacs-frontend.git
 ```
 When you create a repository on GitHub (or any other remote service), it exists as a remote repository. You can **clone** your repository to create a local copy on your computer and sync between the two locations.
@@ -37,7 +37,7 @@ When you create a repository on GitHub (or any other remote service), it exists 
 Running the listed command will copy the current state of the hacs-frontend repository into a new directory (folder) named hacs-frontend at the current location on your local machine.
 
 ## Commits
-```
+```bash
 git commit -m "Description of the changes in this commit..."
 ```
 A commit can be seen as a revision to a set of files. Git will create a unique ID to record the changes made in the current commit.
@@ -49,11 +49,11 @@ Files can be added to be "staged" for a commit. This creates a distinction betwe
 
 ### Adding files to a commit
 Since a commit tracks revisions to a set of files, these changes need to be added prior to committing. There are a few ways to do so.
-```
+```bash
 git add -A
 ```
 This will add all current changes to be "staged" for a commit.
-```
+```bash
 git add <path to file>
 ```
 This will add the specified file (file.js, located in path/to/) to be "staged" for the next commit.
@@ -61,7 +61,7 @@ This will add the specified file (file.js, located in path/to/) to be "staged" f
 From this point, the staged files will be included in the next commit.
 
 ## Status
-```
+```bash
 git status
 ```
 This is a great command to let you see the current state of the working directory and staged files. From here, you can see the current branch, staged changes, other changes, current state compared to the remote repository, etc.
@@ -72,43 +72,43 @@ A branch is a version of the repository that diverges from the main working proj
 All other branches hold the state of the main branch (from the point at which they diverged), plus the changes found in the commits on that branch.
 
 ### Create a branch
-```
+```bash
 git branch <branch-name>
 ```
 This creates a new local branch, which will hold the current state of its parent branch. See how to [switch to a branch](#switch-to-a-branch) after creating it.
 
 A condensed way of creating and switching to a new branch is the following:
-```
+```bash
 git checkout -b <branch-name>
 ```
 
 ### Switch to a branch
-```
+```bash
 git checkout <branch-name>
 ```
 This "checks out" or switches to the target branch for you to make changes on the branch.
 
 ### Delete a branch
-```
+```bash
  git branch -d <branch name>  
 ```
 This deletes the target branch from the local repository. If the branch has unmerged changes (any commits since it diverged), extra precautions must be taken.
 
 ### List all local branches
-```
+```bash
 git branch
 ```
 This shows you all branches in the local repository, with the currently active branch being denoted by a *.
 
 ### Merging a branch
-```
+```bash
 git merge <branch name>
 ```
 Please read about [merging](#merge) prior to working with this command.
 This "merges" all changes of the target branch into the current branch.
 
 ## Merge
-```
+```bash
 git merge <branch name>
 ```
 Merging is the process of combining multiple sequences of changes into a single unified history. Most often, this is done by combining two branches.
@@ -147,7 +147,7 @@ This is an example of the file after accepting both sets of changes.
 
 ### Finalizing a merge conflict
 Git will hold a status indicating that you are currently resolving a merge conflict until a commit is made to resolve all conflicts. In order to resolve it, add all changed files from your conflict resolution and commit them.
-```
+```bash
 git add <resolved file>
 git commit -m "Resolved merge conflict by accepting both changes"
 ```
@@ -160,7 +160,7 @@ In the case that this cannot be done, it is important to effectively communicate
 Prior to committing and resolving, test all changes and reach out to previous owners of the code (if at all possible) to clarify the changes.
 
 ## Push
-```
+```bash
 git push
 ```
 This updates the remote repository with your local state, and is essential in aligning work with other contributors.

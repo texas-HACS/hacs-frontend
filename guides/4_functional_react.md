@@ -7,7 +7,7 @@ As mentioned in `developing_in_react.md`, there are two ways to code in React: F
 Functional React involves the use of Javascript functions to create components of a website's frontend, unlike Class-based React which uses classes instead.
 
 An example of a component made with functional React can be found below:
-```
+```js
 import React from "react";
 import { Link } from "react-router-dom";
 import Socials from "../partials/Socials";

@@ -46,31 +46,31 @@ Please make sure you have completed the [Pre-Setup Setup](#pre-setup-setup) step
 
 Open up your terminal of choice. Change into a good directory for all things HACS web dev! (i.e. hacs-webdev/)
 
-```
+```bash
 cd hacs-webdev
 ```
 
 Clone the [hacs-frontend](https://github.com/texas-HACS/hacs-frontend) repository:
 
-```
+```bash
 git clone https://github.com/texas-HACS/hacs-frontend.git
 ```
 
 Navigate into the project:
 
-```
+```bash
 cd hacs-frontend
 ```
 
 And install the npm dependencies:
 
-```
+```bash
 npm install --legacy-peer-deps
 ```
 
 OR
 
-```
+```bash
 npm i --legacy-peer-deps
 ```
 
@@ -85,7 +85,7 @@ Save this file to the root of the hacs-frontend project. This means that .env sh
 **_IMPORTANT:_** Please do not share the file or any of its contents with anyone. You won't be doing any good to us and this will just be a nuisance.
 
 **_MAC USERS:_** You may not be able to rename this file properly using just Finder. Once you have placed the env file in the correct location, open up the terminal, navigate to `hacs-frontend`, and perform the following command:
-```
+```bash
 mv env .env
 ```
 This will rename env to .env, which is able to be done at the terminal level, but not in Finder.
@@ -94,7 +94,7 @@ This will rename env to .env, which is able to be done at the terminal level, bu
 
 You can then start the development server for our frontend:
 
-```
+```bash
 npm start
 ```
 
