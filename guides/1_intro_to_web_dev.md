@@ -11,11 +11,11 @@ Javascript is used to add functionality to the website and is the only one of th
 # HTML
 Hypertext Markup Language, or HTML is the standard markup language for documents displayed on a web browser
 The basic syntax is a piece of content enclosed within an HTML tag like this:
-```
+```html
 <body>This is where the web page's content will be placed</body>
 ```
 Most tags have a closing tag like the one shown above while other don't like the one below:
-```
+```html
 <img src="" alt="">
 ```
 Most if not all tags have attributes which act as parameters and provide more detail on how the content is displayed. `src` and `alt` shown above are two examples of attributes. Another two attributes `id` and `class` are used to apply styles from a .css file. There are many other attributes that vary in function.
@@ -42,12 +42,12 @@ An example of this is shown below:
 There are also three different ways to apply CSS:
 - Inline style which uses the style attribute to style a single specific element
 
-    ```
+    ```html
     <span style="font-size: 16pt">Inline Style Example</span>
     ```
 - Embedded stylesheet which uses the `<style>` tag to define CSS rules
 
-    ```
+    ```html
     <style>
         span {
             font-size: 16pt;
@@ -56,7 +56,7 @@ There are also three different ways to apply CSS:
     ```
 - External stylesheet which involves placing all of your CSS in a separate .css file and is imported using the `<link>` tag. The .css file will have the same format as the image shown above while the link tag should look something like this:
 
-    ```
+    ```html
     <link href="styles.css" rel="stylesheet">
     ```
 
