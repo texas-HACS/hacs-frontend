@@ -230,24 +230,14 @@
     }
   }
 
-  .timeline-Widget {
-    max-width: none !important;
-  }
+  .posts {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
 
-  .twitter-feed {
-    .tweet-wrapper {
-      margin-top: 60px;
-      display: flex;
-      justify-content: space-between;
-    }
-
-    .timeline-Header {
-      display: none;
-    }
-
-    .feed-wrapper {
-      min-height: 380px;
-      width: 100%;
+    .post {
+      min-width: 328px;
+      width: 30%;
     }
   }
 
@@ -357,8 +347,13 @@
       }
     }
 
-    .insta-feed {
-      min-height: initial;
+    .posts {
+      flex-wrap: wrap;
+
+      .post {
+        margin-left: auto;
+        margin-right: auto;
+      }
     }
 
     .leadership {
