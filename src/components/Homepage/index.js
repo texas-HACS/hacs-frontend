@@ -32,7 +32,7 @@ function Homepage(props) {
       <ImageSlider images={props.images}/>
       <MemberHighlight member={props.memberOfWeek} />
       <UpcomingEvents events={placeholderEvents} />
-      <InstagramPosts />
+      <InstagramPosts posts={props.posts}/>
       <Leadership officers={props.officers} />
     </section>
   );
