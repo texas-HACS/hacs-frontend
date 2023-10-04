@@ -14,6 +14,7 @@ import QRCodeManager from "../QRCode/QRCodeManager";
 import ScholarshipAPI from "../../api/scholarship";
 import FamiliaEdit from "./FamiliaEdit";
 import PointSystemEdit from "./PointSystemEdit";
+import InstagramEdit from "./InstagramEdit";
 // import SliderApi from "../../api/slider"; // not working would need to check heroku!
 
 function AdminPanel(props) {
@@ -233,7 +234,14 @@ function AdminPanel(props) {
 
   const updateBonus = (bonusData) => {
     let updating = {...data};
-    updating.familiasContent.bonus = bonusData ;
+    updating.familiasContent.bonus = bonusData;
+    setData(updating);
+    setUData(updating);
+  }
+
+  const updatePosts = (postData) => {
+    let updating = {...data};
+    updating.posts[postData.uid] = postData;
     setData(updating);
     setUData(updating);
   }
@@ -286,10 +294,30 @@ function AdminPanel(props) {
       />
     ) : null;
 
+  const instagramEdit = (
+    <div className="admin-group">
+      <h2 className="admin-group-title">Instagram Feed</h2>
+      {data.posts !== undefined
+        ? Object.keys(data.posts)
+          .sort((a, b) => {
+            return new Date(data.posts[b].date) - new Date(data.posts[a].date)
+          })
+          .map((uid) => (
+            <InstagramEdit
+              id={uid}
+              key={uid}
+              data={data.posts[uid]}
+              handleUpdate={updatePosts}
+            />
+          ))
+        : null
+      } 
+    </div>
+  );
+
   const familiasEdit = (
     <div className="admin-group">
     <h2 className="admin-group-title">Familias</h2>
-    {console.log(data.familiasContent.familias)}
     {data.familiasContent.familias !== undefined
       ? Object.keys(data.familiasContent.familias)
           .map((uid) => (
@@ -532,6 +560,7 @@ function AdminPanel(props) {
       {/* TODO: Add ability to drag and drop ordering to enforce indices. */}
       {officersEdit}
       {memberOfTheWeekEdit}
+      {instagramEdit}
       {familiasEdit}
       {sliderEdit}
       <div className="opportunities-edit flex-row">

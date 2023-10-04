@@ -171,6 +171,7 @@ function App() {
                     memberOfWeek={siteContent.memberOfTheWeek}
                     officers={siteContent.officers}
                     images={siteContent.slider}
+                    posts={siteContent.posts}
                   />
                 }
               />
