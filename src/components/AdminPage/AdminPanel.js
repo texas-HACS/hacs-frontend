@@ -299,6 +299,9 @@ function AdminPanel(props) {
       <h2 className="admin-group-title">Instagram Feed</h2>
       {data.posts !== undefined
         ? Object.keys(data.posts)
+          .sort((a, b) => {
+            return new Date(data.posts[b].date) - new Date(data.posts[a].date)
+          })
           .map((uid) => (
             <InstagramEdit
               id={uid}

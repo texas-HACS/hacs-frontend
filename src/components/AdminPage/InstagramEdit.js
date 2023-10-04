@@ -74,7 +74,7 @@ function InstagramEdit(props) {
         <div onClick={() => setEditing(editing ^ true)}>
             <p className="editable">
                 <span>
-                    {props.data?.uid}
+                    {new Date(data?.date).toDateString()}
                 </span>
             </p>
         </div>
