@@ -10,9 +10,14 @@ function InstagramPosts(props) {
       <h3 className="section-title">Latest Posts</h3>
 
       <div className="posts">
-        <InstagramEmbed className="post" url="https://www.instagram.com/p/Cwyc4mfM5ds/" />
-        <InstagramEmbed className="post" url="https://www.instagram.com/p/CwvxqMeLGZc/" />
-        <InstagramEmbed className="post" url="https://www.instagram.com/p/CwNw-c6L_dr/" />
+        {Object.keys(postData)
+          .map((uid) => postData[uid])
+          .sort((a, b) => {
+            return new Date(b.date) - new Date(a.date);
+          })
+          .map((post) => {
+            return <InstagramEmbed className="post" url={post.url} />
+          })}
       </div>
 
     </section>
