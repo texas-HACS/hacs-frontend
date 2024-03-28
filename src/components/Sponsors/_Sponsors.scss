@@ -1,0 +1,84 @@
+@import "../../variables";
+
+.sponsors {
+  width: 95vw;
+  padding: $full-screen-safe-zone;
+
+  .description {
+    margin-right: 20vw;
+  }
+
+  h1 {
+    font-family: $title-font;
+    font-size: 36px;
+  }
+
+  h3 {
+    margin-bottom: 0.5em;
+  }
+
+  .sponsor {
+    margin-top: 2em;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+
+    .sponsor-item {
+      height: 350px;
+      width: 300px;
+    }
+
+    h4 {
+      visibility: hidden;
+      text-align: center;
+    }
+
+    img {
+      height: 270px;
+      width: 270px;
+      margin: auto;
+      display: block;
+      object-fit: contain;
+
+    }
+    
+    img:hover {
+      height: 280px;
+      width: 280px;
+      object-fit: contain;
+    }
+
+    .sponsor-item:hover {
+      h4 {
+        visibility: visible;
+        text-align: center;
+      }
+    }
+  }
+
+  .packages {
+    margin-top: 2em;
+    margin-bottom: 2em;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+
+    .package {
+      padding:10px;
+      border-width: 5px;
+      border-top-color: $hacs-blue;
+      border-right-color: $hacs-green;
+      border-bottom-color: $hacs-red;
+      border-left-color: $hacs-gold;
+      border-style: solid;
+      border-radius: 5px;
+      width: 50vw;
+    }
+
+    h3, p {
+      text-align: center;
+    }
+
+  }
+}

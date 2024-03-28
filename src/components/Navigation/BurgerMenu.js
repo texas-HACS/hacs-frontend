@@ -52,6 +52,9 @@ export default function BurgerMenu(props) {
       <Link to="/sign-in" onClick={() => toggleMenu(false)}>
         <div className="nav-link">Sign In</div>
       </Link>
+      <Link to="/sponsorship" onClick={() => toggleMenu(false)}>
+        <div className="nav-link">Sponsorship</div>
+      </Link>
       <Link to="/admin" aria-label="admin" onClick={() => toggleMenu(false)}>
         <div className="nav-link">
           <i className="fas fa-cog" />
