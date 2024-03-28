@@ -62,6 +62,19 @@
   .button-container {
     justify-content: flex-start;
   }
+
+  .tier-options {
+    display: flex;
+    justify-content: space-evenly;
+
+    label {
+      text-align: center;
+    }
+
+    input {
+      margin: auto;
+    }
+  }
 }
 
 // Smartphone/Low-Res Tablets

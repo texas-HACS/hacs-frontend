@@ -7,7 +7,7 @@ function SponsorPackages(props) {
         <div className="packages">
             {Object.keys(props.data)
                 .map((uid) => {
-                    let benefit_list = props.data[uid].benefits.split('--');
+                    let benefit_list = props.data[uid].benefit.split('--');
                     let benefits = (<ul>
                         {benefit_list.map((benefit) => {
                             return (

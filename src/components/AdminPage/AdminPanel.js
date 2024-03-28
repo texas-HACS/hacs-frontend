@@ -15,6 +15,9 @@ import ScholarshipAPI from "../../api/scholarship";
 import FamiliaEdit from "./FamiliaEdit";
 import PointSystemEdit from "./PointSystemEdit";
 import InstagramEdit from "./InstagramEdit";
+import SponsorEdit from "./SponsorEdit";
+import PackageEdit from "./PackageEdit";
+
 // import SliderApi from "../../api/slider"; // not working would need to check heroku!
 
 function AdminPanel(props) {
@@ -246,6 +249,56 @@ function AdminPanel(props) {
     setUData(updating);
   }
 
+  const updateSponsor = (sponsorData) => {
+    let updating = {...data};
+    console.log(sponsorData);
+    if (updating.sponsorContent.sponsors !== undefined) {
+      updating.sponsorContent.sponsors[sponsorData.uid] = sponsorData
+    } else {
+      let uid = sponsorData.uid
+      let sponsors = {}
+      sponsors[uid] = sponsorData
+      updating.sponsorContent = {...updating.sponsorContent, sponsors:{...sponsors}}
+      console.log(updating);
+    }
+    setData(updating);
+    setUData(updating);
+  }
+
+  const deleteSponsor = (uid) => {
+    let updating = {...data};
+    if (updating.sponsorContent?.sponsors?.[uid] != null) {
+      delete updating.sponsorContent.sponsors[uid];
+    }
+    setData(updating);
+    setUData(updating);
+  }
+
+  const updatePackage = (packageData) => {
+    let updating = {...data};
+    console.log(packageData);
+    if (updating.sponsorContent.packages !== undefined) {
+      updating.sponsorContent.packages[packageData.uid] = packageData
+    } else {
+      let uid = packageData.uid
+      let packages = {}
+      packages[uid] = packageData
+      updating.sponsorContent = {...updating.sponsorContent, packages:{...packages}}
+      console.log(updating);
+    }
+    setData(updating);
+    setUData(updating);
+  }
+
+  const deletePackage = (uid) => {
+    let updating = {...data};
+    if (updating.sponsorContent?.packages?.[uid] != null) {
+      delete updating.sponsorContent.packages[uid];
+    }
+    setData(updating);
+    setUData(updating);
+  }
+
   const submitSignout = () => {
     props.signoutUser();
   };
@@ -360,6 +413,49 @@ function AdminPanel(props) {
       addNew
       handleUpdate={updatePoints}
       handleDelete={deletePoints}
+      data={{}}
+    />
+  </div>
+  );
+
+  const sponsorEdit = (
+    <div className="admin-group">
+    <h2 className="admin-group-title">Sponsors</h2>
+    {data.sponsorContent.sponsors !== undefined
+      ? Object.keys(data.sponsorContent.sponsors)
+          .map((uid) => (
+            <SponsorEdit
+              id={uid}
+              key={uid}
+              data={data.sponsorContent.sponsors[uid]}
+              handleUpdate={updateSponsor}
+              handleDelete={deleteSponsor}
+            />
+          ))
+      : null}
+    <SponsorEdit
+      addNew
+      handleUpdate={updateSponsor}
+      handleDelete={deleteSponsor}
+      data={{}}
+    />  
+    <h2 className="admin-group-title">Sponsor Packages</h2> 
+    {data.sponsorContent.packages !== undefined
+      ? Object.keys(data.sponsorContent.packages)
+          .map((uid) => (
+            <PackageEdit
+              id={uid}
+              key={uid}
+              data={data.sponsorContent.packages[uid]}
+              handleUpdate={updatePackage}
+              handleDelete={deletePackage}
+            />
+          ))
+      : null}
+    <PackageEdit
+      addNew
+      handleUpdate={updatePackage}
+      handleDelete={deletePackage}
       data={{}}
     />
   </div>
@@ -562,6 +658,7 @@ function AdminPanel(props) {
       {memberOfTheWeekEdit}
       {instagramEdit}
       {familiasEdit}
+      {sponsorEdit}
       {sliderEdit}
       <div className="opportunities-edit flex-row">
         {eventsEdit}
