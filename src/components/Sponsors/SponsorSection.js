@@ -1,32 +1,108 @@
-import React from "react";
+import React, { useState } from "react";
 import Fade from "react-reveal/Fade";
 
 function SponsorSection(props) {
-// for each sponsor in list (should have an id, name, and logo in firebase), organize them into rows
-const sponsors = (
-    // incorporate tiers?? and also make it so that you have to add an image instead of calls to website
-    // add links their website
-    <div className="sponsor">
-        {Object.keys(props.data)
-            .map((uid) => {
-                return(
+
+let platinum_sponsors = []
+let gold_sponsors = []
+let focs_sponsors = []
+
+let sort_sponsors =
+    Object.keys(props.data)
+    .map((uid) => (props.data[uid]))
+    .sort((a, b) => {
+        return a.tier - b.tier;
+    })
+    .map((item) => {
+        if (item.tier == "Gold") {
+            gold_sponsors.push(item);
+        } else if (item.tier == "Platinum") {
+            platinum_sponsors.push(item);
+        } else {
+            focs_sponsors.push(item);
+            
+        }
+    })
+
+const platinum_section = (
+    platinum_sponsors.length > 0 ?
+        <div> 
+            <h3 className="tier-header">Platinum</h3>
+            <div className="sponsor">
+            {platinum_sponsors.sort((a, b) => {
+                return a.name < b.name ? -1 : 1;
+            }).map((item) => {
+                return (
                     <div className="sponsor-item">
-                        <img src={props.data[uid].logo}/>
-                        <h4 className="title">{props.data[uid].name}</h4>
+                        <a href={item.site} target="_blank">
+                            <img src={item.logo}/>
+                            <h4>{item.name}</h4>
+                        </a>
                     </div>
                 )
-            })
-        }
+            })}
+            </div>
+        </div> 
+        : <div/>
+)
+
+const gold_section = (
+    gold_sponsors.length > 0 ?
+        <div>
+            <h3 className="tier-header">Gold</h3>
+            <div className="sponsor">
+            {gold_sponsors.sort((a, b) => {
+                return a.name < b.name ? -1 : 1;
+            }).map((item) => {
+                return (
+                    <div className="sponsor-item">
+                        <a href={item.site} target="_blank">
+                            <img src={item.logo}/>
+                            <h4>{item.name}</h4>
+                        </a>
+                    </div>
+                )
+            })}
+            </div>
+        </div>
+        : <div/>
+)
+
+const focs_section = ( 
+    focs_sponsors.length > 0 ?
+    <div>
+        <h3 className="tier-header">FOCS</h3>
+        <div className="sponsor">
+        {focs_sponsors.sort((a, b) => {
+            return a.name < b.name ? -1 : 1;
+        }).map((item) => {
+            return (
+                <div className="sponsor-item">
+                    <a href={item.site} target="_blank">
+                        <img src={item.logo}/>
+                        <h4>{item.name}</h4>
+                    </a>
+                </div>
+            )
+        })}
+        </div>
     </div>
-);
-// editable packages should include a name/title, amount, benefits, and description
+    : <div/>
+)
+
 return(
     <div>
         <Fade bottom>
         <h3 className="section-title">Sponsors</h3>
         </Fade>
         <Fade right>
-        {sponsors}
+        {platinum_section}
+        </Fade>
+        <Fade right>
+        {gold_section}
+        </Fade>
+        <Fade right>
+        {focs_section}
         </Fade>
     </div>
  )
