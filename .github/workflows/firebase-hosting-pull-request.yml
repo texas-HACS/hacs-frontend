@@ -28,4 +28,5 @@ jobs:
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_HACS_OPENSOURCE_INT }}'
+          firebaseToolsVersion: 12.9.1
           projectId: hacs-opensource-int
