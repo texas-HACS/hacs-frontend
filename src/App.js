@@ -9,6 +9,7 @@ import Footer from "./components/Footer";
 import AdminPage from "./components/AdminPage";
 import Redirect from "./components/Redirect";
 import Opportunities from "./components/Opportunities";
+import Sponsors from "./components/Sponsors";
 import Familias from "./components/Familias";
 import firebase from "./_firebase";
 import useSticky from "./components/utils/useSticky";
@@ -131,6 +132,10 @@ function App() {
               <Route
                 path="opportunities"
                 element={<Opportunities />}
+              />
+              <Route 
+                path="sponsorship" 
+                element={<Sponsors data={siteContent.sponsorContent} />} 
               />
               <Route
                 path="admin"

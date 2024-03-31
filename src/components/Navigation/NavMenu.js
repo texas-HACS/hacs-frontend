@@ -42,6 +42,9 @@ export default function NavMenu(props) {
       <Link to="/sign-in">
         <div className="nav-link">Sign In</div>
       </Link>
+      <Link to="/sponsorship">
+        <div className="nav-link">Sponsorship</div>
+      </Link>
       <Link to="/admin">
         <div className="nav-link">
           <i className="fas fa-cog" />
