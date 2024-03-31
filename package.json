@@ -4,7 +4,7 @@
   "description": "Website for the Hispanic Association of Computer Scientists (HACS) at the University of Texas at Austin.",
   "version": "0.1.0",
   "private": true,
-  "engines": {"node": "18"},
+  "engines": {"node": "16"},
   "dependencies": {
     "@material-ui/core": "^4.12.3",
     "@material-ui/pickers": "^3.3.10",
