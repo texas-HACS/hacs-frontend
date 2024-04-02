@@ -95,15 +95,11 @@ return(
         <Fade bottom>
         <h3 className="section-title">Sponsors</h3>
         </Fade>
-        <Fade right>
+        <Fade>
         {platinum_section}
         </Fade>
-        <Fade right>
         {gold_section}
-        </Fade>
-        <Fade right>
         {focs_section}
-        </Fade>
     </div>
  )
 

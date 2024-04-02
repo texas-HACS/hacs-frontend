@@ -103,3 +103,15 @@
 
   }
 }
+
+@media only screen and (max-width: 768px) {
+  .sponsors {
+    .sponsor {
+      .sponsor-item:hover {
+        h4{
+          visibility: hidden;
+        }
+      }
+    }
+  }
+}
