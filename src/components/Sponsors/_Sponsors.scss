@@ -106,6 +106,13 @@
 
 @media only screen and (max-width: 768px) {
   .sponsors {
+
+    .description {
+      img {
+        min-width: 300px;
+      }
+    }
+
     .sponsor {
       .sponsor-item:hover {
         h4{

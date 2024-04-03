@@ -36,8 +36,8 @@ const platinum_section = (
                     <div className="sponsor-item">
                         <a href={item.site} target="_blank">
                             <img src={item.logo}/>
-                            <h4>{item.name}</h4>
                         </a>
+                        <h4>{item.name}</h4>
                     </div>
                 )
             })}
@@ -58,8 +58,8 @@ const gold_section = (
                     <div className="sponsor-item">
                         <a href={item.site} target="_blank">
                             <img src={item.logo}/>
-                            <h4>{item.name}</h4>
                         </a>
+                        <h4>{item.name}</h4>
                     </div>
                 )
             })}
@@ -80,8 +80,8 @@ const focs_section = (
                 <div className="sponsor-item">
                     <a href={item.site} target="_blank">
                         <img src={item.logo}/>
-                        <h4>{item.name}</h4>
                     </a>
+                    <h4>{item.name}</h4>
                 </div>
             )
         })}
