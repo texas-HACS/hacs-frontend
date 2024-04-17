@@ -35,7 +35,7 @@ const platinum_section = (
                 return (
                     <div className="sponsor-item">
                         <a href={item.site} target="_blank">
-                            <img src={item.logo}/>
+                            <img src={item?.image?.url}/>
                         </a>
                         <h4>{item.name}</h4>
                     </div>
@@ -57,7 +57,7 @@ const gold_section = (
                 return (
                     <div className="sponsor-item">
                         <a href={item.site} target="_blank">
-                            <img src={item.logo}/>
+                            <img src={item?.image?.url}/>
                         </a>
                         <h4>{item.name}</h4>
                     </div>
