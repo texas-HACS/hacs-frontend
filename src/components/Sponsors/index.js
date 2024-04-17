@@ -13,8 +13,17 @@ function Sponsors(props) {
                 <p className="description">
                     HACS is a student organization at the University of Texas at Austin that aims 
                     to empower and provide support for Hispanic and Latinx students in computer 
-                    science through academic, professional, and social events.
-                    <br/><br/>
+                    science through academic, professional, and social events:
+                    <br/>
+                    <ul>
+                        <li>Bi-weekly General Meetings</li>
+                        <li>Monthly Social Events</li>
+                        <li>Monthly Study Nights</li>
+                        <li>Monthly Familias Events</li>
+                        <li>Diversity Networking Night (Exclusive Career Fair for members of HACS, ABCS, Q++ with our Sponsors)</li>
+                        <li>Professional Development Workshops / Presentations</li>
+                        <li>Custom Company Sponsored Events (Presentations, Trivia, Resume Reviews, Engineer Panels)</li>
+                    </ul>
                     For the 2023-2024 school year HACS had an active member count of 90+ HACS members 
                     (Most active members post-2020)
                     <br/>
