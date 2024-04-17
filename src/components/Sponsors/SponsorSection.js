@@ -35,9 +35,9 @@ const platinum_section = (
                 return (
                     <div className="sponsor-item">
                         <a href={item.site} target="_blank">
-                            <img src={item.logo}/>
-                            <h4>{item.name}</h4>
+                            <img src={item?.image?.url}/>
                         </a>
+                        <h4>{item.name}</h4>
                     </div>
                 )
             })}
@@ -57,9 +57,9 @@ const gold_section = (
                 return (
                     <div className="sponsor-item">
                         <a href={item.site} target="_blank">
-                            <img src={item.logo}/>
-                            <h4>{item.name}</h4>
+                            <img src={item?.image?.url}/>
                         </a>
+                        <h4>{item.name}</h4>
                     </div>
                 )
             })}
@@ -80,8 +80,8 @@ const focs_section = (
                 <div className="sponsor-item">
                     <a href={item.site} target="_blank">
                         <img src={item.logo}/>
-                        <h4>{item.name}</h4>
                     </a>
+                    <h4>{item.name}</h4>
                 </div>
             )
         })}
@@ -95,15 +95,11 @@ return(
         <Fade bottom>
         <h3 className="section-title">Sponsors</h3>
         </Fade>
-        <Fade right>
+        <Fade>
         {platinum_section}
         </Fade>
-        <Fade right>
         {gold_section}
-        </Fade>
-        <Fade right>
         {focs_section}
-        </Fade>
     </div>
  )
 
