@@ -79,7 +79,7 @@ function SponsorEdit(props) {
             value="Platinum"
             name="tier"
             type="radio"
-            defaultValue={data.tier == "Platinum" ? true : false}
+            checked={data.tier == "Platinum" ? "checked" : ""}
             required
             onChange={handleChange}
           />
@@ -91,7 +91,7 @@ function SponsorEdit(props) {
             value="Gold"
             name="tier"
             type="radio"
-            defaultValue={data.tier == "Gold" ? true : false}
+            checked={data.tier == "Gold" ? "checked" : ""}
             required
             onChange={handleChange}
           />
@@ -103,7 +103,7 @@ function SponsorEdit(props) {
             value="FOCS"
             name="tier"
             type="radio"
-            defaultValue={data.tier == "FOCS" ? true : false}
+            checked={data.tier == "FOCS" ? "checked" : ""}
             required
             onChange={handleChange}
           />
