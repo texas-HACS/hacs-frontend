@@ -34,6 +34,9 @@ export default function BurgerMenu(props) {
           About
         </div>
       </Link> */}
+      <Link to="/people" onClick={() => toggleMenu(false)}>
+        <div className="nav-link">People</div>
+      </Link>
       <Link to="/familias" onClick={() => toggleMenu(false)}>
         <div className="nav-link">Familias</div>
       </Link>

@@ -11,6 +11,7 @@ import Redirect from "./components/Redirect";
 import Opportunities from "./components/Opportunities";
 import Sponsors from "./components/Sponsors";
 import Familias from "./components/Familias";
+import People from "./components/People";
 import firebase from "./_firebase";
 import useSticky from "./components/utils/useSticky";
 import JumpToTop from "./components/utils/jumpToTop";
@@ -120,6 +121,10 @@ function App() {
           <Header />
           <div className="main-content">
             <Routes>
+              <Route 
+                path="people" 
+                element= {<People officers={siteContent.officers}/>}
+              />
               <Route 
                 path="familias" 
                 element= {<Familias data={siteContent.familiasContent}/>}

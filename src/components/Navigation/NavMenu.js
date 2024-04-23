@@ -23,6 +23,9 @@ export default function NavMenu(props) {
       {/* <Link to="/about">
         <div className="nav-link">About</div>
       </Link> */}
+      <Link to="/people">
+        <div className="nav-link">People</div>
+      </Link>
       <Link to="/familias">
         <div className="nav-link">Familias</div>
       </Link>
