@@ -423,6 +423,10 @@ function AdminPanel(props) {
     <h2 className="admin-group-title">Sponsors</h2>
     {data.sponsorContent.sponsors !== undefined
       ? Object.keys(data.sponsorContent.sponsors)
+          .sort((a, b) => {
+            // sorting by tier and then by names
+            return data.sponsorContent.sponsors[b].tier.localeCompare(data.sponsorContent.sponsors[a].tier) || data.sponsorContent.sponsors[a].name.localeCompare(data.sponsorContent.sponsors[b].name)
+          })
           .map((uid) => (
             <SponsorEdit
               id={uid}
