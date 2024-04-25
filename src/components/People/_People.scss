@@ -47,12 +47,77 @@
             object-position: 50% 30%;
           }
         }
+    }
+
+    .alumni {
+      padding-bottom: 1em;
+      width: fit-content;
+
+      .section-title {
+        margin-bottom: 35px;
       }
+
+      .dropdown {
+        height:40px;
+        margin:0;
+        line-height: 40px;
+        display: flex;
+        justify-content: space-between;
+
+        span {
+          color: $hacs-blue;
+          font-size: 27px;
+        }
+      }
+
+      .dropdown:hover {
+        font-size: 1.28em;
+
+        span {
+          font-size: 27px;
+        }
+      }
+
+      .officers {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+      }
+
+      .officer {
+        display: flex;
+        flex-direction: column;
+        width: 200px;
+        text-align: center;
+
+        img{
+          width: 100px;
+          height: 100px;
+          border-radius: 100%;
+          object-fit: cover;
+          margin: auto;
+        }
+      }
+
+      .grads {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+      }
+
+      .grad {
+        text-align: center;
+      }
+    }
+
+
 }
 
 // Smartphone/Low-Res Tablets
 @media only screen and (max-width: 768px) {
-    .homepage {
+    .people {
         .leadership {
             .leadership-wrapper .react-reveal {
               margin: 0 auto !important;

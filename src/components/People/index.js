@@ -3,11 +3,31 @@ import Leadership from "./Leadership";
 import Alumni from "./Alumni";
 
 function People(props) {
-    /*Need to create the link to the page
-     use the leadership cards from the home page for this page
+    /*
      add some history about the org at the top
      then work on the alumni section with the dropdowns
     */
+
+    const alumniSection = (
+        <section className="alumni">
+            <h3 className="section-title">Past Officers and Alumni</h3>
+                {Object.keys(props.data?.pastYears)
+                .sort((a, b) => {
+                    return b.localeCompare(a)
+                })
+                .map((year) => {
+                    return (
+                    <Alumni
+                        year={year}
+                        pastOfficers={props.data?.pastYears[year].pastOfficers}
+                        alumni={props.data?.pastYears[year].alumni}
+                    />
+                    )
+                })
+                }
+        </section>
+    )
+
      return (
         <div className="people">
             <section>
@@ -16,8 +36,8 @@ function People(props) {
                     History of HACS ...
                 </p>
             </section>
-            <Leadership officers={props.officers} />
-            <Alumni/>
+            <Leadership officers={props.data?.officers} />
+            {alumniSection}
         </div>
      )
 

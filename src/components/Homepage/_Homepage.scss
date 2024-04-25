@@ -240,43 +240,6 @@
       width: 30%;
     }
   }
-
-  .leadership {
-    background-color: $faded-blue;
-
-    .container {
-      margin: 0 auto;
-      margin-top: 100px;
-      max-width: 1240px;
-
-      h1 {
-        font-weight: bold;
-        font-size: 48px;
-        line-height: 63px;
-        font-family: $title-font;
-        color: $hacs-blue;
-        padding: 60px 0;
-        text-align: center;
-        margin: 0;
-      }
-    }
-
-    .leadership-wrapper {
-      padding-bottom: 60px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-evenly;
-    }
-
-    .card {
-      img {
-        height: 380px;
-        width: 380px;
-        object-fit: cover;
-        object-position: 50% 30%;
-      }
-    }
-  }
 }
 
 // Smartphone/Low-Res Tablets
@@ -353,21 +316,6 @@
       .post {
         margin-left: auto;
         margin-right: auto;
-      }
-    }
-
-    .leadership {
-      .leadership-wrapper .react-reveal {
-        margin: 0 auto !important;
-      }
-
-      .card {
-        img {
-          height: 300px;
-          width: 300px;
-          object-fit: cover;
-          object-position: 50% 30%;
-        }
       }
     }
   }

@@ -123,7 +123,7 @@ function App() {
             <Routes>
               <Route 
                 path="people" 
-                element= {<People officers={siteContent.officers}/>}
+                element= {<People data={siteContent.peopleContent}/>}
               />
               <Route 
                 path="familias" 
