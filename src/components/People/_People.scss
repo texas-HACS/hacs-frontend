@@ -50,19 +50,30 @@
     }
 
     .alumni {
-      padding-bottom: 1em;
-      width: fit-content;
+      padding-bottom: 2em;
+      // width: fit-content;
+
+      a {
+        color: $hacs-blue;
+      }
+
+      hr {
+        border: 1px solid $hacs-blue;
+        border-radius: 1px;
+      }
 
       .section-title {
         margin-bottom: 35px;
       }
 
       .dropdown {
-        height:40px;
-        margin:0;
-        line-height: 40px;
+        height: 50px;
+        margin: 10px 0px;
+        line-height: 50px;
         display: flex;
         justify-content: space-between;
+        border-bottom: 2px solid $hacs-blue;
+        border-radius: 3px;
 
         span {
           color: $hacs-blue;
@@ -88,7 +99,7 @@
       .officer {
         display: flex;
         flex-direction: column;
-        width: 200px;
+        width: 230px;
         text-align: center;
 
         img{
