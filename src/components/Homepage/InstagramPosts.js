@@ -16,7 +16,7 @@ function InstagramPosts(props) {
             return new Date(b.date) - new Date(a.date);
           })
           .map((post) => {
-            return <InstagramEmbed className="post" url={post.url} />
+            return <InstagramEmbed className="post" url={post.url} width={"30vw"}/>
           })}
       </div>
 

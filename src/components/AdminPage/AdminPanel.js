@@ -30,6 +30,16 @@ function AdminPanel(props) {
   const [scholarships, setScholarships] = useState(null);
   const [images, setImages] = useState(null);
   const [selected, setSelected] = useState(null);
+  const [officerOpen, setOfficerOpen] = useState(false);
+  const [instagramOpen, setInstagramOpen] = useState(false);
+  const [familiasOpen, setFamiliasOpen] = useState(false);
+  const [pointsOpen, setPointsOpen] = useState(false);
+  const [sponsorOpen, setSponsorOpen] = useState(false);
+  const [packagesOpen, setPackagesOpen] = useState(false);
+  const [eventsOpen, setEventsOpen] = useState(false);
+  const [jobsOpen, setJobsOpen] = useState(false);
+  const [scholarshipsOpen, setScholarshipsOpen] = useState(false);
+  const [imageOpen, setImageOpen] = useState(false);
 
   // Redundant? We already get this info from the props passed in. Might be to allow updates to show
   useEffect(() => {
@@ -303,6 +313,14 @@ function AdminPanel(props) {
     props.signoutUser();
   };
 
+  const up = (
+    <span><i className="fa fa-caret-up"></i></span>
+  );
+
+  const down = (
+    <span><i className="fa fa-caret-down"></i></span>
+  );
+
   // setting up the various elements that allow editing on the admin page
   const signInLinkEdit =
     data.redirects.signInLink !== undefined ? (
@@ -312,19 +330,18 @@ function AdminPanel(props) {
       />
     ) : null;
 
-  const officersEdit = (
-    <div className="admin-group">
-      <h2 className="admin-group-title">Officers</h2>
-      {data.officers !== undefined
-        ? Object.keys(data.officers)
+  const officersData = (
+    <div>
+      {data.peopleContent.officers !== undefined
+        ? Object.keys(data.peopleContent.officers)
             ?.sort((a_uid, b_uid) => {
-              return data.officers[a_uid].order - data.officers[b_uid].order
+              return data.peopleContent.officers[a_uid].order - data.peopleContent.officers[b_uid].order
             })
             .map((uid) => (
               <OfficerEdit
                 id={uid}
                 key={uid}
-                data={data.officers[uid]}
+                data={data.peopleContent.officers[uid]}
                 handleUpdate={updateOfficer}
                 handleDelete={deleteOfficer}
               />
@@ -337,6 +354,16 @@ function AdminPanel(props) {
         data={{}}
       />
     </div>
+  )
+
+  const officersEdit = (
+    <div className="admin-group">
+      <h2 className="admin-group-title" onClick={() => setOfficerOpen(!officerOpen)}>
+        Officers
+        {officerOpen ? up : down}
+      </h2>
+      {!!officerOpen && officersData}
+    </div>
   );
 
   const memberOfTheWeekEdit =
@@ -347,9 +374,8 @@ function AdminPanel(props) {
       />
     ) : null;
 
-  const instagramEdit = (
-    <div className="admin-group">
-      <h2 className="admin-group-title">Instagram Feed</h2>
+  const instagramData = (
+    <div>
       {data.posts !== undefined
         ? Object.keys(data.posts)
           .sort((a, b) => {
@@ -366,102 +392,148 @@ function AdminPanel(props) {
         : null
       } 
     </div>
+  )
+
+  const instagramEdit = (
+    <div className="admin-group">
+      <h2 className="admin-group-title" onClick={() => setInstagramOpen(!instagramOpen)}>
+        Instagram Feed
+        {instagramOpen ? up : down}
+      </h2>
+      {!!instagramOpen && instagramData}
+    </div>
   );
+
+  const familiasData = (
+    <div>
+      {data.familiasContent.familias !== undefined
+        ? Object.keys(data.familiasContent.familias)
+            .map((uid) => (
+              <FamiliaEdit
+                id={uid}
+                key={uid}
+                data={data.familiasContent.familias[uid]}
+                handleUpdate={updateFamilia}
+                handleDelete={deleteFamilia}
+              />
+            ))
+        : null}
+      <FamiliaEdit
+        addNew
+        handleUpdate={updateFamilia}
+        handleDelete={deleteFamilia}
+        data={{}}
+      />  
+    </div>
+  )
+
+  const pointsData = (
+    <div>
+      {data.familiasContent.points !== undefined 
+        ? Object.keys(data?.familiasContent?.points)
+          .map((uid) => (
+            <PointSystemEdit
+              id={uid}
+              key={uid}
+              data={data?.familiasContent?.points[uid]}
+              handleUpdate={updatePoints}
+              handleDelete={deletePoints}
+            />
+          ))
+      : null}
+      <PointSystemEdit
+        bonus
+        id={"bonus"}
+        key={"bonus"}
+        data={data?.familiasContent?.bonus}
+        handleUpdate={updateBonus}
+      />
+      <PointSystemEdit
+        addNew
+        handleUpdate={updatePoints}
+        handleDelete={deletePoints}
+        data={{}}
+      />
+    </div>
+  )
 
   const familiasEdit = (
     <div className="admin-group">
-    <h2 className="admin-group-title">Familias</h2>
-    {data.familiasContent.familias !== undefined
-      ? Object.keys(data.familiasContent.familias)
-          .map((uid) => (
-            <FamiliaEdit
-              id={uid}
-              key={uid}
-              data={data.familiasContent.familias[uid]}
-              handleUpdate={updateFamilia}
-              handleDelete={deleteFamilia}
-            />
-          ))
-      : null}
-    <FamiliaEdit
-      addNew
-      handleUpdate={updateFamilia}
-      handleDelete={deleteFamilia}
-      data={{}}
-    />  
-    <h2 className="admin-group-title">Point System</h2> 
-    {data.familiasContent.points !== undefined 
-      ? Object.keys(data?.familiasContent?.points)
-        .map((uid) => (
-          <PointSystemEdit
-            id={uid}
-            key={uid}
-            data={data?.familiasContent?.points[uid]}
-            handleUpdate={updatePoints}
-            handleDelete={deletePoints}
-          />
-        ))
-    : null}
-    <PointSystemEdit
-      bonus
-      id={"bonus"}
-      key={"bonus"}
-      data={data?.familiasContent?.bonus}
-      handleUpdate={updateBonus}
-    />
-    <PointSystemEdit
-      addNew
-      handleUpdate={updatePoints}
-      handleDelete={deletePoints}
-      data={{}}
-    />
+    <h2 className="admin-group-title" onClick={() => setFamiliasOpen(!familiasOpen)}>
+      Familias
+      {familiasOpen ? up : down}
+    </h2>
+    {!!familiasOpen && familiasData}
+    <h2 className="admin-group-title" onClick={() => setPointsOpen(!pointsOpen)}>
+      Point System
+      {pointsOpen ? up : down}
+    </h2> 
+    {!!pointsOpen && pointsData}
   </div>
   );
 
+  const sponsorData = (
+    <div>
+      {data.sponsorContent.sponsors !== undefined
+        ? Object.keys(data.sponsorContent.sponsors)
+            .sort((a, b) => {
+              // sorting by tier and then by names
+              return data.sponsorContent.sponsors[b].tier.localeCompare(data.sponsorContent.sponsors[a].tier) || data.sponsorContent.sponsors[a].name.localeCompare(data.sponsorContent.sponsors[b].name)
+            })
+            .map((uid) => (
+              <SponsorEdit
+                id={uid}
+                key={uid}
+                data={data.sponsorContent.sponsors[uid]}
+                handleUpdate={updateSponsor}
+                handleDelete={deleteSponsor}
+              />
+            ))
+        : null}
+      <SponsorEdit
+        addNew
+        handleUpdate={updateSponsor}
+        handleDelete={deleteSponsor}
+        data={{}}
+      />  
+    </div>
+  )
+
+  const packagesData = (
+    <div>
+      {data.sponsorContent.packages !== undefined
+        ? Object.keys(data.sponsorContent.packages)
+            .map((uid) => (
+              <PackageEdit
+                id={uid}
+                key={uid}
+                data={data.sponsorContent.packages[uid]}
+                handleUpdate={updatePackage}
+                handleDelete={deletePackage}
+              />
+            ))
+        : null}
+      <PackageEdit
+        addNew
+        handleUpdate={updatePackage}
+        handleDelete={deletePackage}
+        data={{}}
+      />
+    </div>
+  )
+
   const sponsorEdit = (
     <div className="admin-group">
-    <h2 className="admin-group-title">Sponsors</h2>
-    {data.sponsorContent.sponsors !== undefined
-      ? Object.keys(data.sponsorContent.sponsors)
-          .sort((a, b) => {
-            // sorting by tier and then by names
-            return data.sponsorContent.sponsors[b].tier.localeCompare(data.sponsorContent.sponsors[a].tier) || data.sponsorContent.sponsors[a].name.localeCompare(data.sponsorContent.sponsors[b].name)
-          })
-          .map((uid) => (
-            <SponsorEdit
-              id={uid}
-              key={uid}
-              data={data.sponsorContent.sponsors[uid]}
-              handleUpdate={updateSponsor}
-              handleDelete={deleteSponsor}
-            />
-          ))
-      : null}
-    <SponsorEdit
-      addNew
-      handleUpdate={updateSponsor}
-      handleDelete={deleteSponsor}
-      data={{}}
-    />  
-    <h2 className="admin-group-title">Sponsor Packages</h2> 
-    {data.sponsorContent.packages !== undefined
-      ? Object.keys(data.sponsorContent.packages)
-          .map((uid) => (
-            <PackageEdit
-              id={uid}
-              key={uid}
-              data={data.sponsorContent.packages[uid]}
-              handleUpdate={updatePackage}
-              handleDelete={deletePackage}
-            />
-          ))
-      : null}
-    <PackageEdit
-      addNew
-      handleUpdate={updatePackage}
-      handleDelete={deletePackage}
-      data={{}}
-    />
+    <h2 className="admin-group-title" onClick={() => setSponsorOpen(!sponsorOpen)}>
+      Sponsors
+      {sponsorOpen ? up : down}
+    </h2>
+    {!!sponsorOpen && sponsorData}
+    <h2 className="admin-group-title" onClick={() => setPackagesOpen(!packagesOpen)}>
+      Sponsor Packages
+      {packagesOpen ? up : down}
+    </h2> 
+    {!!packagesOpen && packagesData}
   </div>
   );
       
@@ -473,9 +545,9 @@ function AdminPanel(props) {
     delete updatedEvents[uid];
     setEvents(updatedEvents);
   };
-  eventsEdit = (
-    <div className="admin-group">
-      <h2 className="admin-group-title">Events</h2>
+
+  var eventsData = (
+    <div>
       {events
         ? Object.keys(events)
             .map((uid) => events[uid])
@@ -496,6 +568,16 @@ function AdminPanel(props) {
         : null}
       <EventEdit addNew user={props.user} handleUpdate={rerenderEvents} />
     </div>
+  )
+
+  eventsEdit = (
+    <div className="admin-group">
+      <h2 className="admin-group-title" onClick={() => setEventsOpen(!eventsOpen)}>
+        Events
+        {eventsOpen ? up : down}
+      </h2>
+      {!!eventsOpen && eventsData}
+    </div>
   );
 
   const rerenderScholarhsips = (data) =>
@@ -505,9 +587,9 @@ function AdminPanel(props) {
     delete updatedScholarships[uid];
     setScholarships(updatedScholarships);
   };
-  scholarshipsEdit = (
-    <div className="admin-group">
-      <h2 className="admin-group-title">Scholarship Opportunities</h2>
+
+  var scholarshipsData = (
+    <div>
       {scholarships
         ? Object.keys(scholarships)
             .map((uid) => scholarships[uid])
@@ -531,6 +613,16 @@ function AdminPanel(props) {
         handleUpdate={rerenderScholarhsips}
       />
     </div>
+  )
+
+  scholarshipsEdit = (
+    <div className="admin-group">
+      <h2 className="admin-group-title" onClick={() => setScholarshipsOpen(!scholarshipsOpen)}>
+        Scholarship Opportunities
+        {scholarshipsOpen ? up : down}
+      </h2>
+      {!!scholarshipsOpen && scholarshipsData}
+    </div>
   );
 
   const rerenderJobs = (data) => setJobs({ ...jobs, [data.uid]: data });
@@ -539,9 +631,9 @@ function AdminPanel(props) {
     delete updatedJobs[uid];
     setJobs(updatedJobs);
   };
-  jobsEdit = (
-    <div className="admin-group">
-      <h2 className="admin-group-title">Job Postings</h2>
+
+  var jobsData = (
+    <div>
       {jobs
         ? Object.keys(jobs)
             .map((uid) => jobs[uid])
@@ -560,6 +652,16 @@ function AdminPanel(props) {
             ))
         : null}
       <JobEdit addNew user={props.user} handleUpdate={rerenderJobs} />
+    </div>
+  )
+
+  jobsEdit = (
+    <div className="admin-group">
+      <h2 className="admin-group-title" onClick={() => setJobsOpen(!jobsOpen)}>
+        Job Postings
+        {jobsOpen ? up : down}
+      </h2>
+      {!!jobsOpen && jobsData}
     </div>
   );
 
@@ -621,38 +723,49 @@ function AdminPanel(props) {
       e.target.style.filter = "brightness(50%)";
     }
   }
-  sliderEdit =
-  <div className="admin-group">
-  <h2 className="admin-group-title" style={{marginBottom:0}}>Image Slider</h2>
-  <div className="flex-row carousel">
-  {images
-    ? Object.keys(images)
-      ?.map((uid) => images[uid])
-      ?.sort((a_uid, b_uid) => {
-        return a_uid?.order - b_uid?.order
-      })
-      ?.map((i) => (
-      // will need to adjust sizing
-        <div>
-          <p style={{textAlign:"center"}}>{i.order + ". " + i.alt}</p>
-          <img src={i?.image?.url} alt={i?.alt} id={i?.uid} key={i?.uid} className="image" onClick={handleSelect}/>
-        </div>
-      ))
-    : null}
-  </div>
-  {selected
-    ? <SliderEdit
-            id={selected?.uid}
-            key={selected?.uid}
-            data={selected}
-            user={props.user}
-            handleUpdate={rerenderImages}
-            handleDelete={deleteImage}
-          />
-    : null
-  }
-  <SliderEdit addNew user={props.user} handleUpdate={rerenderImages} />
-  </div>
+
+  const sliderData = (
+    <div>
+      <div className="flex-row carousel">
+      {images
+        ? Object.keys(images)
+          ?.map((uid) => images[uid])
+          ?.sort((a_uid, b_uid) => {
+            return a_uid?.order - b_uid?.order
+          })
+          ?.map((i) => (
+          // will need to adjust sizing
+            <div>
+              <p style={{textAlign:"center"}}>{i.order + ". " + i.alt}</p>
+              <img src={i?.image?.url} alt={i?.alt} id={i?.uid} key={i?.uid} className="image" onClick={handleSelect}/>
+            </div>
+          ))
+        : null}
+      </div>
+      {selected
+        ? <SliderEdit
+                id={selected?.uid}
+                key={selected?.uid}
+                data={selected}
+                user={props.user}
+                handleUpdate={rerenderImages}
+                handleDelete={deleteImage}
+              />
+        : null
+      }
+      <SliderEdit addNew user={props.user} handleUpdate={rerenderImages} />
+    </div>
+  )
+
+  sliderEdit = (
+    <div className="admin-group">
+    <h2 className="admin-group-title" style={{marginBottom:0}} onClick={() => setImageOpen(!imageOpen)}>
+      Image Slider
+      {imageOpen ? up : down}
+    </h2>
+    {!!imageOpen && sliderData}
+    </div>
+  )
 
   return (
     <div className="admin-panel">
