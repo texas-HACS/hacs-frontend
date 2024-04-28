@@ -17,6 +17,7 @@ import PointSystemEdit from "./PointSystemEdit";
 import InstagramEdit from "./InstagramEdit";
 import SponsorEdit from "./SponsorEdit";
 import PackageEdit from "./PackageEdit";
+import PeopleEdit from "./PeopleEdit";
 
 // import SliderApi from "../../api/slider"; // not working would need to check heroku!
 
@@ -40,6 +41,7 @@ function AdminPanel(props) {
   const [jobsOpen, setJobsOpen] = useState(false);
   const [scholarshipsOpen, setScholarshipsOpen] = useState(false);
   const [imageOpen, setImageOpen] = useState(false);
+  const [peopleOpen, setPeopleOpen] = useState(false);
 
   // Redundant? We already get this info from the props passed in. Might be to allow updates to show
   useEffect(() => {
@@ -286,7 +288,6 @@ function AdminPanel(props) {
 
   const updatePackage = (packageData) => {
     let updating = {...data};
-    console.log(packageData);
     if (updating.sponsorContent.packages !== undefined) {
       updating.sponsorContent.packages[packageData.uid] = packageData
     } else {
@@ -294,7 +295,6 @@ function AdminPanel(props) {
       let packages = {}
       packages[uid] = packageData
       updating.sponsorContent = {...updating.sponsorContent, packages:{...packages}}
-      console.log(updating);
     }
     setData(updating);
     setUData(updating);
@@ -307,6 +307,20 @@ function AdminPanel(props) {
     }
     setData(updating);
     setUData(updating);
+  }
+
+  const updatePeople = (peopleData) => {
+    let updating = {...data};
+    if (updating.peopleContent?.pastYears != null) {
+      updating.peopleContent.pastYears[peopleData.uid] = peopleData
+    } else {
+      let uid = peopleData.uid
+      let pastYears = {}
+      pastYears[uid] = peopleData
+      updating.peopleContent = {...updating.peopleContent, pastYears:{...pastYears}}
+      setData(updating);
+      setUData(updating);
+    }
   }
 
   const submitSignout = () => {
@@ -536,6 +550,40 @@ function AdminPanel(props) {
     {!!packagesOpen && packagesData}
   </div>
   );
+
+  const peopleData = (
+    <div>
+      {data.peopleContent.pastYears !== undefined
+        ? Object.keys(data.peopleContent.pastYears)
+            .sort((a, b) => {
+              return b.localeCompare(a)
+            })
+            .map((uid) => (
+              <PeopleEdit
+                id={uid}
+                key={uid}
+                data={data.peopleContent.pastYears[uid]}
+                handleUpdate={updatePeople}
+              />
+            ))
+        : null}
+        <PeopleEdit
+          addNew
+          handleUpdate={updatePeople}
+          data={{}}
+        />
+    </div>
+  );
+
+  const peopleEdit = (
+    <div className="admin-group">
+      <h2 className="admin-group-title" onClick={() => setPeopleOpen(!peopleOpen)}>
+        Past Officers and Alumni
+        {peopleOpen ? up : down}
+      </h2>
+      {!!peopleOpen && peopleData}
+    </div>
+  )
       
   var eventsEdit, jobsEdit, scholarshipsEdit, sliderEdit;
 
@@ -772,6 +820,7 @@ function AdminPanel(props) {
       {signInLinkEdit}
       {/* TODO: Add ability to drag and drop ordering to enforce indices. */}
       {officersEdit}
+      {peopleEdit}
       {memberOfTheWeekEdit}
       {instagramEdit}
       {familiasEdit}

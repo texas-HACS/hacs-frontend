@@ -1,6 +1,6 @@
 import React from "react";
 
-function AlumniEdit(props) {
+function PastOfficerEdit(props) {
 
     return (
         <div>
@@ -9,4 +9,4 @@ function AlumniEdit(props) {
     )
 }
 
-export default AlumniEdit;
+export default PastOfficerEdit;
