@@ -33,7 +33,11 @@ function People(props) {
             <section>
                 <h1>People</h1>
                 <p className="description">
-                    History of HACS ...
+                    The Hispanic Association of Computer Scientists (HACS) aims to empower and 
+                    provide support for Hispanic and Latinx students in computer science through 
+                    academic, professional, and social events. Our Officers make all of our events 
+                    possible and active members can apply for a role at the end of each year. HACS 
+                    alumni are also showcased for networking opportunities.
                 </p>
             </section>
             <Leadership officers={props.data?.officers} />
