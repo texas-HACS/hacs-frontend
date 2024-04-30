@@ -4,7 +4,6 @@ import ImageSlider from "./ImageSlider";
 import MemberHighlight from "./MemberHighlight";
 import UpcomingEvents from "./UpcomingEvents";
 import InstagramPosts from "./InstagramPosts";
-import Leadership from "./Leadership";
 
 const placeholderEvents = [
   {
@@ -33,7 +32,6 @@ function Homepage(props) {
       <MemberHighlight member={props.memberOfWeek} />
       <UpcomingEvents events={placeholderEvents} />
       <InstagramPosts posts={props.posts}/>
-      <Leadership officers={props.officers} />
     </section>
   );
 }

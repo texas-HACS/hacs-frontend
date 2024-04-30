@@ -4,6 +4,7 @@ import FileEdit from "../MediaManagement/FileEdit";
 function MemberOfTheWeekEdit(props) {
   const [editing, setEditing] = useState(false);
   const [data, setData] = useState(props.data);
+  const [open, setOpen] = useState(false);
 
   const handleSave = (e) => {
     props.handleUpdate(data);
@@ -22,6 +23,14 @@ function MemberOfTheWeekEdit(props) {
     value = value === "" ? null : value;
     changeData(name, value);
   };
+
+  const updateVisibility = () => {
+    setOpen(!open);
+
+    if (open) {
+      setEditing(false);
+    }
+  }
 
   const editSection = (
     <div className="admin-edit form-wrapper">
@@ -77,13 +86,25 @@ function MemberOfTheWeekEdit(props) {
     </div>
   );
 
+  const up = (
+    <span><i className="fa fa-caret-up"></i></span>
+  );
+
+  const down = (
+    <span><i className="fa fa-caret-down"></i></span>
+  );
+
   return (
     <div className="form-group">
-      <h2 className="form-group-title">Member of the Week</h2>
+      <h2 className="form-group-title" onClick={updateVisibility} style={{cursor:"pointer"}}>
+        Member of the Week
+        {open ? up : down}
+      </h2>
+      {!!open && (
       <div className="editable-group">
-        {saveSection}
+        {!!open && saveSection}
         {!!editing && editSection}
-      </div>
+      </div>)}
     </div>
   );
 }

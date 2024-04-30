@@ -1,0 +1,148 @@
+@import "../../variables";
+
+.people {
+
+    
+    h1 {
+        font-family: $title-font;
+        font-size: 36px;
+    }
+
+    section {
+        width: $display-max-width;
+        padding: $full-screen-safe-zone;
+    }
+
+    .leadership {
+    
+        .container {
+          margin: 0 auto;
+          margin-top: 100px;
+          max-width: 1240px;
+    
+          h1 {
+            font-weight: bold;
+            font-size: 48px;
+            line-height: 63px;
+            font-family: $title-font;
+            color: $hacs-blue;
+            padding: 60px 0;
+            text-align: center;
+            margin: 0;
+          }
+        }
+    
+        .leadership-wrapper {
+          padding-bottom: 60px;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-evenly;
+        }
+    
+        .card {
+          img {
+            height: 380px;
+            width: 380px;
+            object-fit: cover;
+            object-position: 50% 30%;
+          }
+        }
+    }
+
+    .alumni {
+      padding-bottom: 2em;
+      // width: fit-content;
+
+      a {
+        color: $hacs-blue;
+      }
+
+      hr {
+        border: 1px solid $hacs-blue;
+        border-radius: 1px;
+      }
+
+      .section-title {
+        margin-bottom: 35px;
+      }
+
+      .dropdown {
+        height: 50px;
+        margin: 10px 0px;
+        line-height: 50px;
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 2px solid $hacs-blue;
+        border-radius: 3px;
+        cursor: pointer;
+
+        span {
+          color: $hacs-blue;
+          font-size: 27px;
+        }
+      }
+
+      .dropdown:hover {
+        font-size: 1.28em;
+
+        span {
+          font-size: 27px;
+        }
+      }
+
+      .officers {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+      }
+
+      .officer {
+        display: flex;
+        flex-direction: column;
+        width: 230px;
+        text-align: center;
+
+        img{
+          width: 100px;
+          height: 100px;
+          border-radius: 100%;
+          object-fit: cover;
+          margin: auto;
+        }
+      }
+
+      .grads {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+      }
+
+      .grad {
+        text-align: center;
+      }
+    }
+
+
+}
+
+// Smartphone/Low-Res Tablets
+@media only screen and (max-width: 768px) {
+    .people {
+        .leadership {
+            .leadership-wrapper .react-reveal {
+              margin: 0 auto !important;
+            }
+      
+            .card {
+              img {
+                height: 300px;
+                width: 300px;
+                object-fit: cover;
+                object-position: 50% 30%;
+              }
+            }
+          }
+    }
+}
