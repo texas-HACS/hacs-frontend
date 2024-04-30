@@ -6,7 +6,7 @@ function PastOfficerEdit(props) {
     const [data, setData] = useState({...props.data});
 
     const handleSave = () => {
-        props.handleUpdate(data);
+        props.handleUpdate(props.year, "pastOfficers", data);
         setEditing(false);
     };
 
@@ -17,7 +17,7 @@ function PastOfficerEdit(props) {
     };
     
     const handleChange = (e) => {
-        let { name, value, type } = e.target;
+        let { name, value } = e.target;
         value = value === "" ? null : value;
         changeData(name, value);
     };

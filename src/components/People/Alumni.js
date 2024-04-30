@@ -13,10 +13,10 @@ function Alumni(props) {
                     return (
                         <div className="officer">
                             <p><b>{props.pastOfficers[uid].role}</b></p> 
-                            <img src={props.pastOfficers[uid].image.url}/>
+                            <img src={props.pastOfficers[uid]?.image?.url}/>
                             <p>
                                 {props.pastOfficers[uid].name} 
-                                <a href={props.pastOfficers[uid].linkedin}>
+                                <a href={props.pastOfficers[uid]?.linkedin}>
                                         <i className="fab fa-linkedin"></i>
                                 </a>
                             </p>
@@ -37,7 +37,7 @@ function Alumni(props) {
                     return (
                             <p className="grad">
                                 {props.alumni[uid].name}
-                                <a href={props.alumni[uid].linkedin}>
+                                <a href={props.alumni[uid]?.linkedin}>
                                     <i className="fab fa-linkedin"></i>
                                 </a>
                             </p>
@@ -65,7 +65,7 @@ function Alumni(props) {
         <span><i className="fa fa-caret-down"></i></span>
     )
 
-    return (
+    return ( props.alumni == "" && props.pastOfficers == "" ? null :
         <div>
         <h3 onClick={() => {setOpen(!open)}} className="dropdown">
             {props.year}

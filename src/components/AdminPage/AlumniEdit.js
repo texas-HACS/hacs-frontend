@@ -9,7 +9,7 @@ function AlumniEdit(props) {
     })
 
     const handleSave = () => {
-        props.handleUpdate(data);
+        props.handleUpdate(props.year, "alumni", data);
         setEditing(false);
         if (props.addNew) {
           setData({ uid: newUid("alum") });
@@ -23,24 +23,23 @@ function AlumniEdit(props) {
       };
     
       const handleChange = (e) => {
-        let { name, value, type } = e.target;
+        let { name, value } = e.target;
         value = value === "" ? null : value;
         changeData(name, value);
       };
     
-    // need to implement the handle delete in adminpanel.js
-    //   const handleDelete = () => {
-    //     props.handleDelete(data.uid);
-    //     setEditing(false);
-    //   };
+      const handleDelete = () => {
+        props.handleDelete(props.year, data.uid);
+        setEditing(false);
+      };
     
-    //   const confirmDelete = () => {
-    //     if (window.confirm("Are you sure you want to delete this alum?")) {
-    //       handleDelete();
-    //     } else {
-    //       return;
-    //     };
-    //   };
+      const confirmDelete = () => {
+        if (window.confirm("Are you sure you want to delete this alum?")) {
+          handleDelete();
+        } else {
+          return;
+        };
+      };
 
     const editSection = (
         <div className="admin-edit form-wrapper">
@@ -76,7 +75,7 @@ function AlumniEdit(props) {
             <button className="btn btn-primary" onClick={handleSave}>
                 {props.addNew ? "Create" : "Save"}
             </button>
-            <button className="btn btn-primary" onClick={() => setEditing(false)} type="button">
+            <button className="btn btn-primary" onClick={props.addNew ? () => setEditing(false) : confirmDelete} type="button">
                 {props.addNew ? "Cancel" : "Delete"}
             </button>
             </div>
@@ -86,7 +85,7 @@ function AlumniEdit(props) {
     const saveSection = (
         <div onClick={() => setEditing(editing ^ true)}>
           <p className="editable">
-            {data?.name == null ? (
+            {props.data?.name == null ? (
                 "Add Alum"
             ) : (
               <span>

@@ -263,7 +263,6 @@ function AdminPanel(props) {
 
   const updateSponsor = (sponsorData) => {
     let updating = {...data};
-    console.log(sponsorData);
     if (updating.sponsorContent.sponsors !== undefined) {
       updating.sponsorContent.sponsors[sponsorData.uid] = sponsorData
     } else {
@@ -271,7 +270,6 @@ function AdminPanel(props) {
       let sponsors = {}
       sponsors[uid] = sponsorData
       updating.sponsorContent = {...updating.sponsorContent, sponsors:{...sponsors}}
-      console.log(updating);
     }
     setData(updating);
     setUData(updating);
@@ -309,18 +307,47 @@ function AdminPanel(props) {
     setUData(updating);
   }
 
-  const updatePeople = (peopleData) => {
+  const updatePeople = (year, section, peopleData) => {
     let updating = {...data};
-    if (updating.peopleContent?.pastYears != null) {
-      updating.peopleContent.pastYears[peopleData.uid] = peopleData
+    console.log(updating.peopleContent?.pastYears[year]?.[section] != null)
+    if (updating.peopleContent?.pastYears[year]?.[section] != null) {
+      updating.peopleContent.pastYears[year][section][peopleData.uid] = peopleData
     } else {
       let uid = peopleData.uid
-      let pastYears = {}
-      pastYears[uid] = peopleData
-      updating.peopleContent = {...updating.peopleContent, pastYears:{...pastYears}}
-      setData(updating);
-      setUData(updating);
+      let sectionObject = {}
+      sectionObject[uid] = peopleData
+      if (section == "alumni") {
+        updating.peopleContent.pastYears[year] = {...updating.peopleContent.pastYears[year] , alumni:{...sectionObject}}
+      } else {
+        updating.peopleContent.pastYears[year] = {...updating.peopleContent.pastYears[year] , pastOfficers:{...sectionObject}}
+      }
+      console.log(updating.peopleContent.pastYears[year])
     }
+    setData(updating);
+    setUData(updating);
+  }
+
+  const addYear = (year1, year2) => {
+    let label = year1+"-"+year2;
+    let updating = {...data};
+    if (updating.peopleContent?.pastYears != null) {
+      updating.peopleContent.pastYears[label] = {pastOfficers:"", alumni:""}
+    } else {
+      let pastYears = {}
+      pastYears[label] = {pastOfficers:{}, alumni:{}}
+      updating.peopleContent = {...updating.peopleContent, pastYears:{...pastYears}}
+    }
+    setData(updating);
+    setUData(updating);
+  }
+
+  const deleteAlum = (year, uid) => {
+    let updating = {...data};
+    if (updating.peopleContent?.pastYears?.[year]?.alumni?.[uid] != null) {
+      delete updating.peopleContent?.pastYears?.[year]?.alumni?.[uid];
+    }
+    setData(updating);
+    setUData(updating);
   }
 
   const submitSignout = () => {
@@ -564,12 +591,14 @@ function AdminPanel(props) {
                 key={uid}
                 data={data.peopleContent.pastYears[uid]}
                 handleUpdate={updatePeople}
+                handleDelete={deleteAlum}
               />
             ))
         : null}
         <PeopleEdit
           addNew
           handleUpdate={updatePeople}
+          handleAddYear={addYear}
           data={{}}
         />
     </div>

@@ -4,21 +4,27 @@ import AlumniEdit from "./AlumniEdit";
 
 function PeopleEdit(props) {
     const [open, setOpen] = useState(false);
+    let year1;
+    let year2;
 
     let pastOfficerData;
     let alumniData;
 
-    const handleChange = () => {
-
+    const handleChange = (e) => {
+        let { name, value } = e.target;
+        value = value === "" ? null : value;
+        name == "year1" ? year1 = value : year2 = value;
     }
 
     const handleSave = () => {
-
+        if (year1 && year2) {
+            props.handleAddYear(year1, year2);
+            setOpen(false);
+        }
     }
 
     if (!props.addNew) {
         pastOfficerData = (
-            // might need to add check to prevent error if past officers is empty
             // add a note that offices are added by clicking the archive button under the officer section
             Object.keys(props.data.pastOfficers)
                 .sort((a, b) => {
@@ -28,34 +34,57 @@ function PeopleEdit(props) {
                     <PastOfficerEdit
                         id={uid}
                         key={uid}
+                        year={props.id}
                         data={props.data.pastOfficers[uid]}
                         handleUpdate={props.handleUpdate}
                     />
                 ))
         )
 
-        alumniData = (
-            <div>
-                {/* Might need to add a check to prevent errors if alumni data is empty */}
-                {Object.keys(props.data.alumni)
-                    .sort((a, b) => {
-                        return props.data.alumni[a].name.localeCompare(props.data.alumni[b].name)
-                    })
-                    .map((uid) => (
-                        <AlumniEdit
-                            id={uid}
-                            key={uid}
-                            data={props.data.alumni[uid]}
-                            handleUpdate={props.handleUpdate}
-                        />
-                    ))}
-                <AlumniEdit
-                    addNew
-                    handleUpdate={props.handleUpdate}
-                    data={{}}
-                />
-            </div>
-        )
+        if (props.data.alumni) {
+            alumniData = (
+                <div>
+                    {/* Might need to add a check to prevent errors if alumni data is empty */}
+                    <hr/>
+                    <p><b>Graduates</b></p>
+                    {Object.keys(props.data?.alumni)
+                        .sort((a, b) => {
+                            return props.data?.alumni[a].name.localeCompare(props.data?.alumni[b].name)
+                        })
+                        .map((uid) => (
+                            <AlumniEdit
+                                id={uid}
+                                key={uid}
+                                year={props.id}
+                                data={props.data?.alumni[uid]}
+                                handleUpdate={props.handleUpdate}
+                                handleDelete={props.handleDelete}
+                            />
+                        ))}
+                    <AlumniEdit
+                        addNew
+                        year={props.id}
+                        handleUpdate={props.handleUpdate}
+                        handleDelete={props.handleDelete}
+                        data={{}}
+                    />
+                </div>
+            )
+        } else {
+            alumniData = (
+                <div>
+                    <hr/>
+                    <p><b>Graduates</b></p>
+                    <AlumniEdit
+                        addNew
+                        year={props.id}
+                        handleUpdate={props.handleUpdate}
+                        handleDelete={props.handleDelete}
+                        data={{}}
+                    />
+                </div>
+            )
+        }
     }
 
     const editSection = (
@@ -89,21 +118,33 @@ function PeopleEdit(props) {
         </div>
     )
 
+    const up = (
+        <span><i className="fa fa-caret-up"></i></span>
+    );
+    
+    const down = (
+        <span><i className="fa fa-caret-down"></i></span>
+    );
+
     return (
-        props.addNew 
-            ? (
-                <div>
-                    <h3 onClick={() => setOpen(!open)}>Add Year</h3>
-                    {!!open && editSection}
-                </div>
-            ) 
-            : (
-                <div>
-                <h3 onClick={() => setOpen(!open)}>{props.id}</h3>
-                {!!open && pastOfficerData}
-                {!!open && alumniData}
-                </div>
-            )
+        props.addNew ? (
+            <div>
+                <h3 onClick={() => setOpen(!open)}>
+                    Add Year
+                    {open ? up : down}
+                </h3>
+                {!!open && editSection}
+            </div>
+        ) : (
+            <div>
+            <h3 onClick={() => setOpen(!open)}>
+                {props.id}
+                {open ? up : down}
+            </h3>
+            {!!open && pastOfficerData}
+            {!!open && alumniData}
+            </div>
+        )
     )
 }
 
