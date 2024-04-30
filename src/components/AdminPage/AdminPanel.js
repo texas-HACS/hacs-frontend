@@ -42,6 +42,9 @@ function AdminPanel(props) {
   const [scholarshipsOpen, setScholarshipsOpen] = useState(false);
   const [imageOpen, setImageOpen] = useState(false);
   const [peopleOpen, setPeopleOpen] = useState(false);
+  const [archiveOpen, setArchiveOpen] = useState(false);
+  let year1;
+  let year2;
 
   // Redundant? We already get this info from the props passed in. Might be to allow updates to show
   useEffect(() => {
@@ -159,15 +162,15 @@ function AdminPanel(props) {
   // these functions will update the frontend when changes are made and saved
   const updateOfficer = (officerData) => {
     let updating = { ...data };
-    updating.officers[officerData.uid] = officerData;
+    updating.peopleContent.officers[officerData.uid] = officerData;
     setData(updating);
     setUData(updating);
   };
 
   const deleteOfficer = (uid) => {
     let updating = { ...data };
-    if (updating.officers?.[uid] != null) {
-      delete updating.officers[uid];
+    if (updating.peopleContent.officers?.[uid] != null) {
+      delete updating.peopleContent.officers[uid];
     }
     setData(updating);
     setUData(updating);
@@ -309,8 +312,7 @@ function AdminPanel(props) {
 
   const updatePeople = (year, section, peopleData) => {
     let updating = {...data};
-    console.log(updating.peopleContent?.pastYears[year]?.[section] != null)
-    if (updating.peopleContent?.pastYears[year]?.[section] != null) {
+    if (updating.peopleContent?.pastYears[year]?.[section] != null && updating.peopleContent?.pastYears[year]?.[section] != "") {
       updating.peopleContent.pastYears[year][section][peopleData.uid] = peopleData
     } else {
       let uid = peopleData.uid
@@ -327,18 +329,46 @@ function AdminPanel(props) {
     setUData(updating);
   }
 
-  const addYear = (year1, year2) => {
+  const yearChange = (e) => {
+    let { name, value } = e.target;
+    value = value === "" ? null : value;
+    name == "year1" ? year1 = value : year2 = value;
+  }
+
+  const addYear = (year1, year2, archivedOfficers) => {
     let label = year1+"-"+year2;
     let updating = {...data};
-    if (updating.peopleContent?.pastYears != null) {
-      updating.peopleContent.pastYears[label] = {pastOfficers:"", alumni:""}
+    if (!archiveOfficers) {
+      if (updating.peopleContent?.pastYears != null) {
+        updating.peopleContent.pastYears[label] = {pastOfficers:"", alumni:""}
+      } else {
+        let pastYears = {}
+        pastYears[label] = {pastOfficers:"", alumni:""}
+        updating.peopleContent = {...updating.peopleContent, pastYears:{...pastYears}}
+      }
     } else {
-      let pastYears = {}
-      pastYears[label] = {pastOfficers:{}, alumni:{}}
-      updating.peopleContent = {...updating.peopleContent, pastYears:{...pastYears}}
+      let officers = {...archivedOfficers}
+      if (updating.peopleContent?.pastYears != null) {
+        
+        updating.peopleContent.pastYears[label] = {pastOfficers:{...officers}, alumni:""}
+      } else {
+        let pastYears = {}
+        pastYears[label] = {pastOfficers:{...officers}, alumni:""}
+        updating.peopleContent = {...updating.peopleContent, pastYears:{...pastYears}}
+      }
     }
     setData(updating);
     setUData(updating);
+  }
+
+  const confirmArchive = () => {
+    if (window.confirm("Are you sure you want to archive these officers?")) {
+      // this would call the add year and add the officers to the specified year
+      addYear(year1, year2, data.peopleContent.officers)
+      setArchiveOpen(false);
+    } else {
+      return
+    }
   }
 
   const deleteAlum = (year, uid) => {
@@ -371,6 +401,37 @@ function AdminPanel(props) {
       />
     ) : null;
 
+  const archiveOfficers = (
+    <div className="admin-edit form-wrapper">
+      <label>Year 1</label>
+      <input
+          id="year1-edit"
+          className="form-control-small"
+          name="year1"
+          type="number"
+          required
+          onChange={yearChange}
+      />
+      <label>Year 2</label>
+      <input
+          id="year2-edit"
+          className="form-control-small"
+          name="year2"
+          type="number"
+          required
+          onChange={yearChange}
+      />
+      <div className="button-container flex-row">
+          <button className="btn btn-primary" onClick={confirmArchive}>
+              Archive
+          </button>
+          <button className="btn btn-primary" onClick={() => setArchiveOpen(false)} type="button">
+              Cancel
+          </button>
+      </div>
+    </div>
+  )
+
   const officersData = (
     <div>
       {data.peopleContent.officers !== undefined
@@ -394,6 +455,10 @@ function AdminPanel(props) {
         handleDelete={deleteOfficer}
         data={{}}
       />
+      <p onClick={() => setArchiveOpen(!archiveOpen)}>
+        Archive Officers
+      </p>
+      {!!archiveOpen && archiveOfficers}
     </div>
   )
 

@@ -18,7 +18,7 @@ function PeopleEdit(props) {
 
     const handleSave = () => {
         if (year1 && year2) {
-            props.handleAddYear(year1, year2);
+            props.handleAddYear(year1, year2, null);
             setOpen(false);
         }
     }
