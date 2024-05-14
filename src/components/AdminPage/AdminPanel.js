@@ -349,8 +349,11 @@ function AdminPanel(props) {
     } else {
       let officers = {...archivedOfficers}
       if (updating.peopleContent?.pastYears != null) {
-        
-        updating.peopleContent.pastYears[label] = {pastOfficers:{...officers}, alumni:""}
+        if (updating.peopleContent.pastYears?.[label] != null) {
+          updating.peopleContent.pastYears[label] = {...updating.peopleContent.pastYears[label], pastOfficers:{...officers}}
+        } else {
+          updating.peopleContent.pastYears[label] = {pastOfficers:{...officers}, alumni:""}
+        }
       } else {
         let pastYears = {}
         pastYears[label] = {pastOfficers:{...officers}, alumni:""}
