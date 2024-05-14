@@ -68,7 +68,7 @@ function PackageEdit(props) {
             className="form-control-small"
             name="benefit"
             type="text"
-            defaultValue={data.benefits}
+            defaultValue={data.benefit}
             required
             onChange={handleChange}
           /> 
